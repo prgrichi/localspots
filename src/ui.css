@@ -1,0 +1,58 @@
+@layer components {
+  .app-shell {
+    @apply min-h-screen bg-background text-foreground;
+  }
+
+  .container {
+    @apply mx-auto max-w-app px-4 sm:px-6;
+  }
+
+  .page {
+    @apply py-8 sm:py-12;
+  }
+
+  .section {
+    @apply mb-10;
+  }
+
+  .grid-2 {
+    @apply grid grid-cols-1 md:grid-cols-2 gap-6;
+  }
+
+  .grid-3 {
+    @apply grid grid-cols-1 md:grid-cols-3 gap-6;
+  }
+
+  .stack {
+    @apply flex flex-col gap-4;
+  }
+
+  .stack-sm {
+    @apply flex flex-col gap-2;
+  }
+
+  .stack-lg {
+    @apply flex flex-col gap-6;
+  }
+
+
+
+  /* //////////////////// */
+
+  .btn {
+    @apply cursor-pointer inline-flex items-center justify-center gap-2 rounded-md px-4 py-2 text-sm font-medium transition duration-100 focus:outline-none focus:ring-2 focus:ring-primary-500/40 disabled:cursor-not-allowed disabled:opacity-50 disabled:pointer-events-none;
+  }
+
+  .btn:disabled {
+    @apply opacity-50 cursor-not-allowed pointer-events-none;
+  }
+
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 rounded-md px-4 py-2 text-sm font-medium transition focus:outline-none focus:ring-2 focus:ring-primary-500/40 bg-primary-500 text-white hover:bg-primary-600;
+  }
+
+  .btn-secondary {
+    @apply inline-flex items-center justify-center gap-2 rounded-md px-4 py-2 text-sm font-medium transition focus:outline-none focus:ring-2 focus:ring-primary-500/40 border border-border bg-background text-foreground hover:bg-muted;
+  }
+
+}

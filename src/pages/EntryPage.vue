@@ -1,0 +1,164 @@
+<template>
+  <main class="mx-auto max-w-3xl px-4 md:px-8">
+    <div>
+      <div class="mb-4">
+        <div class="text-xs font-semibold uppercase tracking-wide text-slate-400">Neuer Spot</div>
+
+        <div class="flex items-baseline justify-between gap-3">
+          <h1 class="truncate text-2xl font-semibold text-slate-900">Spot eintragen</h1>
+        </div>
+      </div>
+      <form @submit.prevent="submit">
+        <n-form :model="form" class="compact-form">
+          <div class="flex flex-col">
+            <n-form-item label="Name">
+              <n-input v-model:value="form.name" placeholder="Name" />
+            </n-form-item>
+
+            <n-form-item label="Kategorie">
+              <n-select
+                v-model:value="form.category"
+                :options="spotCategoryOptions"
+                placeholder="Kategorie wählen"
+                filterable
+              />
+            </n-form-item>
+
+            <!-- <n-form-item label="Modell"> -->
+            <!-- <n-select
+                v-model:value="form.model"
+                :options="spotCatalogStore.modelOptions(form.make)"
+                :disabled="!form.make"
+                placeholder="Modell wählen"
+                filterable
+              /> -->
+            <!-- </n-form-item> -->
+
+            <n-form-item label="Collection">
+              <n-select
+                :value="collectionStore.activeCollectionId"
+                :options="collectionStore.collectionOptions"
+                placeholder="Collection wählen"
+                @update:value="collectionStore.setActiveCollection"
+              />
+            </n-form-item>
+
+            <n-form-item label="Beschreibung">
+              <n-input v-model:value="form.description" placeholder="Beschreibung" />
+            </n-form-item>
+
+            <div class="mt-3">
+              <n-button
+                type="primary"
+                block
+                secondary
+                round
+                :loading="isSaving"
+                :disabled="isSaving"
+                @click="submit"
+              >
+                Speichern
+              </n-button>
+            </div>
+          </div>
+        </n-form>
+      </form>
+    </div>
+  </main>
+</template>
+
+<script setup lang="ts">
+import { ref, reactive, watch } from 'vue';
+import { NForm, NFormItem, NInput, NSelect, NButton, useMessage } from 'naive-ui';
+import { useSpotStore } from '@/stores/spotStore';
+import { useCollectionStore } from '@/stores/collectionStore';
+import { useRouter } from 'vue-router';
+
+// import { useSpotCatalogStore } from '@/stores/spotCatalogStore';
+// const spotCatalogStore = useSpotCatalogStore();
+import { spotCategoryOptions } from '@/data/spotCategories';
+
+const spotStore = useSpotStore();
+const collectionStore = useCollectionStore();
+
+const message = useMessage();
+const router = useRouter();
+
+const isSaving = ref(false);
+
+const form = reactive({
+  name: '',
+  category: '',
+  description: '',
+});
+
+// watch(
+//   () => form.make,
+//   () => {
+//     form.model = null;
+//   }
+// );
+
+const resetForm = () => {
+  form.name = '';
+  form.category = '';
+  form.description = '';
+};
+
+const submit = async () => {
+  if (isSaving.value) return;
+
+  if (!collectionStore.activeCollectionId) {
+    message.error('Bitte wähle zuerst eine Collection aus');
+    return;
+  }
+
+  // if (!form.platePrefix.trim() || !form.plateRest.trim()) {
+  //   message.error('Kennzeichen ist erforderlich');
+  //   return;
+  // }
+
+  isSaving.value = true;
+
+  // const plate = `${form.platePrefix}-${form.plateRest}`;
+
+  try {
+    const createdSpot = await spotStore.addSpot(collectionStore.activeCollectionId, {
+      name: form.name,
+      category: form.category,
+      description: form.description,
+    });
+
+    message.success('Spot gespeichert');
+
+    await router.push({
+      path: '/spots',
+      query: { highlight: createdSpot.id },
+    });
+
+    resetForm();
+  } catch (error: unknown) {
+    const msg = error instanceof Error ? error.message : 'Spot konnte nicht gespeichert werden';
+    message.error(msg);
+  } finally {
+    isSaving.value = false;
+  }
+};
+</script>
+
+<style scoped>
+.compact-form :deep(.n-form-item) {
+  margin-bottom: 10px;
+}
+
+.compact-form :deep(.n-form-item-label) {
+  padding-bottom: 0;
+}
+
+.compact-form :deep(.n-form-item-feedback-wrapper) {
+  min-height: 0;
+  height: 0;
+  margin: 0;
+  padding: 0;
+}
+</style>

@@ -1,0 +1,16 @@
+# Build Output
+dist
+dist-ssr
+
+# Coverage Reports
+coverage
+
+# Dependencies
+node_modules
+
+# System Files
+.DS_Store
+*.log
+
+# Lock Files
+package-lock.json
