@@ -10,7 +10,8 @@ export const useCollectionStore = defineStore('collections', {
   }),
 
   getters: {
-    activeCollection: state => state.collections.find(collection => collection.id === state.activeCollectionId) ?? null,
+    activeCollection: state =>
+      state.collections.find(collection => collection.id === state.activeCollectionId) ?? null,
 
     collectionOptions: state =>
       state.collections.map(collection => ({
@@ -36,7 +37,10 @@ export const useCollectionStore = defineStore('collections', {
           this.activeCollectionId = records[0].id;
         }
 
-        if (this.activeCollectionId && !records.some(collection => collection.id === this.activeCollectionId)) {
+        if (
+          this.activeCollectionId &&
+          !records.some(collection => collection.id === this.activeCollectionId)
+        ) {
           this.activeCollectionId = records[0]?.id ?? null;
         }
       } finally {

@@ -8,7 +8,39 @@
           <h1 class="truncate text-2xl font-semibold text-slate-900">Spot eintragen</h1>
         </div>
       </div>
-      <form @submit.prevent="submit">
+
+      <CollectionCreateDrawer v-model:show="showCollectionDrawer" @created="onCollectionCreated" />
+
+      <!-- Wenn keine Collections existieren -->
+      <section
+        v-if="!collectionStore.hasCollections"
+        class="flex min-h-[360px] flex-col items-center justify-center px-4 py-12 text-center"
+      >
+        <div class="flex size-14 items-center justify-center rounded-2xl bg-primary-50">
+          <span class="block size-5 rounded-full bg-accent-600"></span>
+        </div>
+
+        <h2 class="mt-5 text-xl font-semibold text-slate-950">Collection erstellen</h2>
+
+        <p class="mt-2 max-w-sm text-sm leading-6 text-slate-500">
+          Bevor du einen Spot eintragen kannst, brauchst du mindestens eine Collection.
+        </p>
+
+        <div class="mt-6">
+          <n-button
+            type="primary"
+            secondary
+            size="large"
+            round
+            @click="showCollectionDrawer = true"
+          >
+            Collection erstellen
+          </n-button>
+        </div>
+      </section>
+
+      <!-- Wenn Collections existieren -->
+      <form @submit.prevent="submit" v-else>
         <n-form :model="form" class="compact-form">
           <div class="flex flex-col">
             <n-form-item label="Name">
@@ -23,16 +55,6 @@
                 filterable
               />
             </n-form-item>
-
-            <!-- <n-form-item label="Modell"> -->
-            <!-- <n-select
-                v-model:value="form.model"
-                :options="spotCatalogStore.modelOptions(form.make)"
-                :disabled="!form.make"
-                placeholder="Modell wählen"
-                filterable
-              /> -->
-            <!-- </n-form-item> -->
 
             <n-form-item label="Collection">
               <n-select
@@ -68,15 +90,15 @@
 </template>
 
 <script setup lang="ts">
-import { ref, reactive, watch } from 'vue';
+import { ref, reactive } from 'vue';
 import { NForm, NFormItem, NInput, NSelect, NButton, useMessage } from 'naive-ui';
 import { useSpotStore } from '@/stores/spotStore';
 import { useCollectionStore } from '@/stores/collectionStore';
 import { useRouter } from 'vue-router';
 
-// import { useSpotCatalogStore } from '@/stores/spotCatalogStore';
-// const spotCatalogStore = useSpotCatalogStore();
 import { spotCategoryOptions } from '@/data/spotCategories';
+
+import CollectionCreateDrawer from '@/components/collection/CollectionCreateDrawer.vue';
 
 const spotStore = useSpotStore();
 const collectionStore = useCollectionStore();
@@ -85,6 +107,7 @@ const message = useMessage();
 const router = useRouter();
 
 const isSaving = ref(false);
+const showCollectionDrawer = ref(false);
 
 const form = reactive({
   name: '',
@@ -92,17 +115,14 @@ const form = reactive({
   description: '',
 });
 
-// watch(
-//   () => form.make,
-//   () => {
-//     form.model = null;
-//   }
-// );
-
 const resetForm = () => {
   form.name = '';
   form.category = '';
   form.description = '';
+};
+
+const onCollectionCreated = () => {
+  showCollectionDrawer.value = false;
 };
 
 const submit = async () => {
@@ -113,14 +133,7 @@ const submit = async () => {
     return;
   }
 
-  // if (!form.platePrefix.trim() || !form.plateRest.trim()) {
-  //   message.error('Kennzeichen ist erforderlich');
-  //   return;
-  // }
-
   isSaving.value = true;
-
-  // const plate = `${form.platePrefix}-${form.plateRest}`;
 
   try {
     const createdSpot = await spotStore.addSpot(collectionStore.activeCollectionId, {
