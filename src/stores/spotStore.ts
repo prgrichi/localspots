@@ -1,19 +1,11 @@
 import { defineStore } from 'pinia';
 import { pb } from '@/services/pocketbase';
-import type { Spot, UpdateSpotLocationPayload } from '@/types/spot';
-
-type AddSpotPayload = {
-  name: String;
-  category: string;
-  description: string;
-};
-
-type UpdateSpotPayload = {
-  name: String;
-  category: string;
-  collection: string;
-  description: string;
-};
+import type {
+  AddSpotPayload,
+  Spot,
+  UpdateSpotLocationPayload,
+  UpdateSpotPayload,
+} from '@/types/spot';
 
 export const useSpotStore = defineStore('savedSpots', {
   state: () => ({
