@@ -1,10 +1,11 @@
 import { createRouter, createWebHistory } from 'vue-router';
 import DashboardPage from '@/pages/DashboardPage.vue';
 import EntryPage from '@/pages/EntryPage.vue';
-import CollectionPage from '@/pages/CollectionPage.vue';
+import SpotPage from '@/pages/SpotPage.vue';
 import MapPage from '@/pages/MapPage.vue';
 import FriendsFollowingPage from '@/pages/FriendsFollowingPage.vue';
 import FriendsAllUserPage from '@/pages/FriendsAllUserPage.vue';
+import CollectionsAllPage from '@/pages/CollectionsAllPage.vue';
 import { pb } from '@/services/pocketbase';
 
 const router = createRouter({
@@ -21,7 +22,7 @@ const router = createRouter({
     },
     {
       path: '/add',
-      name: 'spot-entry',
+      name: 'add-entry',
       component: EntryPage,
       meta: {
         title: 'Eintragen',
@@ -31,9 +32,9 @@ const router = createRouter({
     {
       path: '/spots',
       name: 'spots',
-      component: CollectionPage,
+      component: SpotPage,
       meta: {
-        title: 'Collection',
+        title: 'Spots',
         requiresAuth: true,
       },
     },
@@ -56,6 +57,15 @@ const router = createRouter({
       },
     },
 
+    {
+      path: '/collections-all',
+      name: 'collections-all',
+      component: CollectionsAllPage,
+      meta: {
+        title: 'Alle Collections',
+        requiresAuth: true,
+      },
+    },
     {
       path: '/friendsAll',
       name: 'friendsAll',
@@ -104,7 +114,7 @@ router.beforeEach(to => {
 });
 
 router.afterEach((to, from) => {
-  const navOrder = ['dashboard', 'spots', 'spot-entry', 'map'];
+  const navOrder = ['dashboard', 'spots', 'add-entry', 'map'];
 
   const toIndex = navOrder.indexOf(String(to.name));
   const fromIndex = navOrder.indexOf(String(from.name));
