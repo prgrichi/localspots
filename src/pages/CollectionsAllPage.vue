@@ -93,7 +93,6 @@ import { NButton, useMessage, useDialog } from 'naive-ui';
 import { useCollectionStore } from '@/stores/collectionStore';
 
 import CollectionCreateDrawer from '@/components/collection/CollectionCreateDrawer.vue';
-import type { Collection } from '@/types/collection';
 
 const collectionStore = useCollectionStore();
 const message = useMessage();
@@ -171,19 +170,12 @@ async function leaveCollection(id: string) {
 
 const sortedCollections = computed(() =>
   [...collectionStore.allCollections].sort((a, b) => {
-    const getRank = (collection: Collection) => {
-      if (collectionStore.isOwner(collection)) return 0;
-      if (collectionStore.isSubscribed(collection)) return 1;
-      return 2;
-    };
+    const aMine = collectionStore.isOwner(a) || collectionStore.isSubscribed(a);
+    const bMine = collectionStore.isOwner(b) || collectionStore.isSubscribed(b);
 
-    const rankDiff = getRank(a) - getRank(b);
+    if (aMine !== bMine) return aMine ? -1 : 1;
 
-    if (rankDiff !== 0) {
-      return rankDiff;
-    }
-
-    return a.name.localeCompare(b.name, 'de', { sensitivity: 'base' });
+    return a.name.localeCompare(b.name, 'de');
   })
 );
 </script>
