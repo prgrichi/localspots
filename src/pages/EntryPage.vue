@@ -47,7 +47,7 @@
               <n-input v-model:value="form.description" placeholder="Beschreibung" />
             </n-form-item>
 
-            <div class="mt-3">
+            <div class="mt-4">
               <n-button
                 type="primary"
                 block

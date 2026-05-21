@@ -5,7 +5,7 @@
 
       <div class="flex items-baseline justify-between gap-3">
         <h1 class="truncate text-2xl font-semibold text-slate-900">
-          {{ collectionStore.activeCollection?.name ?? 'Collection' }}
+          {{ collectionStore.activeCollection?.name ?? 'Collection auswählen' }}
         </h1>
 
         <span v-if="spotCount" class="shrink-0 text-sm text-slate-500">

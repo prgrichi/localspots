@@ -168,13 +168,6 @@ export const useCollectionStore = defineStore('collections', {
         return collection;
       }
 
-      console.log('subscribe update', {
-        id,
-        userId,
-        members,
-        nextMembers: [...members, userId],
-      });
-
       const updatedCollection = await pb.collection('collections').update<Collection>(id, {
         members: [...members, userId],
       });

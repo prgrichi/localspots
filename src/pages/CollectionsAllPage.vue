@@ -5,17 +5,38 @@
       <h1 class="truncate text-2xl font-semibold text-slate-900">Collections entdecken</h1>
     </div>
 
+    <CollectionCreateDrawer v-model:show="showCollectionDrawer" @created="onCollectionCreated" />
+
     <section v-if="collectionStore.isLoadingAllCollections" class="py-10 text-sm text-slate-500">
       Collections werden geladen...
     </section>
 
-    <section v-else-if="!collectionStore.hasAllCollections" class="py-10 text-sm text-slate-500">
-      Noch keine Collections vorhanden
+    <section
+      v-else-if="!collectionStore.hasAllCollections"
+      class="flex min-h-[calc(100vh-180px)] flex-col items-center justify-center px-4 py-12 text-center"
+    >
+      <div class="flex size-16 items-center justify-center rounded-full bg-primary-50">
+        <span class="block size-6 rounded-full bg-accent-600"></span>
+      </div>
+
+      <h2 class="mt-6 text-2xl font-semibold tracking-tight text-slate-950">
+        Noch keine Collections
+      </h2>
+
+      <p class="mt-3 max-w-xs text-sm leading-6 text-slate-500">
+        Erstelle die erste Collection und sammle dort deine Spots.
+      </p>
+
+      <div class="mt-4">
+        <n-button type="primary" secondary size="large" round @click="showCollectionDrawer = true">
+          Collection erstellen
+        </n-button>
+      </div>
     </section>
 
     <section v-else class="space-y-3">
       <article
-        v-for="collection in collectionStore.allCollections"
+        v-for="collection in sortedCollections"
         :key="collection.id"
         class="rounded-2xl bg-white p-4 shadow-sm ring-1 ring-slate-200"
       >
@@ -42,9 +63,11 @@
             v-else-if="collectionStore.isSubscribed(collection)"
             secondary
             round
-            @click="collectionStore.unsubscribeCollection(collection.id)"
+            :loading="pendingCollectionId === collection.id"
+            :disabled="!!pendingCollectionId"
+            @click="confirmLeaveCollection(collection.id)"
           >
-            Unsubscriben
+            Verlassen
           </n-button>
 
           <n-button
@@ -52,9 +75,11 @@
             type="primary"
             secondary
             round
-            @click="collectionStore.subscribeCollection(collection.id)"
+            :loading="pendingCollectionId === collection.id"
+            :disabled="!!pendingCollectionId"
+            @click="joinCollection(collection.id)"
           >
-            SubscrBiben
+            Beitreten
           </n-button>
         </div>
       </article>
@@ -63,13 +88,102 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted } from 'vue';
-import { NButton } from 'naive-ui';
+import { ref, computed, onMounted } from 'vue';
+import { NButton, useMessage, useDialog } from 'naive-ui';
 import { useCollectionStore } from '@/stores/collectionStore';
 
+import CollectionCreateDrawer from '@/components/collection/CollectionCreateDrawer.vue';
+import type { Collection } from '@/types/collection';
+
 const collectionStore = useCollectionStore();
+const message = useMessage();
+const dialog = useDialog();
+
+const showCollectionDrawer = ref(false);
+const pendingCollectionId = ref<string | null>(null);
 
 onMounted(async () => {
   await collectionStore.fetchAllCollections();
 });
+
+const onCollectionCreated = () => {
+  showCollectionDrawer.value = false;
+};
+
+async function joinCollection(id: string) {
+  pendingCollectionId.value = id;
+
+  try {
+    await collectionStore.subscribeCollection(id);
+    message.success('Collection beigetreten');
+  } catch (error: unknown) {
+    const msg = error instanceof Error ? error.message : 'Beitritt fehlgeschlagen';
+    message.error(msg);
+  } finally {
+    pendingCollectionId.value = null;
+  }
+}
+
+function confirmLeaveCollection(id: string) {
+  dialog.warning({
+    title: 'Collection verlassen?',
+    content: 'Du siehst die Spots dieser Collection danach nicht mehr in deiner App.',
+    positiveText: 'Verlassen',
+    negativeText: 'Abbrechen',
+
+    style: {
+      width: 'calc(100vw - 2rem)',
+      maxWidth: '24rem',
+      borderRadius: '1.5rem',
+      padding: '1rem',
+    },
+
+    class: 'localspot-dialog',
+
+    positiveButtonProps: {
+      type: 'error',
+      secondary: true,
+      round: true,
+    },
+
+    negativeButtonProps: {
+      secondary: true,
+      round: true,
+    },
+
+    onPositiveClick: () => leaveCollection(id),
+  });
+}
+
+async function leaveCollection(id: string) {
+  pendingCollectionId.value = id;
+
+  try {
+    await collectionStore.unsubscribeCollection(id);
+    message.success('Collection verlassen');
+  } catch (error: unknown) {
+    const msg = error instanceof Error ? error.message : 'Verlassen fehlgeschlagen';
+    message.error(msg);
+  } finally {
+    pendingCollectionId.value = null;
+  }
+}
+
+const sortedCollections = computed(() =>
+  [...collectionStore.allCollections].sort((a, b) => {
+    const getRank = (collection: Collection) => {
+      if (collectionStore.isOwner(collection)) return 0;
+      if (collectionStore.isSubscribed(collection)) return 1;
+      return 2;
+    };
+
+    const rankDiff = getRank(a) - getRank(b);
+
+    if (rankDiff !== 0) {
+      return rankDiff;
+    }
+
+    return a.name.localeCompare(b.name, 'de', { sensitivity: 'base' });
+  })
+);
 </script>

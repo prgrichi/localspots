@@ -49,9 +49,9 @@ watch(
       return;
     }
 
-    if (!collectionStore.hasCollections && !collectionStore.isLoading) {
-      await collectionStore.fetchCollections();
-    }
+    // if (!collectionStore.hasCollections && !collectionStore.isLoading) {
+    //   await collectionStore.fetchCollections();
+    // }
   },
   { immediate: true }
 );

@@ -1,5 +1,8 @@
 <template>
-  <div v-if="collectionStore.hasCollections" class="rounded-2xl border border-slate-200 bg-slate-50 p-4">
+  <div
+    v-if="collectionStore.hasCollections"
+    class="rounded-2xl border border-slate-200 bg-slate-50 p-4"
+  >
     <div class="mb-2 text-xs font-semibold uppercase tracking-wide text-slate-500">Collection</div>
 
     <n-select

@@ -37,6 +37,13 @@
           Freunde
         </RouterLink>
 
+        <RouterLink
+          to="/collections-all"
+          class="block w-full rounded-2xl bg-accent-600 px-4 py-2 text-center text-sm font-semibold text-white no-underline shadow-sm transition hover:bg-accent-700"
+        >
+          Alle Collections
+        </RouterLink>
+
         <button
           type="button"
           class="w-full rounded-2xl border border-red-100 bg-red-50 px-4 py-3 text-red-600 flex items-center justify-between hover:bg-red-100 transition"
@@ -61,7 +68,7 @@
 
 <script setup lang="ts">
 import { computed } from 'vue';
-import { NIcon, NButton, NDrawer, NDrawerContent } from 'naive-ui';
+import { NIcon, NDrawer, NDrawerContent } from 'naive-ui';
 import { PinOutline, LogOutOutline, ChevronForwardOutline } from '@vicons/ionicons5';
 import { useRouter } from 'vue-router';
 import { useAuthStore } from '@/stores/authStore';
