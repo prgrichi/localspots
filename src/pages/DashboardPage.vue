@@ -1,5 +1,5 @@
 <template>
-  <main class="mx-auto max-w-3xl px-4 pb-6 md:px-8">
+  <div class="mx-auto max-w-3xl px-4 pb-6 md:px-8">
     <div class="mb-4">
       <div class="text-xs font-semibold uppercase tracking-wide text-slate-400">Dashboard</div>
 
@@ -12,34 +12,10 @@
 
     <div class="space-y-6">
       <!-- Wenn keine Collections existieren -->
-      <section
+      <NoCollectionsState
         v-if="!collectionStore.hasCollections"
-        class="flex min-h-[calc(100vh-180px)] flex-col items-center justify-center px-4 py-12 text-center"
-      >
-        <div class="flex size-16 items-center justify-center rounded-full bg-primary-50">
-          <span class="block size-6 rounded-full bg-accent-600"></span>
-        </div>
-
-        <h2 class="mt-6 text-2xl font-semibold tracking-tight text-slate-950">
-          Collection erstellen
-        </h2>
-
-        <p class="mt-3 max-w-xs text-sm leading-6 text-slate-500">
-          Lege deine erste Collection an, bevor du Spots einträgst.
-        </p>
-
-        <div class="mt-7">
-          <n-button
-            type="primary"
-            secondary
-            size="large"
-            round
-            @click="showCollectionDrawer = true"
-          >
-            Collection erstellen
-          </n-button>
-        </div>
-      </section>
+        @create="showCollectionDrawer = true"
+      />
 
       <!-- Wenn Collections existieren -->
       <div v-else class="space-y-6">
@@ -165,7 +141,7 @@
         </section>
       </div>
     </div>
-  </main>
+  </div>
 </template>
 
 <script setup lang="ts">
@@ -176,13 +152,17 @@ import { ChevronForwardOutline } from '@vicons/ionicons5';
 import { useDashboardStats } from '@/composables/useDashboardStats';
 import { useSpotStore } from '@/stores/spotStore';
 import { useCollectionStore } from '@/stores/collectionStore';
+import { useEnsureCollections } from '@/composables/useEnsureCollections';
 
 import CollectionCreateDrawer from '@/components/collection/CollectionCreateDrawer.vue';
+import NoCollectionsState from '@/components/NoCollectionsState.vue';
 
 const spotStore = useSpotStore();
 const collectionStore = useCollectionStore();
 
 const showCollectionDrawer = ref(false);
+
+useEnsureCollections();
 
 onMounted(async () => {
   await spotStore.fetchAllSpots();

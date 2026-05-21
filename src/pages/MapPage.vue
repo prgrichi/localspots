@@ -88,6 +88,8 @@ import { useSpotStore } from '@/stores/spotStore';
 import { useCollectionStore } from '@/stores/collectionStore';
 import { useSpotMap } from '@/composables/useSpotMap';
 
+import { useEnsureCollections } from '@/composables/useEnsureCollections';
+
 const thunderforestApiKey = import.meta.env.VITE_THUNDERFOREST_API_KEY;
 
 const spotStore = useSpotStore();
@@ -100,6 +102,8 @@ const isMapReady = ref(false);
 const mapRef = ref<LeafletMap | null>(null);
 
 const spots = computed(() => spotStore.spots);
+
+useEnsureCollections();
 
 const { spotMarkers, mapCenter, spotIcon, mapBounds, spotLatLngs, defaultMapZoom, focusedMapZoom } =
   useSpotMap(spots);

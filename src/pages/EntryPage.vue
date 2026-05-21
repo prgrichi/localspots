@@ -12,32 +12,10 @@
       <CollectionCreateDrawer v-model:show="showCollectionDrawer" @created="onCollectionCreated" />
 
       <!-- Wenn keine Collections existieren -->
-      <section
+      <NoCollectionsState
         v-if="!collectionStore.hasCollections"
-        class="flex min-h-[360px] flex-col items-center justify-center px-4 py-12 text-center"
-      >
-        <div class="flex size-14 items-center justify-center rounded-2xl bg-primary-50">
-          <span class="block size-5 rounded-full bg-accent-600"></span>
-        </div>
-
-        <h2 class="mt-5 text-xl font-semibold text-slate-950">Collection erstellen</h2>
-
-        <p class="mt-2 max-w-sm text-sm leading-6 text-slate-500">
-          Bevor du einen Spot eintragen kannst, brauchst du mindestens eine Collection.
-        </p>
-
-        <div class="mt-6">
-          <n-button
-            type="primary"
-            secondary
-            size="large"
-            round
-            @click="showCollectionDrawer = true"
-          >
-            Collection erstellen
-          </n-button>
-        </div>
-      </section>
+        @create="showCollectionDrawer = true"
+      />
 
       <!-- Wenn Collections existieren -->
       <form @submit.prevent="submit" v-else>
@@ -94,11 +72,13 @@ import { ref, reactive } from 'vue';
 import { NForm, NFormItem, NInput, NSelect, NButton, useMessage } from 'naive-ui';
 import { useSpotStore } from '@/stores/spotStore';
 import { useCollectionStore } from '@/stores/collectionStore';
+import { useEnsureCollections } from '@/composables/useEnsureCollections';
 import { useRouter } from 'vue-router';
 
 import { spotCategoryOptions } from '@/data/spotCategories';
 
 import CollectionCreateDrawer from '@/components/collection/CollectionCreateDrawer.vue';
+import NoCollectionsState from '@/components/NoCollectionsState.vue';
 
 const spotStore = useSpotStore();
 const collectionStore = useCollectionStore();
@@ -108,6 +88,8 @@ const router = useRouter();
 
 const isSaving = ref(false);
 const showCollectionDrawer = ref(false);
+
+useEnsureCollections();
 
 const form = reactive({
   name: '',
