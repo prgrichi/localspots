@@ -1,11 +1,13 @@
 // src/types/spot.ts
 import type { Collection } from '@/types/collection';
+import type { UserRecord } from '@/types/user';
 
 export type Spot = {
   id: string;
   name: string;
   category: string;
   collection: string;
+  user: string;
   description: string;
 
   locationLat?: number | null;
@@ -17,6 +19,7 @@ export type Spot = {
 
   expand?: {
     collection?: Collection;
+    user?: UserRecord;
   };
 };
 

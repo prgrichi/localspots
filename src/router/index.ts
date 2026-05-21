@@ -3,6 +3,8 @@ import DashboardPage from '@/pages/DashboardPage.vue';
 import EntryPage from '@/pages/EntryPage.vue';
 import CollectionPage from '@/pages/CollectionPage.vue';
 import MapPage from '@/pages/MapPage.vue';
+import FriendsFollowingPage from '@/pages/FriendsFollowingPage.vue';
+import FriendsAllUserPage from '@/pages/FriendsAllUserPage.vue';
 import { pb } from '@/services/pocketbase';
 
 const router = createRouter({
@@ -50,6 +52,25 @@ const router = createRouter({
       component: MapPage,
       meta: {
         title: 'Karte',
+        requiresAuth: true,
+      },
+    },
+
+    {
+      path: '/friendsAll',
+      name: 'friendsAll',
+      component: FriendsAllUserPage,
+      meta: {
+        title: 'Alle User',
+        requiresAuth: true,
+      },
+    },
+    {
+      path: '/friends',
+      name: 'friends',
+      component: FriendsFollowingPage,
+      meta: {
+        title: 'Freundesliste',
         requiresAuth: true,
       },
     },

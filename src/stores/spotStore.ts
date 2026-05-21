@@ -55,12 +55,16 @@ export const useSpotStore = defineStore('savedSpots', {
     },
 
     async addSpot(collectionId: string, spot: AddSpotPayload) {
-      // const formattedPlate = formatPlate(spot.plate);
-      // const normalizedPlate = normalizePlate(spot.plate);
+      const userId = pb.authStore.record?.id;
+
+      if (!userId) {
+        throw new Error('Kein eingeloggter User gefunden.');
+      }
 
       const createdSpot = await pb.collection('spots').create<Spot>({
         ...spot,
         collection: collectionId,
+        user: userId,
       });
 
       this.spots.unshift(createdSpot);

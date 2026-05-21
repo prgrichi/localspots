@@ -55,6 +55,13 @@ watch(
   },
   { immediate: true }
 );
+
+watch(
+  () => route.fullPath,
+  () => {
+    showMenu.value = false;
+  }
+);
 </script>
 
 <style scoped>
