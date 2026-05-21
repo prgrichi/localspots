@@ -6,7 +6,7 @@
       <router-link to="/" class="no-underline">
         <button
           type="button"
-          class="flex h-full w-full flex-col items-center justify-center rounded-2xl gap-0.5 text-xs font-medium transition"
+          class="opacity-20 flex h-full w-full flex-col items-center justify-center rounded-2xl gap-0.5 text-xs font-medium transition"
           :class="navButtonClass(isDashboardActive)"
         >
           <n-icon size="20">
@@ -25,7 +25,7 @@
           <n-icon size="20">
             <ListOutline />
           </n-icon>
-          <span>Collection</span>
+          <span>Spots</span>
         </button>
       </router-link>
 
@@ -89,7 +89,7 @@ const route = useRoute();
 
 const isDashboardActive = computed(() => route.name === 'dashboard');
 const isSpotsActive = computed(() => route.name === 'spots' || route.name === 'spot-detail');
-const isAddActive = computed(() => route.name === 'spot-entry');
+const isAddActive = computed(() => route.name === 'add-entry');
 const isMapActive = computed(() => route.name === 'map');
 
 function navButtonClass(isActive: boolean) {
