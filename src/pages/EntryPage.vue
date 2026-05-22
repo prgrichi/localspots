@@ -22,7 +22,7 @@
         <n-form :model="form" class="compact-form">
           <div class="flex flex-col">
             <n-form-item label="Name">
-              <n-input v-model:value="form.name" placeholder="Name" />
+              <n-input v-model:value="form.name" placeholder="Name" @keyup.enter="submit" />
             </n-form-item>
 
             <n-form-item label="Kategorie">
@@ -110,8 +110,15 @@ const onCollectionCreated = () => {
 const submit = async () => {
   if (isSaving.value) return;
 
+  const name = form.name.trim();
+
   if (!collectionStore.activeCollectionId) {
     message.error('Bitte wähle zuerst eine Collection aus');
+    return;
+  }
+
+  if (!name) {
+    message.error('Bitte gib einen Namen ein');
     return;
   }
 
