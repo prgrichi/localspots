@@ -12,7 +12,7 @@
           </div>
 
           <div class="leading-tight">
-            <div class="font-semibold text-slate-900">LocalSpots App</div>
+            <div class="font-semibold text-slate-900">LocalSpots</div>
           </div>
         </div>
       </template>
