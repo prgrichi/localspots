@@ -36,7 +36,7 @@
 
     <section v-else class="space-y-3">
       <article
-        v-for="collection in sortedCollections"
+        v-for="collection in collectionStore.allCollections"
         :key="collection.id"
         class="rounded-2xl bg-white p-4 shadow-sm ring-1 ring-slate-200"
       >
@@ -167,15 +167,4 @@ async function leaveCollection(id: string) {
     pendingCollectionId.value = null;
   }
 }
-
-const sortedCollections = computed(() =>
-  [...collectionStore.allCollections].sort((a, b) => {
-    const aMine = collectionStore.isOwner(a) || collectionStore.isSubscribed(a);
-    const bMine = collectionStore.isOwner(b) || collectionStore.isSubscribed(b);
-
-    if (aMine !== bMine) return aMine ? -1 : 1;
-
-    return a.name.localeCompare(b.name, 'de');
-  })
-);
 </script>
