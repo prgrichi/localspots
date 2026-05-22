@@ -5,7 +5,7 @@ import type { UserRecord } from '@/types/user';
 export type Spot = {
   id: string;
   name: string;
-  category: string;
+  category?: string;
   collection: string;
   user: string;
   description: string;
@@ -25,13 +25,13 @@ export type Spot = {
 
 export type AddSpotPayload = {
   name: string;
-  category: string;
+  category?: string;
   description: string;
 };
 
 export type UpdateSpotPayload = {
   name: string;
-  category: string;
+  category?: string;
   collection: string;
   description: string;
 };

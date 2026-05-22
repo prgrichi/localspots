@@ -58,6 +58,7 @@ export const useCollectionStore = defineStore('collections', {
       try {
         this.allCollections = await pb.collection('collections').getFullList<Collection>({
           sort: 'created',
+          expand: 'members',
         });
 
         this.hasLoadedAllCollections = true;
@@ -116,9 +117,10 @@ export const useCollectionStore = defineStore('collections', {
         members: [userId],
       });
 
-      this.collections.push(createdCollection);
-      this.allCollections.push(createdCollection);
       this.activeCollectionId = createdCollection.id;
+
+      await this.fetchMyCollections();
+      await this.fetchAllCollections();
 
       return createdCollection;
     },

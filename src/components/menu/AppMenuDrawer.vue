@@ -41,7 +41,7 @@
           to="/collections-all"
           class="block w-full rounded-2xl bg-accent-600 px-4 py-2 text-center text-sm font-semibold text-white no-underline shadow-sm transition hover:bg-accent-700"
         >
-          Alle Collections
+          Collections entdecken
         </RouterLink>
 
         <button
