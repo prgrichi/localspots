@@ -1,5 +1,5 @@
 <template>
-  <main class="mx-auto max-w-3xl px-4 md:px-8">
+  <div class="mx-auto max-w-3xl px-4 md:px-8 pb-4">
     <div class="mb-4">
       <div class="text-xs font-semibold uppercase tracking-wide text-slate-400">User</div>
       <h1 class="truncate text-2xl font-semibold text-slate-900">User entdecken</h1>
@@ -59,7 +59,7 @@
         </p>
       </div>
     </section>
-  </main>
+  </div>
 </template>
 
 <script setup>
