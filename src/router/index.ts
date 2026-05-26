@@ -5,8 +5,9 @@ import SpotPage from '@/pages/SpotPage.vue';
 import MapPage from '@/pages/MapPage.vue';
 import FriendsFollowingPage from '@/pages/FriendsFollowingPage.vue';
 import FriendsAllUserPage from '@/pages/FriendsAllUserPage.vue';
-import CollectionsAllPage from '@/pages/CollectionsAllPage.vue';
+import AllCollectionsPage from '@/pages/AllCollectionsPage.vue';
 import MyCollectionsPage from '@/pages/MyCollectionsPage.vue';
+import CollectionsPage from '@/pages/CollectionsPage.vue';
 import ActivitiesPage from '@/pages/ActivitiesPage.vue';
 import { pb } from '@/services/pocketbase';
 
@@ -68,9 +69,18 @@ const router = createRouter({
       },
     },
     {
-      path: '/collections-all',
-      name: 'collections-all',
-      component: CollectionsAllPage,
+      path: '/collections',
+      name: 'collections',
+      component: CollectionsPage,
+      meta: {
+        title: 'Collections',
+        requiresAuth: true,
+      },
+    },
+    {
+      path: '/all-collections',
+      name: 'all-collections',
+      component: AllCollectionsPage,
       meta: {
         title: 'Alle Collections',
         requiresAuth: true,
@@ -86,8 +96,8 @@ const router = createRouter({
       },
     },
     {
-      path: '/friendsAll',
-      name: 'friendsAll',
+      path: '/friends-all',
+      name: 'friends-all',
       component: FriendsAllUserPage,
       meta: {
         title: 'Alle User',

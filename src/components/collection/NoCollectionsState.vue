@@ -16,7 +16,7 @@
     </p>
 
     <div class="mt-7 space-y-4">
-      <RouterLink :to="{ name: 'collections-all' }" class="block no-underline">
+      <RouterLink :to="{ name: 'all-collections' }" class="block no-underline">
         <n-button type="primary" secondary size="large" round> Collections entdecken </n-button>
       </RouterLink>
 

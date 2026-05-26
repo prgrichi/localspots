@@ -30,7 +30,7 @@
           <n-button type="primary" secondary size="large" round> Spot eintragen </n-button>
         </RouterLink>
 
-        <RouterLink :to="{ name: 'collections-all' }" class="block no-underline">
+        <RouterLink :to="{ name: 'all-collections' }" class="block no-underline">
           <n-button type="primary" secondary size="large" round> Collections entdecken </n-button>
         </RouterLink>
       </div>

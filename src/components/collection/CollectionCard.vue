@@ -2,13 +2,22 @@
 <template>
   <article class="rounded-2xl bg-white p-4 shadow-sm ring-1 ring-slate-200">
     <div class="min-w-0">
-      <h2 class="truncate font-semibold text-slate-950">
-        {{ collection.name }}
-      </h2>
+      <div class="flex items-start justify-between gap-3">
+        <h2 class="min-w-0 truncate font-semibold text-slate-950">
+          {{ collection.name }}
+        </h2>
+
+        <span
+          v-if="isOwner"
+          class="shrink-0 rounded-full bg-slate-100 px-2 py-0.5 text-[11px] font-medium text-slate-500"
+        >
+          Von dir erstellt
+        </span>
+      </div>
 
       <p class="mt-0.5 text-sm text-slate-500">
-        {{ collection.members?.length ?? 0 }}
-        Mitglieder
+        {{ memberCount }}
+        {{ memberCount === 1 ? 'Mitglied' : 'Mitglieder' }}
       </p>
     </div>
 
@@ -17,15 +26,8 @@
         {{ primaryText }}
       </n-button>
 
-      <span
-        v-if="isOwner"
-        class="inline-flex h-9 flex-1 items-center justify-center rounded-full bg-slate-100 px-3 text-xs font-medium text-slate-500"
-      >
-        Deine Collection
-      </span>
-
       <n-button
-        v-else-if="isSubscribed"
+        v-if="!isOwner && isSubscribed"
         secondary
         round
         class="flex-1"
@@ -37,7 +39,7 @@
       </n-button>
 
       <n-button
-        v-else-if="showJoin"
+        v-else-if="!isOwner && showJoin"
         type="primary"
         secondary
         round
@@ -53,10 +55,11 @@
 </template>
 
 <script setup lang="ts">
+import { computed } from 'vue';
 import { NButton } from 'naive-ui';
 import type { Collection } from '@/types/collection';
 
-defineProps<{
+const props = defineProps<{
   collection: Collection;
   primaryText: string;
   isOwner: boolean;
@@ -71,4 +74,6 @@ const emit = defineEmits<{
   leave: [id: string];
   join: [id: string];
 }>();
+
+const memberCount = computed(() => props.collection.members?.length ?? 0);
 </script>
