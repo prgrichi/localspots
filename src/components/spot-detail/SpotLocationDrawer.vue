@@ -1,3 +1,4 @@
+<!-- src/components/spot-detail/SpotLocationDrawer.vue -->
 <template>
   <n-drawer
     :show="show"

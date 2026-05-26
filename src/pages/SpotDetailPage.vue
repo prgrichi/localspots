@@ -18,14 +18,14 @@
       <SpotLocationPanel :has-location="Boolean(spotLatLng)" @edit-location="openLocationModal" />
     </template>
 
-    <SpotEditModal
+    <SpotEditDrawer
       v-model:show="showEditModal"
       :spot="selectedSpot"
       @saved="handleSpotSaved"
       @delete="deleteSpot(spot)"
     />
 
-    <SpotLocationModal v-model:show="showLocationModal" :spot="spot" @saved="handleSpotSaved" />
+    <SpotLocationDrawer v-model:show="showLocationModal" :spot="spot" @saved="handleSpotSaved" />
   </main>
 </template>
 
@@ -35,11 +35,11 @@ import { useMessage, useDialog } from 'naive-ui';
 import { useRoute, useRouter } from 'vue-router';
 import type { Spot } from '@/types/spot';
 
-import SpotEditModal from '@/components/spot-detail/SpotEditModal.vue';
+import SpotEditDrawer from '@/components/spot-detail/SpotEditDrawer.vue';
 import SpotDetailHeader from '@/components/spot-detail/SpotDetailHeader.vue';
 import SpotLocationMap from '@/components/spot-detail/SpotLocationMap.vue';
 import SpotLocationPanel from '@/components/spot-detail/SpotLocationPanel.vue';
-import SpotLocationModal from '@/components/spot-detail/SpotLocationModal.vue';
+import SpotLocationDrawer from '@/components/spot-detail/SpotLocationDrawer.vue';
 
 import { useSpotStore } from '@/stores/spotStore';
 import { useCollectionStore } from '@/stores/collectionStore';

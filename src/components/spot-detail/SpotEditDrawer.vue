@@ -1,4 +1,4 @@
-<!-- src/components/spot-detail/SpotEditModal.vue -->
+<!-- src/components/spot-detail/SpotEditDrawer.vue -->
 <template>
   <n-drawer
     :show="show"
