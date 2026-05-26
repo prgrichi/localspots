@@ -29,9 +29,7 @@
             v-if="spotCount > 0"
             v-model:selected-category="selectedCategory"
             v-model:search="search"
-            v-model:sort-by="sortBy"
             :category-options="categoryOptions"
-            :sort-options="sortOptions"
             @reset="resetFilters"
           />
 
@@ -87,7 +85,6 @@ import { useSpotStore } from '@/stores/spotStore';
 import { useCollectionStore } from '@/stores/collectionStore';
 import { useRoute } from 'vue-router';
 
-// import CollectionHeader from '@/components/collection/CollectionHeader.vue';
 import SpotFilterBar from '@/components/collection/SpotFilterBar.vue';
 import SpotCard from '@/components/collection/SpotCard.vue';
 import CollectionCreateDrawer from '@/components/collection/CollectionCreateDrawer.vue';
@@ -104,8 +101,9 @@ const highlightedId = ref<string | null>((route.query.highlight as string) || nu
 
 useEnsureCollections();
 
-const { search, selectedCategory, sortBy, sortOptions, filteredSpots, resetFilters } =
-  useSpotFilters(() => spotStore.spots);
+const { search, selectedCategory, categoryOptions, filteredSpots, resetFilters } = useSpotFilters(
+  () => spotStore.spots
+);
 
 onMounted(() => {
   if (highlightedId.value) {
@@ -118,23 +116,6 @@ onMounted(() => {
 const onCollectionCreated = () => {
   showCollectionDrawer.value = false;
 };
-
-const categoryOptions = computed(() => {
-  const categories = new Set<string>();
-
-  for (const spot of spotStore.spots) {
-    if (spot.category) {
-      categories.add(spot.category);
-    }
-  }
-
-  return [...categories]
-    .sort((a, b) => a.localeCompare(b, 'de'))
-    .map(category => ({
-      label: category,
-      value: category,
-    }));
-});
 
 const isFilterActive = computed(() => !!selectedCategory.value || !!search.value.trim());
 

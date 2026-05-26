@@ -3,25 +3,11 @@
 import { computed, ref } from 'vue';
 import type { Spot } from '@/types/spot';
 
-type SelectOption = {
-  label: string;
-  value: string;
-};
-
-type SpotSortBy = 'newest' | 'category' | 'name';
-
 export function useSpotFilters(getSpots: () => Spot[]) {
   const search = ref('');
-  const selectedCategory = ref('');
-  const sortBy = ref<SpotSortBy>('newest');
+  const selectedCategory = ref<string | null>(null);
 
-  const sortOptions: SelectOption[] = [
-    { label: 'Neueste zuerst', value: 'newest' },
-    { label: 'Kategorie A–Z', value: 'category' },
-    { label: 'Name A–Z', value: 'name' },
-  ];
-
-  const existingCategoryOptions = computed(() => {
+  const categoryOptions = computed(() => {
     const categories = getSpots()
       .map(spot => spot.category)
       .filter((category): category is string => Boolean(category));
@@ -37,7 +23,7 @@ export function useSpotFilters(getSpots: () => Spot[]) {
   const filteredSpots = computed(() => {
     const q = search.value.trim().toLowerCase();
 
-    const filtered = getSpots().filter(spot => {
+    return getSpots().filter(spot => {
       const categoryMatches = !selectedCategory.value || spot.category === selectedCategory.value;
 
       const searchMatches =
@@ -48,33 +34,18 @@ export function useSpotFilters(getSpots: () => Spot[]) {
 
       return categoryMatches && searchMatches;
     });
-
-    return [...filtered].sort((a, b) => {
-      if (sortBy.value === 'category') {
-        return (a.category ?? '').localeCompare(b.category ?? '', 'de');
-      }
-
-      if (sortBy.value === 'name') {
-        return (a.name ?? '').localeCompare(b.name ?? '', 'de');
-      }
-
-      return new Date(b.created).getTime() - new Date(a.created).getTime();
-    });
   });
 
   const resetFilters = () => {
-    selectedCategory.value = '';
+    selectedCategory.value = null;
     search.value = '';
-    sortBy.value = 'newest';
   };
 
   return {
     search,
     selectedCategory,
-    existingCategoryOptions,
+    categoryOptions,
     filteredSpots,
-    sortBy,
-    sortOptions,
     resetFilters,
   };
 }

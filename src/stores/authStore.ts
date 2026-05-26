@@ -7,6 +7,7 @@ let authChangeUnsubscribe: null | (() => void) = null;
 export const useAuthStore = defineStore('auth', {
   state: () => ({
     user: null as RecordModel | null,
+    isAuthReady: false,
   }),
 
   getters: {
@@ -19,10 +20,14 @@ export const useAuthStore = defineStore('auth', {
     },
 
     initAuth() {
-      if (authChangeUnsubscribe) return;
+      if (authChangeUnsubscribe) {
+        this.isAuthReady = true;
+        return;
+      }
 
       authChangeUnsubscribe = pb.authStore.onChange(() => {
         this.setUserFromAuthStore();
+        this.isAuthReady = true;
       }, true);
     },
 

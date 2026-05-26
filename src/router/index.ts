@@ -143,12 +143,14 @@ router.beforeEach(to => {
 });
 
 router.afterEach((to, from) => {
-  const navOrder = ['dashboard', 'spots', 'add-entry', 'map'];
+  const mainNavOrder = ['activities', 'spots', 'add-entry', 'map', 'collections'];
 
-  const toIndex = navOrder.indexOf(String(to.name));
-  const fromIndex = navOrder.indexOf(String(from.name));
+  const toIndex = mainNavOrder.indexOf(String(to.name));
+  const fromIndex = mainNavOrder.indexOf(String(from.name));
 
-  if (toIndex === -1 || fromIndex === -1) {
+  const bothAreMainNavRoutes = toIndex !== -1 && fromIndex !== -1;
+
+  if (!bothAreMainNavRoutes) {
     to.meta.transition = 'fade';
     return;
   }

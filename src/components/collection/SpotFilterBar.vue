@@ -1,7 +1,5 @@
 <template>
-  <div
-    class="grid w-full grid-cols-1 gap-3 mb-2 sm:grid-cols-2 lg:grid-cols-[1fr_1fr_1fr_180px_auto] lg:items-center"
-  >
+  <div class="mb-2 grid w-full grid-cols-1 gap-3 sm:grid-cols-[1fr_1fr_auto] sm:items-center">
     <n-select
       v-model:value="selectedCategoryModel"
       :options="categoryOptions"
@@ -10,20 +8,13 @@
       class="w-full"
     />
 
-    <n-input v-model:value="searchModel" placeholder="Suchen..." clearable class="w-full" />
-
-    <n-select
-      v-model:value="sortByModel"
-      :options="sortOptions"
-      placeholder="Sortieren"
-      class="w-full"
-    />
+    <n-input v-model:value="searchModel" placeholder="Spot suchen..." clearable class="w-full" />
 
     <n-button
       secondary
       type="default"
       :disabled="!searchModel && !selectedCategoryModel"
-      class="w-full lg:w-auto"
+      class="w-full sm:w-auto"
       @click="$emit('reset')"
     >
       Reset
@@ -42,37 +33,30 @@ type SelectOption = {
 
 const props = withDefaults(
   defineProps<{
-    selectedCategory: string;
+    selectedCategory: string | null;
     search: string;
-    sortBy: string;
     categoryOptions: SelectOption[];
-    sortOptions: SelectOption[];
   }>(),
   {
-    selectedCategory: '',
+    selectedCategory: null,
     search: '',
     categoryOptions: () => [],
-    sortOptions: () => [],
   }
 );
 
-const emit = defineEmits(['update:selectedCategory', 'update:search', 'update:sortBy', 'reset']);
+const emit = defineEmits<{
+  'update:selectedCategory': [value: string | null];
+  'update:search': [value: string];
+  reset: [];
+}>();
 
 const selectedCategoryModel = computed({
   get: () => props.selectedCategory,
-  set: value => emit('update:selectedCategory', value ?? ''),
+  set: value => emit('update:selectedCategory', value ?? null),
 });
 
 const searchModel = computed({
   get: () => props.search,
   set: value => emit('update:search', value ?? ''),
-});
-
-const sortByModel = computed({
-  get: () => props.sortBy,
-  set: value => {
-    if (!value) return;
-    emit('update:sortBy', value);
-  },
 });
 </script>
