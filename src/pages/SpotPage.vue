@@ -3,16 +3,14 @@
     <div class="mb-4">
       <div class="text-xs font-semibold uppercase tracking-wide text-slate-400">Spots</div>
 
-      <div class="flex items-baseline justify-between gap-3">
-        <h1 class="truncate text-2xl font-semibold text-slate-900">
-          {{ collectionStore.activeCollection?.name ?? 'Collection auswählen' }}
-        </h1>
+      <h1 class="mt-1 line-clamp-2 text-2xl font-semibold leading-tight text-slate-900">
+        {{ collectionStore.activeCollection?.name ?? 'Collection auswählen' }}
+      </h1>
 
-        <span v-if="spotCount" class="shrink-0 text-sm text-slate-500">
-          {{ spotCount }}
-          {{ getSpotLabel(spotCount) }}
-        </span>
-      </div>
+      <p v-if="spotCount" class="mt-1 text-sm text-slate-500">
+        {{ spotCount }}
+        {{ getSpotLabel(spotCount) }}
+      </p>
     </div>
 
     <CollectionCreateDrawer v-model:show="showCollectionDrawer" @created="onCollectionCreated" />

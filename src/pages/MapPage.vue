@@ -3,16 +3,14 @@
     <div class="mb-4 px-4 md:px-8">
       <div class="text-xs font-semibold uppercase tracking-wide text-slate-400">Kartenansicht</div>
 
-      <div class="mt-1 flex items-baseline justify-between gap-3">
-        <h1 class="truncate text-2xl font-semibold text-slate-900">
-          {{ collectionStore.activeCollection?.name ?? 'Collection wählen' }}
-        </h1>
+      <h1 class="mt-1 line-clamp-2 text-2xl font-semibold leading-tight text-slate-900">
+        {{ collectionStore.activeCollection?.name ?? 'Collection wählen' }}
+      </h1>
 
-        <span v-if="collectionStore.activeCollectionId" class="shrink-0 text-sm text-slate-500">
-          {{ spotMarkers.length }}
-          {{ spotMarkers.length === 1 ? 'Standort' : 'Standorte' }}
-        </span>
-      </div>
+      <p v-if="collectionStore.activeCollectionId" class="mt-1 text-sm text-slate-500">
+        {{ spotMarkers.length }}
+        {{ spotMarkers.length === 1 ? 'Standort' : 'Standorte' }}
+      </p>
     </div>
 
     <div class="relative z-0 min-h-0 flex-1 overflow-hidden bg-slate-200">
