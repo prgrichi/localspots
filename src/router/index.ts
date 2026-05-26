@@ -7,6 +7,7 @@ import FriendsFollowingPage from '@/pages/FriendsFollowingPage.vue';
 import FriendsAllUserPage from '@/pages/FriendsAllUserPage.vue';
 import CollectionsAllPage from '@/pages/CollectionsAllPage.vue';
 import MyCollectionsPage from '@/pages/MyCollectionsPage.vue';
+import ActivitiesPage from '@/pages/ActivitiesPage.vue';
 import { pb } from '@/services/pocketbase';
 
 const router = createRouter({
@@ -14,13 +15,22 @@ const router = createRouter({
   routes: [
     {
       path: '/',
-      name: 'dashboard',
-      component: DashboardPage,
+      name: 'activities',
+      component: ActivitiesPage,
       meta: {
-        title: 'Dashboard',
+        title: 'Activities',
         requiresAuth: true,
       },
     },
+    // {
+    //   path: '/',
+    //   name: 'dashboard',
+    //   component: DashboardPage,
+    //   meta: {
+    //     title: 'Dashboard',
+    //     requiresAuth: true,
+    //   },
+    // },
     {
       path: '/add',
       name: 'add-entry',

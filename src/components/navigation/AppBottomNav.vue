@@ -6,6 +6,19 @@
       <router-link to="/" class="no-underline">
         <button
           type="button"
+          class="flex h-full w-full flex-col items-center justify-center rounded-2xl gap-0.5 text-xs font-medium transition"
+          :class="navButtonClass(isActivitiesActive)"
+        >
+          <n-icon size="20">
+            <HomeOutline />
+          </n-icon>
+          <span>Aktivitäten</span>
+        </button>
+      </router-link>
+
+      <!-- <router-link to="/" class="no-underline">
+        <button
+          type="button"
           class="opacity-20 flex h-full w-full flex-col items-center justify-center rounded-2xl gap-0.5 text-xs font-medium transition"
           :class="navButtonClass(isDashboardActive)"
         >
@@ -14,7 +27,7 @@
           </n-icon>
           <span>Dashboard</span>
         </button>
-      </router-link>
+      </router-link> -->
 
       <router-link to="/spots" class="no-underline">
         <button
@@ -87,7 +100,7 @@ defineEmits<{
 
 const route = useRoute();
 
-const isDashboardActive = computed(() => route.name === 'dashboard');
+const isActivitiesActive = computed(() => route.name === 'activities');
 const isSpotsActive = computed(() => route.name === 'spots' || route.name === 'spot-detail');
 const isAddActive = computed(() => route.name === 'add-entry');
 const isMapActive = computed(() => route.name === 'map');
