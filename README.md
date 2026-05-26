@@ -1,149 +1,159 @@
 # Localspots App
 
-Localspots ist eine mobile-first Vue-3-Webapp zum Erfassen, Verwalten und Auffinden von Orten ("Spots") in persönlichen Collections.
+Localspots ist eine mobile-first Vue-3-Webapp zum Erfassen, Organisieren und Teilen von Orten ("Spots") in Collections.
 
-Die App richtet sich an kleine Gruppen/Freundeskreise: Spots werden pro Collection organisiert, können gefiltert und auf der Karte visualisiert werden.
+## Features
 
-## Inhaltlicher Überblick
-
-- Collections als organisatorischer Rahmen (z. B. "City-Trips", "Lost Places", "Cafés")
-- Spots mit Stammdaten: Name, Kategorie, Beschreibung
-- Detailansicht für einzelne Spots
-- Kartenansicht mit Marker-basiertem Überblick
-- Dashboard mit Kennzahlen und zuletzt eingetragenen Spots
-- Login-geschützter Zugriff
+- Login-geschützter Zugriff mit PocketBase Auth
+- Spots pro Collection anlegen, bearbeiten, löschen
+- Spot-Detailseite inkl. Standortverwaltung
+- Kartenansicht mit Leaflet-Markern pro aktiver Collection
+- Collection-Verwaltung (eigene / alle, beitreten, verlassen, umbenennen)
+- Aktivitäten-Startseite als zentrale Home-Ansicht
+- Mobile Bottom-Navigation mit Route-Transitions
+- PWA-Konfiguration für installierbare App
 
 ## Tech Stack
 
 - Vue 3 (`<script setup>`) + TypeScript
 - Vite 7
-- Pinia für State Management
+- Pinia
 - Vue Router 4
-- Naive UI + TailwindCSS 4
-- PocketBase als Backend (Auth + Daten)
-- Leaflet / `@vue-leaflet/vue-leaflet` für Karten
-- PWA via `vite-plugin-pwa`
+- Naive UI
+- Tailwind CSS 4
+- PocketBase
+- Leaflet + `@vue-leaflet/vue-leaflet`
+- `vite-plugin-pwa`
 
-## Architektur
+## Projektstruktur
 
-### Frontend-Struktur (`src/`)
+```text
+src/
+  components/        UI-Komponenten (collections, spot-detail, menu, navigation)
+  composables/       Feature-/UI-Logik (z. B. map, filters, stats)
+  layouts/           AppLayout mit Route-spezifischer Höhenlogik
+  pages/             Seiten (Activities, Spots, Map, Collections, Login, ...)
+  router/            Routen, Guards, Transition-Logik
+  services/          externe Services (PocketBase-Client)
+  stores/            Pinia Stores (auth, collections, spots, follows)
+  types/             zentrale TS-Typen
+```
 
-- `pages/`: Routing-Ziele (`DashboardPage`, `EntryPage`, `SpotPage`, `MapPage`, `SpotDetailPage`, `LoginPage`)
-- `components/`: wiederverwendbare UI-Bausteine
-  - `collection/`: Filter, Header, Card, Create-Drawer
-  - `spotdetail/`: Spot-Details, Bearbeiten, Standort-Modal/Karte
-  - `menu/` + `navigation/`: Drawer, Bottom Navigation
-- `stores/`: Pinia Stores (`authStore`, `collectionStore`, `spotStore`)
-- `composables/`: fachliche Ableitungen und UI-Logik (`useSpotFilters`, `useSpotMap`, `useDashboardStats`, ...)
-- `services/pocketbase.ts`: zentrale PocketBase-Instanz
-- `types/`: zentrale TS-Modelle
+## Routing und Zugriff
 
-### Routing und Zugriffsschutz
+Routen sind in `src/router/index.ts` definiert.
 
-- Definiert in `src/router/index.ts`
-- Routen mit `meta.requiresAuth: true` sind durch `beforeEach` geschützt
-- Nicht eingeloggte Nutzer werden auf `/login` umgeleitet
+- Geschützte Routen nutzen `meta.requiresAuth: true`
+- Globaler `beforeEach` leitet unauthentifizierte Nutzer auf `/login`
+- Main-Nav-Routen bekommen Slide-Transitions (`slide-left` / `slide-right`), sonst `fade`
 
-### State Management (Pinia)
+Aktuelle Hauptseiten:
 
-- `authStore`: Login/Logout und Synchronisierung mit `pb.authStore`
-- `collectionStore`: Laden, Erstellen, Aktualisieren, Löschen und aktive Collection
-- `spotStore`: CRUD für Spots, Laden collection-spezifischer und globaler Spot-Listen, Standort-Updates
+- `/` (`activities`)
+- `/spots`
+- `/add`
+- `/map`
+- `/collections`
+- `/all-collections`
+- `/my-collections`
+- `/friends`
+- `/friends-all`
+- `/login`
+
+## State Management (Pinia)
+
+- `authStore`: Login/Logout, Sync mit `pb.authStore`, `isAuthReady`
+- `collectionStore`: eigene + alle Collections, active collection, subscribe/unsubscribe
+- `spotStore`: collection-spezifische Spots, globale Spots, CRUD + Standort-Updates
+- `followStore`: Follow-Daten/Beziehungen für Social-Bereiche
 
 ## Datenmodell (vereinfacht)
 
-### Spot
-
-- `id: string`
-- `name: string`
-- `category: string`
-- `collection: string`
-- `description: string`
-- `locationLat?: number | null`
-- `locationLng?: number | null`
-- `locationUpdatedAt?: string | null`
-- `created`, `updated`
-
 ### Collection
 
-- `id: string`
-- `name: string`
-- `owner`, `members` (in PocketBase verwaltet)
+- `id`
+- `name`
+- `owner`
+- `members[]`
+- `created`, `updated`
+
+### Spot
+
+- `id`
+- `name`
+- `category`
+- `description`
+- `collection`
+- `user`
+- `locationLat`, `locationLng`
+- `locationUpdatedAt`
+- `created`, `updated`
 
 ## Voraussetzungen
 
-- Node.js: `^20.19.0` oder `>=22.12.0`
+- Node.js `^20.19.0 || >=22.12.0`
 - laufender PocketBase-Server
 
-## Setup
+## Environment
 
-1. Abhängigkeiten installieren:
-
-```bash
-npm install
-```
-
-2. `.env` anlegen (oder vorhandene Werte prüfen):
+Lege eine `.env` im Projektroot an:
 
 ```env
 VITE_PB_URL=http://127.0.0.1:8091
 VITE_THUNDERFOREST_API_KEY=<dein_thunderforest_api_key>
 ```
 
-3. Entwicklungsserver starten:
+Für den Seed-Script-Lauf werden zusätzlich benötigt:
+
+```env
+PB_ADMIN_EMAIL=<pocketbase_admin_email>
+PB_ADMIN_PASSWORD=<pocketbase_admin_passwort>
+```
+
+## Entwicklung
 
 ```bash
+npm install
 npm run dev
 ```
 
-4. Build erzeugen:
+Weitere Befehle:
 
 ```bash
 npm run build
-```
-
-5. Preview lokal testen:
-
-```bash
 npm run preview
-```
-
-## Qualitätssicherung
-
-- Lint + Auto-Fixes:
-
-```bash
 npm run lint
-```
-
-- Type-Check:
-
-```bash
 npm run type-check
-```
-
-- Formatierung:
-
-```bash
 npm run format
 ```
 
-## PWA-Hinweise
+## Seed-Daten (optional)
 
-- PWA ist über `vite-plugin-pwa` konfiguriert (`vite.config.js`)
+Im Repo liegt ein Demo-Seed in `scripts/pocketbase/data.json`.
+
+Ausführen:
+
+```bash
+npx tsx scripts/pocketbase/seed.ts
+```
+
+Der Script:
+
+- authentifiziert als PocketBase Superuser
+- erstellt Demo-User
+- erstellt Collections pro User
+- erstellt Spots inkl. optionaler Geokoordinaten
+
+## PWA
+
+Konfiguration in `vite.config.js`:
+
 - `registerType: 'autoUpdate'`
-- `devOptions.enabled: false` verhindert Service-Worker-Cache-Effekte in der lokalen Entwicklung
+- `workbox.navigateFallback: '/index.html'`
+- `devOptions.enabled: false` (kein SW-Cache in lokaler Entwicklung)
 
-## Aktueller Fokus im Code
+## Hinweise zum aktuellen Stand
 
-- mobile-first Layout mit Bottom-Navigation
-- schnelle Spot-Erfassung
-- filterbare Collection-Ansicht
-- Kartenfokus auf vorhandene Spot-Standorte
-
-## Mögliche nächste Ausbaustufen
-
-- Rollen-/Rechtemodell pro Collection (Owner, Member, Readonly)
-- Offline-Strategie für Spot-Erfassung
-- Tests (Unit für Composables/Stores, E2E für Kernflows)
-- Import/Export von Spots
+- Home-Route ist derzeit `ActivitiesPage` (nicht `DashboardPage`)
+- Layout-Höhenlogik ist route-spezifisch (u. a. für Login und Map)
+- App ist klar mobile-first ausgerichtet
