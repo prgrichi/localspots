@@ -1,0 +1,353 @@
+[
+  {
+    "email": "lena.mayer@example.com",
+    "password": "12345678",
+    "name": "Lena Mayer",
+    "collections": [
+      {
+        "name": "München nach Feierabend",
+        "spots": [
+          {
+            "name": "Gans am Wasser",
+            "category": "Café",
+            "description": "Entspannter Kiosk im Westpark mit Kaffee, Kuchen und unkomplizierter Stimmung. Besonders schön nach der Arbeit, wenn man noch eine Stunde draußen sitzen möchte."
+          },
+          {
+            "name": "Hackerbrücke",
+            "category": "Sonnenuntergangsspot",
+            "description": "Guter Ort für einen schnellen Blick über die Gleise und die Stadt. Zum Sonnenuntergang oft belebt, aber genau das macht den Spot recht münchnerisch."
+          },
+          {
+            "name": "Flaucher",
+            "category": "Natur",
+            "description": "Klassischer Isar-Spot mit Kiesbänken, Bäumen und viel Platz am Wasser. Gut für kurze Spaziergänge, Picknick oder einfach zum Runterkommen."
+          },
+          {
+            "name": "Café Frischhut",
+            "category": "Café",
+            "description": "Traditionelle Adresse nahe Viktualienmarkt, bekannt für Schmalznudeln und Kaffee. Ideal für einen kurzen, ehrlichen Stopp in der Innenstadt."
+          },
+          {
+            "name": "Alter Südfriedhof",
+            "category": "Kultur",
+            "description": "Ruhiger historischer Ort mitten in der Stadt mit alten Grabsteinen, Bäumen und viel Atmosphäre. Gut für einen langsamen Spaziergang abseits der vollen Straßen."
+          },
+          {
+            "name": "Müllersches Volksbad",
+            "category": "Sport",
+            "description": "Schönes Jugendstilbad an der Isar mit besonderer Atmosphäre. Eignet sich gut für einen ruhigen Schwimmabend, wenn man mal etwas anderes als ein normales Hallenbad möchte."
+          },
+          {
+            "name": "Reichenbachbrücke",
+            "category": "Fotospot",
+            "description": "Schöner Blick auf die Isar, besonders wenn das Licht am Abend weich wird. Praktisch gelegen und gut kombinierbar mit einem Spaziergang durchs Glockenbachviertel."
+          },
+          {
+            "name": "Goldene Bar",
+            "category": "Bar",
+            "description": "Stilvolle Bar beim Haus der Kunst mit guter Karte und angenehmer Atmosphäre. Funktioniert gut für einen besonderen Drink, ohne gleich zu formell zu wirken."
+          },
+          {
+            "name": "Hofgarten",
+            "category": "Picknickplatz",
+            "description": "Zentraler, gepflegter Garten mit ruhigen Ecken und schönen Arkaden. Gut für eine kurze Pause, ein kleines Picknick oder ein Treffen vor dem Abendprogramm."
+          },
+          {
+            "name": "Olympiaberg",
+            "category": "Aussichtspunkt",
+            "description": "Einer der besten unkomplizierten Aussichtspunkte in München. Von oben sieht man Olympiapark, Stadt und bei guter Sicht sogar die Alpen."
+          }
+        ]
+      },
+      {
+        "name": "Wochenende in Oberbayern",
+        "spots": [
+          {
+            "name": "Tegernseer Höhenweg",
+            "category": "Wandern",
+            "description": "Schöne, nicht zu schwere Runde mit Blick auf den Tegernsee. Ideal für einen halben Tag, wenn man Natur will, aber keine große Bergtour plant."
+          },
+          {
+            "name": "Seebad St. Quirin",
+            "category": "Badestelle",
+            "description": "Angenehme Badestelle am Tegernsee mit Blick auf die Berge. Im Sommer lieber früh kommen, weil es bei gutem Wetter schnell voll wird."
+          },
+          {
+            "name": "Bräustüberl Tegernsee",
+            "category": "Restaurant",
+            "description": "Traditionelles Wirtshaus direkt am See mit bayerischer Küche und lebhafter Atmosphäre. Gut geeignet nach einer Wanderung oder für Besuch von außerhalb."
+          },
+          {
+            "name": "Kloster Reutberg",
+            "category": "Aussichtspunkt",
+            "description": "Ruhiger Ort mit schönem Blick ins Voralpenland und einem klassischen Biergarten. Besonders angenehm, wenn man einen Ausflug ohne großen Trubel sucht."
+          },
+          {
+            "name": "Kirchsee bei Sachsenkam",
+            "category": "Badestelle",
+            "description": "Moorsee mit warmem Wasser und entspannter Umgebung. Gut für einen Sommertag, an dem man baden möchte, ohne direkt an einen der großen Seen zu fahren."
+          },
+          {
+            "name": "Maisinger See",
+            "category": "Natur",
+            "description": "Kleiner, ruhiger See bei Starnberg mit Spazierwegen und viel Vogelwelt. Eher ein Ort zum Abschalten als für Action."
+          },
+          {
+            "name": "Ilkahöhe",
+            "category": "Fotospot",
+            "description": "Aussichtspunkt oberhalb des Starnberger Sees mit weitem Blick Richtung Alpen. Besonders schön bei klarer Sicht oder leichtem Abendlicht."
+          },
+          {
+            "name": "Buchheim Museum",
+            "category": "Kultur",
+            "description": "Museum am Starnberger See mit Kunst, Architektur und Seezugang in der Nähe. Gute Wahl für einen Ausflug, wenn Wetter und Kultur zusammenpassen sollen."
+          },
+          {
+            "name": "Staffelsee Ufer bei Uffing",
+            "category": "Sonnenuntergangsspot",
+            "description": "Ruhiger Uferbereich mit schönem Blick über den See und die Berge. Zum Sonnenuntergang oft deutlich entspannter als bekanntere Orte."
+          },
+          {
+            "name": "Murnauer Moos",
+            "category": "Wandern",
+            "description": "Weite Moorlandschaft mit flachen Wegen und beeindruckendem Alpenpanorama. Ideal für einen ruhigen Spaziergang mit viel Natur und wenig Steigung."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "email": "maximilian.huber@example.com",
+    "password": "12345678",
+    "name": "Maximilian Huber",
+    "collections": [
+      {
+        "name": "Nürnberg entspannt",
+        "spots": [
+          {
+            "name": "Hesperidengärten",
+            "category": "Kultur",
+            "description": "Kleiner historischer Garten in St. Johannis, ruhig und etwas versteckt. Schön für einen kurzen Abstecher abseits der typischen Innenstadtwege."
+          },
+          {
+            "name": "Café Wanderer",
+            "category": "Café",
+            "description": "Unkomplizierter Treffpunkt unterhalb der Burg mit Kaffee, Bier und Blick auf das Treiben am Platz. Besonders gut für eine Pause beim Stadtspaziergang."
+          },
+          {
+            "name": "Wöhrder See Uferweg",
+            "category": "Sport",
+            "description": "Gute Strecke zum Laufen, Spazieren oder Radfahren mitten in der Stadt. Der Weg am Wasser ist alltagstauglich und funktioniert auch nach Feierabend."
+          },
+          {
+            "name": "Kettensteg",
+            "category": "Fotospot",
+            "description": "Historische Fußgängerbrücke mit schönem Blick auf die Pegnitz und die Altstadt. Eignet sich gut für kurze Fotostopps beim Spaziergang."
+          },
+          {
+            "name": "Kaffe Hörna",
+            "category": "Café",
+            "description": "Kleines Café mit nordischem Einschlag, gutem Kaffee und ruhiger Stimmung. Gut geeignet, wenn man nicht mitten im Innenstadttrubel sitzen will."
+          },
+          {
+            "name": "Johannisfriedhof",
+            "category": "Kultur",
+            "description": "Historischer Friedhof mit viel Atmosphäre und alten Grabstätten. Ein ruhiger Ort, der gut zu einem Spaziergang durch St. Johannis passt."
+          },
+          {
+            "name": "Insel Schütt",
+            "category": "Picknickplatz",
+            "description": "Grüne Fläche direkt an der Pegnitz, zentral und trotzdem angenehm für eine kurze Pause. Gut für ein kleines Picknick oder einen Treffpunkt im Sommer."
+          },
+          {
+            "name": "Tiergärtnertorplatz",
+            "category": "Bar",
+            "description": "Lebendiger Platz unterhalb der Burg, an warmen Abenden oft voll und gesellig. Gut, wenn man draußen sitzen und Nürnberg-Atmosphäre mitnehmen möchte."
+          },
+          {
+            "name": "Burgfreiung",
+            "category": "Aussichtspunkt",
+            "description": "Schöner Blick von der Kaiserburg über die Dächer der Stadt. Klassisch, aber immer noch einer der besten Orte, um Nürnberg von oben zu sehen."
+          },
+          {
+            "name": "Künstlerhaus im KunstKulturQuartier",
+            "category": "Kultur",
+            "description": "Kulturort mit Kino, Veranstaltungen und Ausstellungen in Bahnhofsnähe. Gute Adresse, wenn man spontan etwas Programm in der Stadt sucht."
+          }
+        ]
+      },
+      {
+        "name": "Fränkische Auszeiten",
+        "spots": [
+          {
+            "name": "Walberla",
+            "category": "Aussichtspunkt",
+            "description": "Markanter Aussichtspunkt in der Fränkischen Schweiz mit weitem Blick über die Landschaft. Die Wege sind gut machbar und oben lohnt sich eine längere Pause."
+          },
+          {
+            "name": "Binghöhle Streitberg",
+            "category": "Natur",
+            "description": "Kleine Tropfsteinhöhle bei Streitberg, gut als Ausflugsziel bei wechselhaftem Wetter. Passt gut in Kombination mit einem Spaziergang durch das Wiesenttal."
+          },
+          {
+            "name": "Brauerei-Gasthof Rothenbach",
+            "category": "Restaurant",
+            "description": "Bodenständiger Gasthof in der Fränkischen Schweiz mit regionaler Küche und Bier aus eigener Brauerei. Gut für eine ehrliche Einkehr nach einem Ausflug."
+          },
+          {
+            "name": "Felsenbad Pottenstein",
+            "category": "Badestelle",
+            "description": "Historisches Freibad zwischen Felsen, im Sommer ein besonderer Ort zum Abkühlen. Schön nach einer kleinen Wanderung oder einem Ausflug in der Gegend."
+          },
+          {
+            "name": "Tüchersfeld",
+            "category": "Fotospot",
+            "description": "Bekannter Ort mit markanten Felsen und Fachwerkhäusern. Sehr fotogen, besonders am Morgen oder später am Tag, wenn weniger los ist."
+          },
+          {
+            "name": "Wiesenttal bei Muggendorf",
+            "category": "Wandern",
+            "description": "Abwechslungsreiche Gegend mit Fluss, Felsen und Waldwegen. Gut für eine entspannte Wanderung ohne zu lange Anfahrt von Nürnberg."
+          },
+          {
+            "name": "Druidenhain",
+            "category": "Natur",
+            "description": "Mystisch wirkendes Felsenlabyrinth im Wald bei Wohlmannsgesees. Ein kurzer, besonderer Spaziergang, der sich gut mit anderen Zielen kombinieren lässt."
+          },
+          {
+            "name": "Brauerei Hübner in Steinfeld",
+            "category": "Restaurant",
+            "description": "Traditionelle fränkische Einkehr mit regionaler Küche und bodenständiger Atmosphäre. Gut als Abschluss einer Tour durch die nördliche Fränkische Schweiz."
+          },
+          {
+            "name": "Neubürg",
+            "category": "Sonnenuntergangsspot",
+            "description": "Freier Höhenrücken mit weitem Blick über die Fränkische Schweiz. Zum Sonnenuntergang ruhig, offen und deutlich weniger überlaufen als manche Klassiker."
+          },
+          {
+            "name": "Forchheimer Kellerwald",
+            "category": "Bar",
+            "description": "Besonderer Bierkellerbereich mit mehreren Kellern und viel fränkischer Biergartenkultur. Im Sommer ein sehr geselliger Ort für den Abend."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "email": "sofia.schneider@example.com",
+    "password": "12345678",
+    "name": "Sofia Schneider",
+    "collections": [
+      {
+        "name": "Regensburg und Donau",
+        "spots": [
+          {
+            "name": "Steinerne Brücke",
+            "category": "Kultur",
+            "description": "Historisches Wahrzeichen von Regensburg mit Blick auf Donau, Altstadt und Dom. Besonders schön früh am Morgen, bevor die Brücke voller wird."
+          },
+          {
+            "name": "Dultplatz Donauufer",
+            "category": "Sonnenuntergangsspot",
+            "description": "Weiter Blick über die Donau Richtung Altstadt, abends oft mit schönem Licht. Gut für einen ruhigen Abschluss nach einem Stadtspaziergang."
+          },
+          {
+            "name": "Historische Wurstkuchl",
+            "category": "Restaurant",
+            "description": "Sehr klassische Adresse direkt an der Donau mit einfachen, deftigen Gerichten. Touristisch, aber für Regensburg trotzdem irgendwie Pflicht."
+          },
+          {
+            "name": "Herzogspark",
+            "category": "Natur",
+            "description": "Gepflegter Park am Rand der Altstadt mit ruhigen Wegen und schönen Ecken. Ideal, wenn man kurz aus dem Innenstadttrubel raus möchte."
+          },
+          {
+            "name": "Café Lila",
+            "category": "Café",
+            "description": "Beliebtes Café in der Altstadt mit gemütlicher Atmosphäre und guter Auswahl. Gut für Frühstück, Kaffeepause oder längeres Sitzen mit Freunden."
+          },
+          {
+            "name": "Jahninsel",
+            "category": "Picknickplatz",
+            "description": "Grüne Insel zwischen Donauarmen, beliebt zum Sitzen, Reden und Picknicken. Im Sommer lebendig, aber meistens trotzdem entspannt."
+          },
+          {
+            "name": "Winzerer Höhen",
+            "category": "Aussichtspunkt",
+            "description": "Schöne Anhöhe mit Blick über Regensburg und die Donau. Gut erreichbar und angenehm, wenn man Stadt und Landschaft zusammen sehen möchte."
+          },
+          {
+            "name": "Ostentor",
+            "category": "Fotospot",
+            "description": "Gut erhaltenes Stadttor am Rand der Altstadt mit mittelalterlicher Wirkung. Eignet sich als kurzer Fotostopp auf dem Weg durch den Osten der Stadt."
+          },
+          {
+            "name": "Donau-Radweg Richtung Donaustauf",
+            "category": "Sport",
+            "description": "Angenehme Strecke entlang der Donau, gut für eine kleine Radtour ohne große Planung. Besonders schön, wenn man bis zur Walhalla weiterfährt."
+          },
+          {
+            "name": "Mischbar Regensburg",
+            "category": "Bar",
+            "description": "Kleine Bar mit entspanntem Publikum und guter Lage für einen Abend in der Altstadt. Funktioniert gut für einen unkomplizierten Drink nach dem Essen."
+          }
+        ]
+      },
+      {
+        "name": "Allgäu kleine Fluchten",
+        "spots": [
+          {
+            "name": "Alpsee bei Immenstadt",
+            "category": "Badestelle",
+            "description": "Schöner See mit Bergblick und mehreren Stellen zum Baden oder Sitzen am Ufer. Im Sommer beliebt, aber mit etwas Bewegung findet man ruhigere Ecken."
+          },
+          {
+            "name": "Buchenegger Wasserfälle",
+            "category": "Natur",
+            "description": "Beeindruckende Wasserfälle bei Oberstaufen mit kurzen, teils steilen Wegen. Lohnt sich besonders nach Regen, wenn genug Wasser unterwegs ist."
+          },
+          {
+            "name": "Mittagberg",
+            "category": "Wandern",
+            "description": "Gut erreichbarer Berg bei Immenstadt mit schönem Blick ins Allgäu. Geeignet für eine moderate Tour, auch wenn man nicht den ganzen Tag unterwegs sein will."
+          },
+          {
+            "name": "Altstadt Wangen im Allgäu",
+            "category": "Kultur",
+            "description": "Sehr schöne historische Altstadt mit bunten Fassaden, kleinen Plätzen und ruhiger Atmosphäre. Ideal für einen entspannten Nachmittag ohne großes Programm."
+          },
+          {
+            "name": "Café Zuckerschnute Kempten",
+            "category": "Café",
+            "description": "Gemütliches Café mit Kuchen, Frühstück und freundlicher Stimmung. Gut für eine Pause in Kempten, ohne dass es zu hektisch wirkt."
+          },
+          {
+            "name": "Burgruine Eisenberg",
+            "category": "Aussichtspunkt",
+            "description": "Ruine mit weitem Blick über das Ostallgäu und Richtung Alpen. Der kurze Aufstieg lohnt sich besonders bei klarer Sicht."
+          },
+          {
+            "name": "Hopfensee Uferpromenade",
+            "category": "Sonnenuntergangsspot",
+            "description": "Promenade mit starkem Alpenpanorama und ruhigem Seegefühl. Zum Sonnenuntergang oft besonders schön, wenn die Berge im Hintergrund leuchten."
+          },
+          {
+            "name": "Markthalle Kempten",
+            "category": "Shop",
+            "description": "Guter Ort für regionale Produkte, kleine Einkäufe und einen kurzen Stadtbummel. Praktisch, wenn man etwas Lokales mitnehmen möchte."
+          },
+          {
+            "name": "Illerufer bei Kempten",
+            "category": "Sport",
+            "description": "Angenehmer Abschnitt am Fluss zum Laufen, Spazieren oder Radfahren. Funktioniert gut als kleine Runde direkt aus der Stadt heraus."
+          },
+          {
+            "name": "Alpe Dornach",
+            "category": "Restaurant",
+            "description": "Schöne Einkehr oberhalb von Oberstdorf mit Allgäuer Küche und Bergblick. Gut geeignet nach einer Wanderung oder für einen besonderen Ausflugstag."
+          }
+        ]
+      }
+    ]
+  }
+]

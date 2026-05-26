@@ -1,0 +1,190 @@
+import 'dotenv/config';
+import PocketBase from 'pocketbase';
+import seedUsers from './data.json';
+
+type SeedSpot = {
+  name: string;
+  category?: string;
+  description: string;
+  created?: string;
+  updated?: string;
+};
+
+type SeedCollection = {
+  name: string;
+  created?: string;
+  updated?: string;
+  spots: SeedSpot[];
+};
+
+type SeedUser = {
+  email: string;
+  password: string;
+  name?: string;
+  created?: string;
+  updated?: string;
+  collections: SeedCollection[];
+};
+
+type CreatedUser = {
+  seed: SeedUser;
+  id: string;
+  email: string;
+};
+
+type CreatedCollection = {
+  seed: SeedCollection;
+  id: string;
+  name: string;
+  userId: string;
+  userEmail: string;
+};
+
+function requiredEnv(name: string): string {
+  const value = process.env[name];
+
+  if (!value) {
+    throw new Error(`${name} muss gesetzt sein.`);
+  }
+
+  return value;
+}
+
+function daysAgo(days: number, hour: number, minute: number): string {
+  const date = new Date();
+
+  date.setDate(date.getDate() - days);
+  date.setHours(hour, minute, 0, 0);
+
+  return date.toISOString();
+}
+
+function addMinutes(dateString: string, minutes: number): string {
+  const date = new Date(dateString);
+
+  date.setMinutes(date.getMinutes() + minutes);
+
+  return date.toISOString();
+}
+
+const pb = new PocketBase('http://127.0.0.1:8091');
+
+const adminEmail = requiredEnv('PB_ADMIN_EMAIL');
+const adminPassword = requiredEnv('PB_ADMIN_PASSWORD');
+
+async function seed() {
+  await pb.collection('_superusers').authWithPassword(adminEmail, adminPassword);
+
+  let activityOffsetDays = 18;
+
+  const createdUsers: CreatedUser[] = [];
+
+  // 1. Erst alle User erstellen
+  for (const userSeed of seedUsers as SeedUser[]) {
+    console.log(`Erstelle User: ${userSeed.email}`);
+
+    const userCreated = userSeed.created ?? daysAgo(activityOffsetDays, 9, 15);
+    const userUpdated = userSeed.updated ?? addMinutes(userCreated, 12);
+
+    activityOffsetDays -= 2;
+
+    const user = await pb.collection('users').create({
+      email: userSeed.email,
+      password: userSeed.password,
+      passwordConfirm: userSeed.password,
+      name: userSeed.name,
+      emailVisibility: true,
+      verified: true,
+      created: userCreated,
+      updated: userUpdated,
+    });
+
+    createdUsers.push({
+      seed: userSeed,
+      id: user.id,
+      email: user.email,
+    });
+  }
+
+  const createdCollections: CreatedCollection[] = [];
+
+  // 2. Collections pro User durchmischen:
+  // User A Collection 1, User B Collection 1, User C Collection 1,
+  // User A Collection 2, User B Collection 2, User C Collection 2, ...
+  const maxCollectionCount = Math.max(...createdUsers.map(user => user.seed.collections.length));
+
+  for (let collectionIndex = 0; collectionIndex < maxCollectionCount; collectionIndex += 1) {
+    for (const createdUser of createdUsers) {
+      const collectionSeed = createdUser.seed.collections[collectionIndex];
+
+      if (!collectionSeed) {
+        continue;
+      }
+
+      console.log(`Erstelle Collection für ${createdUser.email}: ${collectionSeed.name}`);
+
+      const collectionCreated = collectionSeed.created ?? daysAgo(activityOffsetDays, 17, 30);
+      const collectionUpdated = collectionSeed.updated ?? addMinutes(collectionCreated, 8);
+
+      activityOffsetDays -= 2;
+
+      const collection = await pb.collection('collections').create({
+        name: collectionSeed.name,
+        owner: createdUser.id,
+        members: [createdUser.id],
+        created: collectionCreated,
+        updated: collectionUpdated,
+      });
+
+      createdCollections.push({
+        seed: collectionSeed,
+        id: collection.id,
+        name: collection.name,
+        userId: createdUser.id,
+        userEmail: createdUser.email,
+      });
+    }
+  }
+
+  // 3. Spots über alle Collections durchmischen:
+  // Collection A Spot 1, Collection B Spot 1, Collection C Spot 1,
+  // Collection A Spot 2, Collection B Spot 2, ...
+  const maxSpotCount = Math.max(
+    ...createdCollections.map(collection => collection.seed.spots.length)
+  );
+
+  for (let spotIndex = 0; spotIndex < maxSpotCount; spotIndex += 1) {
+    for (const createdCollection of createdCollections) {
+      const spotSeed = createdCollection.seed.spots[spotIndex];
+
+      if (!spotSeed) {
+        continue;
+      }
+
+      console.log(`Erstelle Spot für ${createdCollection.userEmail}: ${spotSeed.name}`);
+
+      const spotCreated = spotSeed.created ?? daysAgo(activityOffsetDays, 18, 45);
+      const spotUpdated = spotSeed.updated ?? addMinutes(spotCreated, 5);
+
+      activityOffsetDays -= 1;
+
+      await pb.collection('spots').create({
+        name: spotSeed.name,
+        category: spotSeed.category,
+        description: spotSeed.description,
+        collection: createdCollection.id,
+        user: createdCollection.userId,
+        created: spotCreated,
+        updated: spotUpdated,
+      });
+    }
+  }
+
+  console.log('Seed fertig');
+}
+
+seed().catch(error => {
+  console.error('Seed fehlgeschlagen');
+  console.error(error);
+  process.exit(1);
+});

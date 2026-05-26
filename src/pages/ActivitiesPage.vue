@@ -11,9 +11,29 @@
 
     <section
       v-else-if="activities.length === 0"
-      class="rounded-2xl bg-white p-4 text-sm text-slate-500 shadow-sm ring-1 ring-slate-200"
+      class="flex min-h-[calc(100vh-240px)] flex-col items-center justify-center px-4 py-12 text-center"
     >
-      Noch keine Aktivitäten gefunden.
+      <div class="flex size-16 items-center justify-center rounded-full bg-primary-50">
+        <span class="block size-6 rounded-full bg-accent-600"></span>
+      </div>
+
+      <h2 class="mt-6 text-2xl font-semibold tracking-tight text-slate-950">
+        Noch keine Aktivitäten gefunden
+      </h2>
+
+      <p class="mt-3 max-w-xs text-sm leading-6 text-slate-500">
+        Sobald in deinen Collections neue Spots eingetragen werden, erscheinen sie hier.
+      </p>
+
+      <div class="mt-7 space-y-4">
+        <RouterLink :to="{ name: 'add-entry' }" class="block no-underline">
+          <n-button type="primary" secondary size="large" round> Spot eintragen </n-button>
+        </RouterLink>
+
+        <RouterLink :to="{ name: 'collections-all' }" class="block no-underline">
+          <n-button type="primary" secondary size="large" round> Collections entdecken </n-button>
+        </RouterLink>
+      </div>
     </section>
 
     <section v-else class="overflow-hidden rounded-3xl bg-white shadow-sm ring-1 ring-slate-200">
