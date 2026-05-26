@@ -1,6 +1,32 @@
 <template>
-  <main class="mx-auto flex h-full w-full max-w-3xl items-center px-4 py-6 md:px-8">
-    <section class="mx-auto flex h-full w-full max-w-sm flex-col py-2">
+  <main
+    class="relative mx-auto flex h-full w-full max-w-3xl items-center overflow-hidden px-4 py-6 md:px-8"
+  >
+    <div
+      aria-hidden="true"
+      class="pointer-events-none absolute -right-20 -top-24 z-0 h-[19rem] w-[22.5rem] rotate-[-18deg] rounded-[3rem] bg-accent-600/8"
+    ></div>
+
+    <div
+      aria-hidden="true"
+      class="pointer-events-none absolute -right-32 top-32 z-0 h-28 w-64 rotate-[-18deg] rounded-[2.5rem] bg-accent-700/12"
+    ></div>
+
+    <div
+      aria-hidden="true"
+      class="pointer-events-none absolute right-8 top-8 z-0 text-accent-600/18"
+    >
+      <LocationOutline class="size-6" />
+    </div>
+
+    <div
+      aria-hidden="true"
+      class="pointer-events-none absolute right-20 top-18 z-0 rotate-[-12deg] text-accent-600/14"
+    >
+      <LocationOutline class="size-5" />
+    </div>
+
+    <section class="relative z-10 mx-auto flex h-full w-full max-w-sm flex-col py-2">
       <div class="text-center">
         <div class="mx-auto flex size-14 items-center justify-center rounded-full bg-primary-50">
           <span class="block size-6 rounded-full bg-accent-600"></span>
@@ -65,7 +91,6 @@
               block
               size="large"
               :loading="isSubmitting"
-              :disabled="!canSubmit"
             >
               Einloggen
             </n-button>
@@ -77,10 +102,10 @@
 </template>
 
 <script setup lang="ts">
-import { computed, reactive, ref } from 'vue';
+import { reactive, ref } from 'vue';
 import { useRouter } from 'vue-router';
 import { NFormItem, NInput, NButton, NSpace, NIcon, useMessage } from 'naive-ui';
-import { LockClosedOutline, MailOutline } from '@vicons/ionicons5';
+import { LockClosedOutline, MailOutline, LocationOutline } from '@vicons/ionicons5';
 import { useAuthStore } from '@/stores/authStore';
 
 const router = useRouter();
@@ -94,17 +119,31 @@ const form = reactive({
   password: '',
 });
 
-const canSubmit = computed(() => {
-  return form.email.trim().length > 0 && form.password.length > 0 && !isSubmitting.value;
-});
-
 async function submit() {
-  if (!canSubmit.value) return;
+  if (isSubmitting.value) return;
+
+  const email = form.email.trim();
+  const password = form.password;
+
+  if (!email && !password) {
+    message.warning('Bitte gib deine E-Mail und dein Passwort ein.');
+    return;
+  }
+
+  if (!email) {
+    message.warning('Bitte gib deine E-Mail Adresse ein.');
+    return;
+  }
+
+  if (!password) {
+    message.warning('Bitte gib dein Passwort ein.');
+    return;
+  }
 
   isSubmitting.value = true;
 
   try {
-    await authStore.login(form.email.trim(), form.password);
+    await authStore.login(email, password);
 
     message.success('Eingeloggt');
     router.push('/');
