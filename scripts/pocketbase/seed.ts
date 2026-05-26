@@ -6,6 +6,9 @@ type SeedSpot = {
   name: string;
   category?: string;
   description: string;
+  locationLat?: number | null;
+  locationLng?: number | null;
+  locationUpdatedAt?: string | null;
   created?: string;
   updated?: string;
 };
@@ -174,6 +177,12 @@ async function seed() {
         description: spotSeed.description,
         collection: createdCollection.id,
         user: createdCollection.userId,
+        locationLat: spotSeed.locationLat ?? null,
+        locationLng: spotSeed.locationLng ?? null,
+        locationUpdatedAt:
+          spotSeed.locationLat != null && spotSeed.locationLng != null
+            ? (spotSeed.locationUpdatedAt ?? new Date().toISOString())
+            : null,
         created: spotCreated,
         updated: spotUpdated,
       });
