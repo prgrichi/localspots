@@ -78,7 +78,7 @@ import { useRouter } from 'vue-router';
 import { spotCategoryOptions } from '@/data/spotCategories';
 
 import CollectionCreateDrawer from '@/components/collection/CollectionCreateDrawer.vue';
-import NoCollectionsState from '@/components/NoCollectionsState.vue';
+import NoCollectionsState from '@/components/collection/NoCollectionsState.vue';
 
 const spotStore = useSpotStore();
 const collectionStore = useCollectionStore();

@@ -31,28 +31,42 @@
   </main>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { computed, onMounted, ref } from 'vue';
 import { pb } from '@/services/pocketbase';
 
-const follows = ref([]);
+type FollowingUser = {
+  id: string;
+  name?: string;
+  email?: string;
+};
+
+type FollowRecord = {
+  id: string;
+  expand?: {
+    following?: FollowingUser;
+  };
+};
+
+const follows = ref<FollowRecord[]>([]);
 const isLoading = ref(false);
 
 const followingUsers = computed(() =>
-  follows.value.map(follow => follow.expand?.following).filter(Boolean)
+  follows.value
+    .map(follow => follow.expand?.following)
+    .filter((user): user is FollowingUser => !!user)
 );
 
 async function fetchFollows() {
   isLoading.value = true;
 
   try {
-    follows.value = await pb.collection('follows').getFullList({
+    follows.value = await pb.collection('follows').getFullList<FollowRecord>({
       filter: `follower = "${pb.authStore.record?.id}"`,
       expand: 'following',
     });
   } finally {
     isLoading.value = false;
-    console.log(follows.value[0]?.expand);
   }
 }
 

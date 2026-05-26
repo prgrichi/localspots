@@ -1,4 +1,4 @@
-<!-- src/components/NoCollectionsState.vue -->
+<!-- src/components/collection/NoCollectionsState.vue -->
 <template>
   <section
     class="flex min-h-[calc(100vh-180px)] flex-col items-center justify-center px-4 py-12 text-center"

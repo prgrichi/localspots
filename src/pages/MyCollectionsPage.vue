@@ -51,7 +51,7 @@ import { confirmDialogOptions } from '@/utils/confirmDialogOptions';
 
 import CollectionCreateDrawer from '@/components/collection/CollectionCreateDrawer.vue';
 import CollectionDetailDrawer from '@/components/collection/CollectionDetailDrawer.vue';
-import NoCollectionsState from '@/components/NoCollectionsState.vue';
+import NoCollectionsState from '@/components/collection/NoCollectionsState.vue';
 import CollectionCard from '@/components/collection/CollectionCard.vue';
 
 const collectionStore = useCollectionStore();
