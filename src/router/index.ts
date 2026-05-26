@@ -6,6 +6,7 @@ import MapPage from '@/pages/MapPage.vue';
 import FriendsFollowingPage from '@/pages/FriendsFollowingPage.vue';
 import FriendsAllUserPage from '@/pages/FriendsAllUserPage.vue';
 import CollectionsAllPage from '@/pages/CollectionsAllPage.vue';
+import MyCollectionsPage from '@/pages/MyCollectionsPage.vue';
 import { pb } from '@/services/pocketbase';
 
 const router = createRouter({
@@ -56,13 +57,21 @@ const router = createRouter({
         requiresAuth: true,
       },
     },
-
     {
       path: '/collections-all',
       name: 'collections-all',
       component: CollectionsAllPage,
       meta: {
         title: 'Alle Collections',
+        requiresAuth: true,
+      },
+    },
+    {
+      path: '/my-collections',
+      name: 'my-collections',
+      component: MyCollectionsPage,
+      meta: {
+        title: 'Meine Collections',
         requiresAuth: true,
       },
     },

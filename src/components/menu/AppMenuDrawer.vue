@@ -44,6 +44,13 @@
           Collections entdecken
         </RouterLink>
 
+        <RouterLink
+          to="/my-collections"
+          class="block w-full rounded-2xl bg-accent-600 px-4 py-2 text-center text-sm font-semibold text-white no-underline shadow-sm transition hover:bg-accent-700"
+        >
+          Meine Collections
+        </RouterLink>
+
         <button
           type="button"
           class="w-full rounded-2xl border border-red-100 bg-red-50 px-4 py-3 text-red-600 flex items-center justify-between hover:bg-red-100 transition"

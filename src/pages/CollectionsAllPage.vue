@@ -35,61 +35,22 @@
     </section>
 
     <section v-else class="space-y-3">
-      <article
+      <CollectionCard
         v-for="collection in collectionStore.allCollections"
         :key="collection.id"
-        class="rounded-2xl bg-white p-4 shadow-sm ring-1 ring-slate-200"
-      >
-        <div class="min-w-0">
-          <h2 class="truncate font-semibold text-slate-950">
-            {{ collection.name }}
-          </h2>
-
-          <p class="mt-0.5 text-sm text-slate-500">
-            {{ collection.members?.length ?? 0 }}
-            Mitglieder
-          </p>
-        </div>
-
-        <div class="mt-3 flex gap-2">
-          <n-button secondary round class="flex-1" @click="openMembersDrawer(collection.id)">
-            Mitglieder
-          </n-button>
-
-          <span
-            v-if="collectionStore.isOwner(collection)"
-            class="inline-flex h-9 flex-1 items-center justify-center rounded-full bg-slate-100 px-3 text-xs font-medium text-slate-500"
-          >
-            Deine Collection
-          </span>
-
-          <n-button
-            v-else-if="collectionStore.isSubscribed(collection)"
-            secondary
-            round
-            class="flex-1"
-            :loading="pendingCollectionId === collection.id"
-            :disabled="!!pendingCollectionId"
-            @click="confirmLeaveCollection(collection.id)"
-          >
-            Verlassen
-          </n-button>
-
-          <n-button
-            v-else
-            type="primary"
-            secondary
-            round
-            class="flex-1"
-            :loading="pendingCollectionId === collection.id"
-            :disabled="!!pendingCollectionId"
-            @click="joinCollection(collection.id)"
-          >
-            Beitreten
-          </n-button>
-        </div>
-      </article>
+        :collection="collection"
+        primary-text="Mitglieder"
+        :is-owner="collectionStore.isOwner(collection)"
+        :is-subscribed="collectionStore.isSubscribed(collection)"
+        :is-pending="pendingCollectionId === collection.id"
+        :is-disabled="!!pendingCollectionId"
+        show-join
+        @primary="openMembersDrawer"
+        @leave="confirmLeaveCollection"
+        @join="joinCollection"
+      />
     </section>
+
     <CollectionMemberDrawer :collection="selectedCollection" v-model:show="showMembersDrawer" />
   </div>
 </template>
@@ -100,7 +61,8 @@ import { NButton, useMessage, useDialog } from 'naive-ui';
 import { useCollectionStore } from '@/stores/collectionStore';
 
 import CollectionCreateDrawer from '@/components/collection/CollectionCreateDrawer.vue';
-import CollectionMemberDrawer from '@/components/allCollections/CollectionMemberDrawer.vue';
+import CollectionMemberDrawer from '@/components/collection/CollectionMemberDrawer.vue';
+import CollectionCard from '@/components/collection/CollectionCard.vue';
 
 const collectionStore = useCollectionStore();
 const message = useMessage();
@@ -111,6 +73,28 @@ const pendingCollectionId = ref<string | null>(null);
 
 const showMembersDrawer = ref(false);
 const selectedCollectionId = ref<string | null>(null);
+
+const dialogOptions = {
+  style: {
+    width: 'calc(100vw - 2rem)',
+    maxWidth: '24rem',
+    borderRadius: '1.5rem',
+    padding: '1rem',
+  },
+
+  class: 'localspot-dialog',
+
+  positiveButtonProps: {
+    type: 'error',
+    secondary: true,
+    round: true,
+  },
+
+  negativeButtonProps: {
+    secondary: true,
+    round: true,
+  },
+} as const;
 
 onMounted(async () => {
   await collectionStore.fetchAllCollections();
@@ -152,27 +136,7 @@ function confirmLeaveCollection(id: string) {
     content: 'Du siehst die Spots dieser Collection danach nicht mehr in deiner App.',
     positiveText: 'Verlassen',
     negativeText: 'Abbrechen',
-
-    style: {
-      width: 'calc(100vw - 2rem)',
-      maxWidth: '24rem',
-      borderRadius: '1.5rem',
-      padding: '1rem',
-    },
-
-    class: 'localspot-dialog',
-
-    positiveButtonProps: {
-      type: 'error',
-      secondary: true,
-      round: true,
-    },
-
-    negativeButtonProps: {
-      secondary: true,
-      round: true,
-    },
-
+    ...dialogOptions,
     onPositiveClick: () => leaveCollection(id),
   });
 }

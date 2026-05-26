@@ -83,6 +83,7 @@ export const useCollectionStore = defineStore('collections', {
         const records = await pb.collection('collections').getFullList<Collection>({
           filter: `owner.id = "${userId}" || members.id ?= "${userId}"`,
           sort: 'created',
+          expand: 'members',
         });
 
         this.collections = records;
@@ -125,15 +126,21 @@ export const useCollectionStore = defineStore('collections', {
       return createdCollection;
     },
 
-    async updateCollection(id: string, name: string) {
+    async renameCollection(id: string, name: string) {
       const updatedCollection = await pb.collection('collections').update<Collection>(id, {
         name,
       });
 
-      const index = this.collections.findIndex(collection => collection.id === id);
+      const collectionsIndex = this.collections.findIndex(collection => collection.id === id);
 
-      if (index !== -1) {
-        this.collections[index] = updatedCollection;
+      if (collectionsIndex !== -1) {
+        this.collections[collectionsIndex] = updatedCollection;
+      }
+
+      const allCollectionsIndex = this.allCollections.findIndex(collection => collection.id === id);
+
+      if (allCollectionsIndex !== -1) {
+        this.allCollections[allCollectionsIndex] = updatedCollection;
       }
 
       return updatedCollection;
