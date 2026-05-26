@@ -3,8 +3,7 @@
   <n-drawer
     :show="show"
     placement="bottom"
-    height="auto"
-    style="max-height: 90vh"
+    height="90vh"
     @update:show="emit('update:show', $event)"
   >
     <n-drawer-content
