@@ -1,4 +1,4 @@
-<!-- src/components/collections/CollectionMemberDrawer.vue -->
+<!-- src/components/collection/CollectionMemberDrawer.vue -->
 <template>
   <n-drawer
     :show="show"

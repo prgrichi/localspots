@@ -35,15 +35,16 @@ import { useMessage, useDialog } from 'naive-ui';
 import { useRoute, useRouter } from 'vue-router';
 import type { Spot } from '@/types/spot';
 
-import SpotEditModal from '@/components/spotdetail/SpotEditModal.vue';
-import SpotDetailHeader from '@/components/spotdetail/SpotDetailHeader.vue';
-import SpotLocationMap from '@/components/spotdetail/SpotLocationMap.vue';
-import SpotLocationPanel from '@/components/spotdetail/SpotLocationPanel.vue';
-import SpotLocationModal from '@/components/spotdetail/SpotLocationModal.vue';
+import SpotEditModal from '@/components/spot-detail/SpotEditModal.vue';
+import SpotDetailHeader from '@/components/spot-detail/SpotDetailHeader.vue';
+import SpotLocationMap from '@/components/spot-detail/SpotLocationMap.vue';
+import SpotLocationPanel from '@/components/spot-detail/SpotLocationPanel.vue';
+import SpotLocationModal from '@/components/spot-detail/SpotLocationModal.vue';
 
 import { useSpotStore } from '@/stores/spotStore';
 import { useCollectionStore } from '@/stores/collectionStore';
 import { useSingleSpotMap } from '@/composables/useSpotMap';
+import { confirmDialogOptions } from '@/utils/confirmDialogOptions';
 
 const route = useRoute();
 const router = useRouter();
@@ -115,26 +116,7 @@ const deleteSpot = (spot: Spot | null) => {
     content: `Möchtest du "${name}" wirklich löschen?`,
     positiveText: 'Löschen',
     negativeText: 'Abbrechen',
-
-    style: {
-      width: 'calc(100vw - 2rem)',
-      maxWidth: '24rem',
-      borderRadius: '1.5rem',
-      padding: '1rem',
-    },
-
-    class: 'localspot-dialog',
-
-    positiveButtonProps: {
-      type: 'error',
-      secondary: true,
-      round: true,
-    },
-
-    negativeButtonProps: {
-      secondary: true,
-      round: true,
-    },
+    ...confirmDialogOptions,
 
     async onPositiveClick() {
       try {

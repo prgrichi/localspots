@@ -46,6 +46,8 @@
 import { computed, ref, onMounted } from 'vue';
 import { useCollectionStore } from '@/stores/collectionStore';
 import { useMessage, useDialog } from 'naive-ui';
+import { useCollectionLeaveDialog } from '@/composables/useCollectionLeaveDialog';
+import { confirmDialogOptions } from '@/utils/confirmDialogOptions';
 
 import CollectionCreateDrawer from '@/components/collection/CollectionCreateDrawer.vue';
 import CollectionDetailDrawer from '@/components/collection/CollectionDetailDrawer.vue';
@@ -64,27 +66,11 @@ const pendingCollectionId = ref<string | null>(null);
 const showDetailDrawer = ref(false);
 const selectedCollectionId = ref<string | null>(null);
 
-const dialogOptions = {
-  style: {
-    width: 'calc(100vw - 2rem)',
-    maxWidth: '24rem',
-    borderRadius: '1.5rem',
-    padding: '1rem',
-  },
-
-  class: 'localspot-dialog',
-
-  positiveButtonProps: {
-    type: 'error',
-    secondary: true,
-    round: true,
-  },
-
-  negativeButtonProps: {
-    secondary: true,
-    round: true,
-  },
-} as const;
+const { confirmLeaveCollection } = useCollectionLeaveDialog({
+  pendingCollectionId,
+  onLeave: id => collectionStore.unsubscribeCollection(id),
+  dialogOptions: confirmDialogOptions,
+});
 
 onMounted(async () => {
   await collectionStore.fetchMyCollections();
@@ -105,38 +91,13 @@ function openDetailsDrawer(id: string) {
   showDetailDrawer.value = true;
 }
 
-function confirmLeaveCollection(id: string) {
-  dialog.warning({
-    title: 'Collection verlassen?',
-    content: 'Du siehst die Spots dieser Collection danach nicht mehr in deiner App.',
-    positiveText: 'Verlassen',
-    negativeText: 'Abbrechen',
-    ...dialogOptions,
-    onPositiveClick: () => leaveCollection(id),
-  });
-}
-
-async function leaveCollection(id: string) {
-  pendingCollectionId.value = id;
-
-  try {
-    await collectionStore.unsubscribeCollection(id);
-    message.success('Collection verlassen');
-  } catch (error: unknown) {
-    const msg = error instanceof Error ? error.message : 'Verlassen fehlgeschlagen';
-    message.error(msg);
-  } finally {
-    pendingCollectionId.value = null;
-  }
-}
-
 function confirmDeleteCollection(id: string) {
   dialog.warning({
     title: 'Collection löschen?',
     content: 'Diese Collection wird dauerhaft gelöscht. Das kann nicht rückgängig gemacht werden.',
     positiveText: 'Löschen',
     negativeText: 'Abbrechen',
-    ...dialogOptions,
+    ...confirmDialogOptions,
     onPositiveClick: () => deleteCollection(id),
   });
 }

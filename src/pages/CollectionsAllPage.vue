@@ -57,8 +57,10 @@
 
 <script setup lang="ts">
 import { ref, computed, onMounted } from 'vue';
-import { NButton, useMessage, useDialog } from 'naive-ui';
+import { NButton, useMessage } from 'naive-ui';
 import { useCollectionStore } from '@/stores/collectionStore';
+import { useCollectionLeaveDialog } from '@/composables/useCollectionLeaveDialog';
+import { confirmDialogOptions } from '@/utils/confirmDialogOptions';
 
 import CollectionCreateDrawer from '@/components/collection/CollectionCreateDrawer.vue';
 import CollectionMemberDrawer from '@/components/collection/CollectionMemberDrawer.vue';
@@ -66,7 +68,6 @@ import CollectionCard from '@/components/collection/CollectionCard.vue';
 
 const collectionStore = useCollectionStore();
 const message = useMessage();
-const dialog = useDialog();
 
 const showCollectionDrawer = ref(false);
 const pendingCollectionId = ref<string | null>(null);
@@ -74,27 +75,11 @@ const pendingCollectionId = ref<string | null>(null);
 const showMembersDrawer = ref(false);
 const selectedCollectionId = ref<string | null>(null);
 
-const dialogOptions = {
-  style: {
-    width: 'calc(100vw - 2rem)',
-    maxWidth: '24rem',
-    borderRadius: '1.5rem',
-    padding: '1rem',
-  },
-
-  class: 'localspot-dialog',
-
-  positiveButtonProps: {
-    type: 'error',
-    secondary: true,
-    round: true,
-  },
-
-  negativeButtonProps: {
-    secondary: true,
-    round: true,
-  },
-} as const;
+const { confirmLeaveCollection } = useCollectionLeaveDialog({
+  pendingCollectionId,
+  onLeave: id => collectionStore.unsubscribeCollection(id),
+  dialogOptions: confirmDialogOptions,
+});
 
 onMounted(async () => {
   await collectionStore.fetchAllCollections();
@@ -124,31 +109,6 @@ async function joinCollection(id: string) {
     message.success('Collection beigetreten');
   } catch (error: unknown) {
     const msg = error instanceof Error ? error.message : 'Beitritt fehlgeschlagen';
-    message.error(msg);
-  } finally {
-    pendingCollectionId.value = null;
-  }
-}
-
-function confirmLeaveCollection(id: string) {
-  dialog.warning({
-    title: 'Collection verlassen?',
-    content: 'Du siehst die Spots dieser Collection danach nicht mehr in deiner App.',
-    positiveText: 'Verlassen',
-    negativeText: 'Abbrechen',
-    ...dialogOptions,
-    onPositiveClick: () => leaveCollection(id),
-  });
-}
-
-async function leaveCollection(id: string) {
-  pendingCollectionId.value = id;
-
-  try {
-    await collectionStore.unsubscribeCollection(id);
-    message.success('Collection verlassen');
-  } catch (error: unknown) {
-    const msg = error instanceof Error ? error.message : 'Verlassen fehlgeschlagen';
     message.error(msg);
   } finally {
     pendingCollectionId.value = null;
