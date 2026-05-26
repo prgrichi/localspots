@@ -15,7 +15,13 @@
         </p>
       </div>
 
-      <n-button type="primary" secondary round @click="$emit('edit-location')">
+      <n-button
+        v-if="canEditLocation"
+        type="primary"
+        secondary
+        round
+        @click="$emit('edit-location')"
+      >
         {{ hasLocation ? 'Standort ändern' : 'Standort eintragen' }}
       </n-button>
     </div>
@@ -27,6 +33,10 @@ import { NButton } from 'naive-ui';
 
 defineProps({
   hasLocation: {
+    type: Boolean,
+    default: false,
+  },
+  canEditLocation: {
     type: Boolean,
     default: false,
   },

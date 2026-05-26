@@ -5,6 +5,7 @@
         :spot="spot"
         :has-location="Boolean(spotLatLng)"
         :collection-name="collectionName"
+        :can-edit-location="canEditLocation"
         @edit="editSpot(spot)"
       />
 
@@ -15,7 +16,11 @@
         :spot-icon="spotIcon"
       />
 
-      <SpotLocationPanel :has-location="Boolean(spotLatLng)" @edit-location="openLocationModal" />
+      <SpotLocationPanel
+        :has-location="Boolean(spotLatLng)"
+        :can-edit-location="canEditLocation"
+        @edit-location="openLocationModal"
+      />
     </template>
 
     <SpotEditDrawer
@@ -33,6 +38,7 @@
 import { computed, ref, watch } from 'vue';
 import { useMessage, useDialog } from 'naive-ui';
 import { useRoute, useRouter } from 'vue-router';
+import { pb } from '@/services/pocketbase';
 import type { Spot } from '@/types/spot';
 
 import SpotEditDrawer from '@/components/spot-detail/SpotEditDrawer.vue';
@@ -66,6 +72,12 @@ const { spotLatLng, mapCenter, spotIcon } = useSingleSpotMap(spot);
 
 const collectionName = computed(() => {
   return collectionStore.activeCollection?.name ?? 'Nicht angegeben';
+});
+
+const authUserId = computed(() => pb.authStore.record?.id ?? null);
+
+const canEditLocation = computed(() => {
+  return Boolean(spot.value && spot.value.user === authUserId.value);
 });
 
 watch(
@@ -109,7 +121,7 @@ const openLocationModal = () => {
 const deleteSpot = (spot: Spot | null) => {
   if (!spot) return;
 
-  const name = [spot.category].filter(Boolean).join(' ') || 'diesen Spot';
+  const name = [spot.name].filter(Boolean).join(' ') || 'diesen Spot';
 
   dialog.warning({
     title: 'Spot löschen',

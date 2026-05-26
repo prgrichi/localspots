@@ -10,6 +10,7 @@
           </h1>
 
           <n-button
+            v-if="canEditLocation"
             quaternary
             size="medium"
             class="!h-auto !w-auto !p-0 !text-slate-400 hover:!bg-transparent hover:!text-slate-700 focus:!bg-transparent active:scale-95"
@@ -82,6 +83,10 @@ defineProps({
   collectionName: {
     type: String,
     default: 'Nicht angegeben',
+  },
+  canEditLocation: {
+    type: Boolean,
+    default: false,
   },
 });
 
