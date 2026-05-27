@@ -1,14 +1,9 @@
 import { createRouter, createWebHistory } from 'vue-router';
-import DashboardPage from '@/pages/DashboardPage.vue';
+import ActivitiesPage from '@/pages/ActivitiesPage.vue';
 import EntryPage from '@/pages/EntryPage.vue';
 import SpotPage from '@/pages/SpotPage.vue';
 import MapPage from '@/pages/MapPage.vue';
-import FriendsFollowingPage from '@/pages/FriendsFollowingPage.vue';
-import FriendsAllUserPage from '@/pages/FriendsAllUserPage.vue';
-import AllCollectionsPage from '@/pages/AllCollectionsPage.vue';
-import MyCollectionsPage from '@/pages/MyCollectionsPage.vue';
 import CollectionsPage from '@/pages/CollectionsPage.vue';
-import ActivitiesPage from '@/pages/ActivitiesPage.vue';
 import { pb } from '@/services/pocketbase';
 
 const router = createRouter({
@@ -23,15 +18,6 @@ const router = createRouter({
         requiresAuth: true,
       },
     },
-    // {
-    //   path: '/',
-    //   name: 'dashboard',
-    //   component: DashboardPage,
-    //   meta: {
-    //     title: 'Dashboard',
-    //     requiresAuth: true,
-    //   },
-    // },
     {
       path: '/add',
       name: 'add-entry',
@@ -80,7 +66,7 @@ const router = createRouter({
     {
       path: '/all-collections',
       name: 'all-collections',
-      component: AllCollectionsPage,
+      component: () => import('@/pages/AllCollectionsPage.vue'),
       meta: {
         title: 'Alle Collections',
         requiresAuth: true,
@@ -89,7 +75,7 @@ const router = createRouter({
     {
       path: '/my-collections',
       name: 'my-collections',
-      component: MyCollectionsPage,
+      component: () => import('@/pages/MyCollectionsPage.vue'),
       meta: {
         title: 'Meine Collections',
         requiresAuth: true,
@@ -98,7 +84,7 @@ const router = createRouter({
     {
       path: '/friends-all',
       name: 'friends-all',
-      component: FriendsAllUserPage,
+      component: () => import('@/pages/FriendsAllUserPage.vue'),
       meta: {
         title: 'Alle User',
         requiresAuth: true,
@@ -107,7 +93,7 @@ const router = createRouter({
     {
       path: '/friends',
       name: 'friends',
-      component: FriendsFollowingPage,
+      component: () => import('@/pages/FriendsFollowingPage.vue'),
       meta: {
         title: 'Freundesliste',
         requiresAuth: true,
