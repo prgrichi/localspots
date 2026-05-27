@@ -39,7 +39,15 @@
           </n-form-item>
 
           <n-form-item label="Beschreibung">
-            <n-input v-model:value="form.description" />
+            <n-input
+              v-model:value="form.description"
+              type="textarea"
+              placeholder="Beschreibung"
+              :autosize="{
+                minRows: 3,
+                maxRows: 6,
+              }"
+            />
           </n-form-item>
 
           <div class="flex flex-col gap-2">
