@@ -44,6 +44,12 @@ export const useCollectionStore = defineStore('collections', {
   },
 
   actions: {
+    async fetchCollectionWithMembers(id: string) {
+      return pb.collection('collections').getOne<Collection>(id, {
+        expand: 'members',
+      });
+    },
+
     async ensureMyCollectionsLoaded() {
       if (this.hasLoadedCollections || this.isLoading) {
         return;
@@ -127,9 +133,11 @@ export const useCollectionStore = defineStore('collections', {
     },
 
     async renameCollection(id: string, name: string) {
-      const updatedCollection = await pb.collection('collections').update<Collection>(id, {
+      await pb.collection('collections').update<Collection>(id, {
         name,
       });
+
+      const updatedCollection = await this.fetchCollectionWithMembers(id);
 
       const collectionsIndex = this.collections.findIndex(collection => collection.id === id);
 
@@ -177,9 +185,11 @@ export const useCollectionStore = defineStore('collections', {
         return collection;
       }
 
-      const updatedCollection = await pb.collection('collections').update<Collection>(id, {
+      await pb.collection('collections').update<Collection>(id, {
         members: [...members, userId],
       });
+
+      const updatedCollection = await this.fetchCollectionWithMembers(id);
 
       this.replaceCollectionEverywhere(updatedCollection);
 
@@ -211,9 +221,11 @@ export const useCollectionStore = defineStore('collections', {
 
       const members = collection.members ?? [];
 
-      const updatedCollection = await pb.collection('collections').update<Collection>(id, {
+      await pb.collection('collections').update<Collection>(id, {
         members: members.filter(memberId => memberId !== userId),
       });
+
+      const updatedCollection = await this.fetchCollectionWithMembers(id);
 
       this.replaceCollectionEverywhere(updatedCollection);
 
