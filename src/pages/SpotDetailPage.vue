@@ -69,7 +69,17 @@ const spotId = computed(() => String(route.params.id));
 
 const { spotLatLng, mapCenter, spotIcon } = useSingleSpotMap(spot);
 
+const isOwnSpot = computed(() => {
+  return Boolean(spot.value && spot.value.user === authUserId.value);
+});
+
+const canEditSpot = computed(() => {
+  return isOwnSpot.value;
+});
+
 const creatorName = computed(() => {
+  if (isOwnSpot.value) return 'dir';
+
   return spot.value?.expand?.user?.name ?? 'Unbekannt';
 });
 
@@ -78,10 +88,6 @@ const collectionName = computed(() => {
 });
 
 const authUserId = computed(() => pb.authStore.record?.id ?? null);
-
-const canEditSpot = computed(() => {
-  return Boolean(spot.value && spot.value.user === authUserId.value);
-});
 
 watch(
   spotId,
