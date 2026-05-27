@@ -33,7 +33,7 @@ export const useSpotStore = defineStore('savedSpots', {
 
     async fetchSpotById(spotId: string) {
       const spot = await pb.collection('spots').getOne<Spot>(spotId, {
-        expand: 'collection',
+        expand: 'collection,user',
       });
 
       return spot;
@@ -78,9 +78,15 @@ export const useSpotStore = defineStore('savedSpots', {
       updatedSpot: UpdateSpotPayload,
       currentCollectionId: string | null
     ) {
-      const savedSpot = await pb.collection('spots').update<Spot>(id, {
-        ...updatedSpot,
-      });
+      const savedSpot = await pb.collection('spots').update<Spot>(
+        id,
+        {
+          ...updatedSpot,
+        },
+        {
+          expand: 'collection,user',
+        }
+      );
 
       const index = this.spots.findIndex(spot => spot.id === id);
       const allIndex = this.allSpots.findIndex(spot => spot.id === id);
@@ -107,11 +113,17 @@ export const useSpotStore = defineStore('savedSpots', {
       try {
         const hasLocation = location.locationLat !== null && location.locationLng !== null;
 
-        const savedSpot = await pb.collection('spots').update<Spot>(id, {
-          locationLat: location.locationLat,
-          locationLng: location.locationLng,
-          locationUpdatedAt: hasLocation ? new Date().toISOString() : null,
-        });
+        const savedSpot = await pb.collection('spots').update<Spot>(
+          id,
+          {
+            locationLat: location.locationLat,
+            locationLng: location.locationLng,
+            locationUpdatedAt: hasLocation ? new Date().toISOString() : null,
+          },
+          {
+            expand: 'collection,user',
+          }
+        );
 
         const index = this.spots.findIndex(spot => spot.id === id);
         const allIndex = this.allSpots.findIndex(spot => spot.id === id);

@@ -32,6 +32,21 @@
                 </span>
               </div>
             </div>
+
+            <div class="mt-3 flex items-center gap-2 text-sm text-slate-500">
+              <div
+                class="flex size-7 shrink-0 items-center justify-center rounded-full bg-slate-100 text-xs font-semibold text-slate-500"
+              >
+                {{ creatorInitials }}
+              </div>
+
+              <div class="min-w-0">
+                Erstellt von
+                <span class="font-medium text-slate-700">
+                  {{ creatorName }}
+                </span>
+              </div>
+            </div>
           </div>
 
           <n-button
@@ -87,10 +102,11 @@
 </template>
 
 <script setup>
+import { computed } from 'vue';
 import { NButton, NIcon } from 'naive-ui';
 import { CreateOutline } from '@vicons/ionicons5';
 
-defineProps({
+const props = defineProps({
   spot: {
     type: Object,
     required: true,
@@ -107,9 +123,23 @@ defineProps({
     type: Boolean,
     default: false,
   },
+  creatorName: {
+    type: String,
+    default: 'Unbekannt',
+  },
 });
 
 defineEmits(['edit', 'delete']);
+
+const creatorInitials = computed(() => {
+  return props.creatorName
+    .split(' ')
+    .filter(Boolean)
+    .slice(0, 2)
+    .map(part => part[0])
+    .join('')
+    .toUpperCase();
+});
 
 const formatDate = value => {
   if (!value) return 'Nicht angegeben';

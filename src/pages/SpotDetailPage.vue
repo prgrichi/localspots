@@ -6,6 +6,7 @@
         :has-location="Boolean(spotLatLng)"
         :collection-name="collectionName"
         :can-edit-spot="canEditSpot"
+        :creator-name="creatorName"
         @edit="editSpot(spot)"
       />
 
@@ -67,6 +68,10 @@ const spot = ref<Spot | null>(null);
 const spotId = computed(() => String(route.params.id));
 
 const { spotLatLng, mapCenter, spotIcon } = useSingleSpotMap(spot);
+
+const creatorName = computed(() => {
+  return spot.value?.expand?.user?.name ?? 'Unbekannt';
+});
 
 const collectionName = computed(() => {
   return spot.value?.expand?.collection?.name ?? 'Nicht angegeben';
