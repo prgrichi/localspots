@@ -1,6 +1,6 @@
 <template>
   <main
-    class="relative mx-auto flex h-full w-full max-w-3xl items-center overflow-hidden px-4 py-6 md:px-8"
+    class="relative mx-auto flex min-h-dvh w-full max-w-3xl items-center overflow-x-hidden overflow-y-auto px-4 py-6 md:px-8"
   >
     <div
       aria-hidden="true"
@@ -26,7 +26,7 @@
       <LocationOutline class="size-5" />
     </div>
 
-    <section class="relative z-10 mx-auto flex h-full w-full max-w-sm flex-col py-2">
+    <section class="relative z-10 mx-auto flex w-full max-w-sm flex-col py-2">
       <div class="text-center">
         <div class="mx-auto flex size-14 items-center justify-center rounded-full bg-primary-50">
           <span class="block size-6 rounded-full bg-accent-600"></span>
@@ -43,7 +43,7 @@
         </p>
       </div>
 
-      <div class="mt-[clamp(3rem,14vh,8rem)]">
+      <div class="mt-10 sm:mt-14">
         <div class="mb-4">
           <h2 class="text-base font-semibold text-slate-950">Einloggen</h2>
           <p class="mt-1 text-sm text-slate-500">Melde dich mit deinem Account an.</p>
@@ -90,6 +90,7 @@
               round
               block
               size="large"
+              class="!h-12 !min-h-12"
               :loading="isSubmitting"
             >
               Einloggen
