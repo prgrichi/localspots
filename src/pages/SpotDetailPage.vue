@@ -5,7 +5,7 @@
         :spot="spot"
         :has-location="Boolean(spotLatLng)"
         :collection-name="collectionName"
-        :can-edit-location="canEditLocation"
+        :can-edit-spot="canEditSpot"
         @edit="editSpot(spot)"
       />
 
@@ -18,7 +18,7 @@
 
       <SpotLocationPanel
         :has-location="Boolean(spotLatLng)"
-        :can-edit-location="canEditLocation"
+        :can-edit-location="canEditSpot"
         @edit-location="openLocationModal"
       />
     </template>
@@ -48,7 +48,6 @@ import SpotLocationPanel from '@/components/spot-detail/SpotLocationPanel.vue';
 import SpotLocationDrawer from '@/components/spot-detail/SpotLocationDrawer.vue';
 
 import { useSpotStore } from '@/stores/spotStore';
-import { useCollectionStore } from '@/stores/collectionStore';
 import { useSingleSpotMap } from '@/composables/useSpotMap';
 import { confirmDialogOptions } from '@/utils/confirmDialogOptions';
 
@@ -58,7 +57,6 @@ const message = useMessage();
 const dialog = useDialog();
 
 const spotStore = useSpotStore();
-const collectionStore = useCollectionStore();
 
 const showEditModal = ref(false);
 const showLocationModal = ref(false);
@@ -71,12 +69,12 @@ const spotId = computed(() => String(route.params.id));
 const { spotLatLng, mapCenter, spotIcon } = useSingleSpotMap(spot);
 
 const collectionName = computed(() => {
-  return collectionStore.activeCollection?.name ?? 'Nicht angegeben';
+  return spot.value?.expand?.collection?.name ?? 'Nicht angegeben';
 });
 
 const authUserId = computed(() => pb.authStore.record?.id ?? null);
 
-const canEditLocation = computed(() => {
+const canEditSpot = computed(() => {
   return Boolean(spot.value && spot.value.user === authUserId.value);
 });
 
@@ -91,10 +89,6 @@ watch(
       const loadedSpot = await spotStore.fetchSpotById(id);
 
       spot.value = loadedSpot;
-
-      if (loadedSpot.collection) {
-        collectionStore.setActiveCollection(loadedSpot.collection);
-      }
     } catch {
       message.error('Spot konnte nicht geladen werden');
     }
