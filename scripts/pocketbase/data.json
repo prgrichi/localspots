@@ -469,5 +469,476 @@
         ]
       }
     ]
+  },
+  {
+    "email": "jonas.weber@example.com",
+    "password": "12345678",
+    "name": "Jonas Weber",
+    "collections": [
+      {
+        "name": "Stuttgart Feierabend",
+        "spots": [
+          {
+            "name": "Karlshöhe",
+            "category": "Aussichtspunkt",
+            "description": "Grüne Anhöhe mit schönem Blick über Stuttgart und die Kessel-Lage. Gut für einen kurzen Feierabendspaziergang oder ein Getränk mit Aussicht.",
+            "locationLat": 48.7669,
+            "locationLng": 9.1629
+          },
+          {
+            "name": "Teehaus im Weißenburgpark",
+            "category": "Café",
+            "description": "Ruhiger Ort oberhalb der Stadt mit Terrasse, Park und weitem Blick. Besonders angenehm, wenn man Kaffee, Kuchen und Aussicht verbinden möchte.",
+            "locationLat": 48.7615,
+            "locationLng": 9.1884
+          },
+          {
+            "name": "Stadtbibliothek Stuttgart",
+            "category": "Kultur",
+            "description": "Markantes Gebäude mit klarer Architektur und ruhiger Atmosphäre. Gut für einen kurzen Kulturstopp oder als Fotomotiv in der Innenstadt.",
+            "locationLat": 48.7906,
+            "locationLng": 9.1833
+          },
+          {
+            "name": "Eugensplatz",
+            "category": "Sonnenuntergangsspot",
+            "description": "Klassischer Platz mit Blick über Stuttgart und guter Lage zwischen Innenstadt und Osten. Zum Abendlicht sehr schön und unkompliziert erreichbar.",
+            "locationLat": 48.7771,
+            "locationLng": 9.1902
+          },
+          {
+            "name": "Bärensee",
+            "category": "Natur",
+            "description": "Waldsee im Stuttgarter Westen mit ruhigen Wegen und viel Grün. Ideal für eine Runde, wenn man aus der Stadt raus möchte, ohne weit zu fahren.",
+            "locationLat": 48.7467,
+            "locationLng": 9.0869
+          },
+          {
+            "name": "Lapidarium Stuttgart",
+            "category": "Fotospot",
+            "description": "Kleiner, besonderer Garten mit historischen Steinen und ruhiger Stimmung. Ein versteckter Spot, der sich gut für einen langsamen Besuch eignet.",
+            "locationLat": 48.7709,
+            "locationLng": 9.1635
+          },
+          {
+            "name": "Schlossgarten",
+            "category": "Picknickplatz",
+            "description": "Zentrale Grünfläche mit Wiesen, Wegen und Nähe zum Hauptbahnhof. Gut für eine schnelle Pause oder ein unkompliziertes Picknick in der Stadt.",
+            "locationLat": 48.7859,
+            "locationLng": 9.1881
+          },
+          {
+            "name": "Leuze Mineralbad",
+            "category": "Sport",
+            "description": "Bekanntes Mineralbad mit Innen- und Außenbereichen. Geeignet für einen entspannten Schwimmabend oder Regeneration nach einer längeren Woche.",
+            "locationLat": 48.7972,
+            "locationLng": 9.2071
+          },
+          {
+            "name": "Palast der Republik",
+            "category": "Bar",
+            "description": "Unkomplizierter Treffpunkt in zentraler Lage mit viel Stadtleben rundherum. Gut für ein Feierabendbier ohne große Planung.",
+            "locationLat": 48.7774,
+            "locationLng": 9.1738
+          },
+          {
+            "name": "Markthalle Stuttgart",
+            "category": "Shop",
+            "description": "Schöne historische Markthalle mit regionalen und internationalen Spezialitäten. Praktisch für kleine Einkäufe, Geschenke oder einen kurzen Genussstopp.",
+            "locationLat": 48.7752,
+            "locationLng": 9.1786
+          }
+        ]
+      },
+      {
+        "name": "Schwarzwald kurze Auszeiten",
+        "spots": [
+          {
+            "name": "Mummelsee",
+            "category": "Natur",
+            "description": "Bekannter Karsee an der Schwarzwaldhochstraße mit kurzen Wegen und Bergstimmung. Gut für einen unkomplizierten Ausflug mit Aussicht und Wasser.",
+            "locationLat": 48.5992,
+            "locationLng": 8.2008
+          },
+          {
+            "name": "Hornisgrinde",
+            "category": "Aussichtspunkt",
+            "description": "Höchster Berg im Nordschwarzwald mit weitem Blick über Wälder und Rheinebene. Besonders schön bei klarer Sicht oder leichtem Nebel.",
+            "locationLat": 48.6101,
+            "locationLng": 8.2023
+          },
+          {
+            "name": "Geroldsauer Wasserfall",
+            "category": "Wandern",
+            "description": "Kleiner Wasserfall nahe Baden-Baden mit angenehmem Waldweg. Gut für eine kurze Tour, wenn man Natur ohne langen Aufstieg sucht.",
+            "locationLat": 48.7299,
+            "locationLng": 8.2454
+          },
+          {
+            "name": "Lichtentaler Allee",
+            "category": "Kultur",
+            "description": "Elegante Park- und Spazierachse in Baden-Baden mit alten Bäumen, Villen und Museen in der Nähe. Ruhig, gepflegt und gut für einen halben Tag.",
+            "locationLat": 48.7547,
+            "locationLng": 8.2413
+          },
+          {
+            "name": "Café König Baden-Baden",
+            "category": "Café",
+            "description": "Traditionsreiche Konditorei in zentraler Lage, gut für Kuchen, Kaffee und eine klassische Pause. Passt gut nach einem Spaziergang durch die Stadt.",
+            "locationLat": 48.7623,
+            "locationLng": 8.2398
+          },
+          {
+            "name": "Allerheiligen Wasserfälle",
+            "category": "Fotospot",
+            "description": "Mehrstufige Wasserfälle mit Wald, Felsen und Klosterruine in der Nähe. Sehr lohnend für Fotos und eine kurze, abwechslungsreiche Wanderung.",
+            "locationLat": 48.5294,
+            "locationLng": 8.1897
+          },
+          {
+            "name": "Baiersbronn Tonbachtal",
+            "category": "Restaurant",
+            "description": "Ruhiges Tal mit guter Ausgangslage für Spaziergänge und Einkehr. Ideal, wenn man Schwarzwaldküche und Natur verbinden möchte.",
+            "locationLat": 48.5268,
+            "locationLng": 8.3615
+          },
+          {
+            "name": "Wildsee Ruhestein",
+            "category": "Natur",
+            "description": "Atmosphärischer Karsee im Nationalpark Schwarzwald mit Waldwegen und stiller Stimmung. Ein schöner Ort zum Runterkommen und langsam Gehen.",
+            "locationLat": 48.5689,
+            "locationLng": 8.2327
+          },
+          {
+            "name": "Schliffkopf",
+            "category": "Sonnenuntergangsspot",
+            "description": "Offener Höhenbereich mit weitem Blick über den Schwarzwald. Zum Sonnenuntergang oft sehr ruhig und deutlich weniger städtisch als klassische Aussichtspunkte.",
+            "locationLat": 48.5272,
+            "locationLng": 8.2197
+          },
+          {
+            "name": "Badesee Buchtzig",
+            "category": "Badestelle",
+            "description": "Sommerlicher Badesee bei Ettlingen mit Liegewiesen und unkomplizierter Atmosphäre. Gut für einen warmen Tag, wenn man schnell ans Wasser möchte.",
+            "locationLat": 48.9225,
+            "locationLng": 8.3984
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "email": "mia.fischer@example.com",
+    "password": "12345678",
+    "name": "Mia Fischer",
+    "collections": [
+      {
+        "name": "Heidelberg und Neckar",
+        "spots": [
+          {
+            "name": "Philosophenweg",
+            "category": "Aussichtspunkt",
+            "description": "Klassischer Weg mit Blick auf Altstadt, Schloss und Neckar. Besonders schön am späten Nachmittag, wenn das Licht über der Stadt weicher wird.",
+            "locationLat": 49.4153,
+            "locationLng": 8.6997
+          },
+          {
+            "name": "Neckarwiese",
+            "category": "Picknickplatz",
+            "description": "Große Wiese direkt am Neckar mit Blick auf die Altstadt. Sehr gut für Picknick, Treffen mit Freunden oder eine entspannte Pause am Wasser.",
+            "locationLat": 49.4142,
+            "locationLng": 8.6886
+          },
+          {
+            "name": "Heidelberger Schloss",
+            "category": "Kultur",
+            "description": "Markante Schlossruine oberhalb der Altstadt mit Terrasse, Geschichte und weitem Blick. Trotz Bekanntheit ein Spot, der sich für Besuch fast immer lohnt.",
+            "locationLat": 49.4106,
+            "locationLng": 8.7154
+          },
+          {
+            "name": "Café Nomad Heidelberg",
+            "category": "Café",
+            "description": "Modernes Café mit gutem Frühstück und entspannter Atmosphäre. Praktisch für einen ruhigen Start in den Tag oder eine Pause zwischen Altstadt und Weststadt.",
+            "locationLat": 49.4079,
+            "locationLng": 8.6924
+          },
+          {
+            "name": "Alte Brücke",
+            "category": "Fotospot",
+            "description": "Sehr fotogene Brücke über den Neckar mit Blick auf Altstadt und Schloss. Früh morgens oder abends deutlich angenehmer als zur Hauptzeit.",
+            "locationLat": 49.4145,
+            "locationLng": 8.7092
+          },
+          {
+            "name": "Thingstätte Heidelberg",
+            "category": "Wandern",
+            "description": "Historischer Ort auf dem Heiligenberg, erreichbar über Waldwege. Gut für eine längere Runde mit etwas Geschichte und viel Grün.",
+            "locationLat": 49.4237,
+            "locationLng": 8.7156
+          },
+          {
+            "name": "Botanischer Garten Heidelberg",
+            "category": "Natur",
+            "description": "Ruhiger Garten mit Gewächshäusern und Pflanzensammlungen im Neuenheimer Feld. Gut, wenn man einen grünen Ort abseits der Altstadt sucht.",
+            "locationLat": 49.4196,
+            "locationLng": 8.6694
+          },
+          {
+            "name": "Mensa-Bar Marstallhof",
+            "category": "Bar",
+            "description": "Unkomplizierter Ort im historischen Umfeld der Altstadt, besonders praktisch für einen lockeren Abend. Passt gut, wenn es nicht zu schick sein soll.",
+            "locationLat": 49.4123,
+            "locationLng": 8.7061
+          },
+          {
+            "name": "Königstuhl",
+            "category": "Sonnenuntergangsspot",
+            "description": "Höhenlage oberhalb Heidelbergs mit weitem Blick in die Rheinebene. Zum Sonnenuntergang stark, wenn das Wetter klar genug ist.",
+            "locationLat": 49.4021,
+            "locationLng": 8.7314
+          },
+          {
+            "name": "Tiergartenbad Heidelberg",
+            "category": "Badestelle",
+            "description": "Großes Freibad mit Liegewiesen und Schwimmbecken. Gut für heiße Tage, wenn man Wasser und Platz sucht, ohne aus der Stadt rauszufahren.",
+            "locationLat": 49.4206,
+            "locationLng": 8.6678
+          }
+        ]
+      },
+      {
+        "name": "Bodensee Wochenende",
+        "spots": [
+          {
+            "name": "Hafen Konstanz",
+            "category": "Aussichtspunkt",
+            "description": "Lebendiger Hafenbereich mit See, Alpenblick bei klarer Sicht und guter Ausgangslage für einen Stadtspaziergang. Funktioniert gut als erster Stopp.",
+            "locationLat": 47.6605,
+            "locationLng": 9.1771
+          },
+          {
+            "name": "Hörnle Konstanz",
+            "category": "Badestelle",
+            "description": "Beliebte Badestelle am Bodensee mit viel Platz und Blick übers Wasser. Im Sommer früh da sein, wenn man einen entspannten Platz möchte.",
+            "locationLat": 47.6722,
+            "locationLng": 9.2044
+          },
+          {
+            "name": "Insel Mainau",
+            "category": "Natur",
+            "description": "Blumeninsel mit Parks, alten Bäumen und Seeblick. Besonders schön im Frühling und Sommer, aber auch außerhalb der Hochsaison gut für einen ruhigen Ausflug.",
+            "locationLat": 47.7044,
+            "locationLng": 9.1959
+          },
+          {
+            "name": "Pfahlbauten Unteruhldingen",
+            "category": "Kultur",
+            "description": "Freilichtmuseum am See mit rekonstruierten Pfahlbauten und gut verständlicher Geschichte. Schön für einen Ausflug, der nicht nur aus Spazieren besteht.",
+            "locationLat": 47.7254,
+            "locationLng": 9.2275
+          },
+          {
+            "name": "Meersburg Altstadt",
+            "category": "Fotospot",
+            "description": "Historische Altstadt mit steilen Gassen, Fachwerk, Burg und Seezugang. Sehr fotogen, vor allem am Morgen oder in der Nebensaison.",
+            "locationLat": 47.6946,
+            "locationLng": 9.2718
+          },
+          {
+            "name": "Haltnau Meersburg",
+            "category": "Restaurant",
+            "description": "Einkehr zwischen Weinbergen und See mit entspannter Ausflugsatmosphäre. Gut für eine Pause nach Spaziergang oder Radtour am Bodensee.",
+            "locationLat": 47.7002,
+            "locationLng": 9.2871
+          },
+          {
+            "name": "Uferpromenade Überlingen",
+            "category": "Sonnenuntergangsspot",
+            "description": "Lange Promenade mit Blick über den Bodensee und vielen Sitzmöglichkeiten. Abends sehr angenehm, wenn das Licht über dem Wasser steht.",
+            "locationLat": 47.7676,
+            "locationLng": 9.1607
+          },
+          {
+            "name": "Café Aran Konstanz",
+            "category": "Café",
+            "description": "Zentrale Café-Adresse mit unkomplizierter Auswahl und guter Lage für eine Pause in der Altstadt. Praktisch vor oder nach einem Spaziergang am See.",
+            "locationLat": 47.6608,
+            "locationLng": 9.1757
+          },
+          {
+            "name": "Bodensee-Radweg bei Hagnau",
+            "category": "Sport",
+            "description": "Schöner Abschnitt zwischen Reben, See und kleinen Orten. Gut für eine entspannte Radtour mit vielen Möglichkeiten für kurze Stopps.",
+            "locationLat": 47.6769,
+            "locationLng": 9.3175
+          },
+          {
+            "name": "Affenberg Salem",
+            "category": "Natur",
+            "description": "Tier- und Naturerlebnis nahe Salem mit Spazierwegen und besonderem Charakter. Gut für einen lockeren Ausflug, wenn man etwas anderes als Seeufer möchte.",
+            "locationLat": 47.7761,
+            "locationLng": 9.2728
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "email": "tobias.klein@example.com",
+    "password": "12345678",
+    "name": "Tobias Klein",
+    "collections": [
+      {
+        "name": "Freiburg draußen",
+        "spots": [
+          {
+            "name": "Schlossberg Freiburg",
+            "category": "Aussichtspunkt",
+            "description": "Grüner Hausberg direkt an der Altstadt mit Blick über Freiburg und Richtung Schwarzwald. Gut für eine kurze Runde nach Feierabend.",
+            "locationLat": 47.9961,
+            "locationLng": 7.8586
+          },
+          {
+            "name": "Kanonenplatz",
+            "category": "Sonnenuntergangsspot",
+            "description": "Aussichtspunkt am Schlossberg mit weitem Blick über Dächer, Münster und Rheinebene. Zum Abendlicht besonders schön und schnell erreichbar.",
+            "locationLat": 47.9956,
+            "locationLng": 7.8582
+          },
+          {
+            "name": "Augustinerplatz",
+            "category": "Picknickplatz",
+            "description": "Lebendiger Platz in der Altstadt, an warmen Abenden oft voller Menschen. Gut für ein unkompliziertes Treffen mitten in Freiburg.",
+            "locationLat": 47.9951,
+            "locationLng": 7.8529
+          },
+          {
+            "name": "Café POW",
+            "category": "Café",
+            "description": "Entspannter Ort mit Innenhofgefühl und kreativer Atmosphäre. Gut für Kaffee, Arbeiten oder eine Pause abseits der klassischen Altstadtcafés.",
+            "locationLat": 47.9921,
+            "locationLng": 7.8499
+          },
+          {
+            "name": "Seepark Freiburg",
+            "category": "Natur",
+            "description": "Großer Stadtpark mit See, Wiesen und Wegen im Westen Freiburgs. Geeignet für Spaziergänge, Picknick oder eine ruhige Pause am Wasser.",
+            "locationLat": 48.0105,
+            "locationLng": 7.8243
+          },
+          {
+            "name": "Strandbad Freiburg",
+            "category": "Badestelle",
+            "description": "Klassisches Freibad mit viel Platz, Wasser und Sommerstimmung. Gut für heiße Tage, wenn man schnell Abkühlung in der Stadt sucht.",
+            "locationLat": 47.9987,
+            "locationLng": 7.8794
+          },
+          {
+            "name": "Markthalle Freiburg",
+            "category": "Restaurant",
+            "description": "Unkomplizierter Ort mit vielen Essensständen und lebendiger Atmosphäre. Praktisch, wenn mehrere Leute unterschiedliche Küchen möchten.",
+            "locationLat": 47.9941,
+            "locationLng": 7.8482
+          },
+          {
+            "name": "Blaue Brücke",
+            "category": "Fotospot",
+            "description": "Markante Brücke mit Blick auf Gleise, Stadt und Schwarzwaldhänge. Ein guter kurzer Fotostopp, besonders bei spannendem Licht.",
+            "locationLat": 47.9954,
+            "locationLng": 7.8377
+          },
+          {
+            "name": "Dreisam Uferweg",
+            "category": "Sport",
+            "description": "Angenehmer Weg entlang der Dreisam zum Laufen, Spazieren oder Radfahren. Funktioniert sehr gut als flexible Feierabendrunde.",
+            "locationLat": 47.9877,
+            "locationLng": 7.8534
+          },
+          {
+            "name": "One Trick Pony",
+            "category": "Bar",
+            "description": "Kleine Bar mit guten Drinks und entspannter Stimmung in zentraler Lage. Gut für einen Abend, der etwas besonderer sein soll.",
+            "locationLat": 47.9953,
+            "locationLng": 7.8491
+          }
+        ]
+      },
+      {
+        "name": "Bayern und BaWü gemischt",
+        "spots": [
+          {
+            "name": "Ulmer Münster",
+            "category": "Kultur",
+            "description": "Beeindruckendes Münster mit sehr hohem Turm und zentraler Lage. Gut für einen Stadtausflug mit Geschichte, Architektur und Donaunähe.",
+            "locationLat": 48.3985,
+            "locationLng": 9.9916
+          },
+          {
+            "name": "Fischerviertel Ulm",
+            "category": "Fotospot",
+            "description": "Historisches Viertel mit Kanälen, Fachwerk und kleinen Brücken. Sehr schön für einen langsamen Spaziergang und Fotos in der Altstadt.",
+            "locationLat": 48.3965,
+            "locationLng": 9.9892
+          },
+          {
+            "name": "Blautopf Blaubeuren",
+            "category": "Natur",
+            "description": "Intensiv blaue Karstquelle mit kurzem Rundweg und besonderer Atmosphäre. Ein sehr guter kleiner Ausflug von Ulm oder der Schwäbischen Alb aus.",
+            "locationLat": 48.4142,
+            "locationLng": 9.7842
+          },
+          {
+            "name": "Burg Hohenzollern",
+            "category": "Aussichtspunkt",
+            "description": "Markante Burg auf einem Bergkegel mit weitem Blick über die Schwäbische Alb. Lohnt sich für Architektur, Aussicht und einen besonderen Tagesausflug.",
+            "locationLat": 48.3236,
+            "locationLng": 8.9672
+          },
+          {
+            "name": "Kloster Maulbronn",
+            "category": "Kultur",
+            "description": "Sehr gut erhaltene Klosteranlage mit ruhigem Innenhof und viel historischer Substanz. Gut für einen Ausflug mit klarer Kulturkomponente.",
+            "locationLat": 49.0018,
+            "locationLng": 8.8126
+          },
+          {
+            "name": "Nördlingen Stadtmauer",
+            "category": "Wandern",
+            "description": "Komplett begehbare Stadtmauer rund um die historische Altstadt. Ein besonderer Spaziergang in Bayern, der sich gut als Tagesziel eignet.",
+            "locationLat": 48.8511,
+            "locationLng": 10.4886
+          },
+          {
+            "name": "Dinkelsbühl Altstadt",
+            "category": "Fotospot",
+            "description": "Sehr gut erhaltene Altstadt mit bunten Häusern, Türmen und ruhigen Gassen. Besonders schön, wenn man mittelalterliche Stadtbilder mag.",
+            "locationLat": 49.0698,
+            "locationLng": 10.3196
+          },
+          {
+            "name": "Brombachsee Ramsberg",
+            "category": "Badestelle",
+            "description": "Großer fränkischer See mit Badestränden, Wegen und viel Platz. Gut für einen Sommertag zwischen Bayern, Wasser und entspannter Ausflugsstimmung.",
+            "locationLat": 49.1269,
+            "locationLng": 10.9445
+          },
+          {
+            "name": "Café Frida Tübingen",
+            "category": "Café",
+            "description": "Gemütlicher Stopp in Tübingen mit guter Lage für eine Pause zwischen Altstadt und Neckar. Passt gut zu einem entspannten Stadtbummel.",
+            "locationLat": 48.5201,
+            "locationLng": 9.0557
+          },
+          {
+            "name": "Neckarinsel Tübingen",
+            "category": "Sonnenuntergangsspot",
+            "description": "Grüne Insel direkt am Neckar mit Blick auf Stocherkähne und Altstadt. Zum Abendlicht sehr angenehm und typisch für Tübingen.",
+            "locationLat": 48.5209,
+            "locationLng": 9.0536
+          }
+        ]
+      }
+    ]
   }
 ]
