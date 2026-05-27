@@ -44,7 +44,15 @@
             </n-form-item>
 
             <n-form-item label="Beschreibung">
-              <n-input v-model:value="form.description" placeholder="Beschreibung" />
+              <n-input
+                v-model:value="form.description"
+                type="textarea"
+                placeholder="Beschreibung"
+                :autosize="{
+                  minRows: 3,
+                  maxRows: 6,
+                }"
+              />
             </n-form-item>
 
             <div class="mt-4">
@@ -150,7 +158,7 @@ const submit = async () => {
 
 <style scoped>
 .compact-form :deep(.n-form-item) {
-  margin-bottom: 10px;
+  margin-bottom: 16px;
 }
 
 .compact-form :deep(.n-form-item-label) {
