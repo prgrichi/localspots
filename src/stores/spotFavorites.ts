@@ -36,7 +36,7 @@ export const useSpotFavoritesStore = defineStore('spotFavorites', () => {
       favorites.value = await pb.collection('spot_favorites').getFullList<SpotFavorite>({
         filter: `user = "${authStore.user.id}"`,
         sort: '-created',
-        expand: 'spot',
+        expand: 'spot,spot.collection',
       });
     } catch (err) {
       console.error(err);
