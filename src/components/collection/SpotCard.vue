@@ -35,7 +35,30 @@
         </div>
       </div>
 
-      <div class="shrink-0 pt-1 text-xl leading-none text-slate-300">›</div>
+      <button
+        type="button"
+        class="group -mr-2 -mt-2 flex size-11 shrink-0 items-center justify-center rounded-full active:scale-95"
+        :aria-label="isFavorite ? 'Aus Favoriten entfernen' : 'Zu Favoriten hinzufügen'"
+        @click.prevent.stop="toggleFavorite"
+      >
+        <span
+          class="flex size-9 items-center justify-center rounded-full transition"
+          :class="
+            isFavorite
+              ? 'text-accent-600 group-hover:bg-accent-100 group-hover:text-accent-700'
+              : 'text-slate-300 group-hover:bg-slate-100 group-hover:text-accent-600'
+          "
+        >
+          <n-icon
+            :key="isFavorite ? 'favorite' : 'not-favorite'"
+            size="20"
+            :class="isFavorite ? 'animate-heart-pop' : ''"
+          >
+            <Heart v-if="isFavorite" />
+            <HeartOutline v-else />
+          </n-icon>
+        </span>
+      </button>
     </div>
   </RouterLink>
 </template>
@@ -43,12 +66,22 @@
 <script setup lang="ts">
 import { computed } from 'vue';
 import { RouterLink } from 'vue-router';
+import { NIcon, useMessage } from 'naive-ui';
+import { Heart, HeartOutline } from '@vicons/ionicons5';
 import type { Spot } from '@/types/spot';
+import { useSpotFavoritesStore } from '@/stores/spotFavorites';
 
 const props = defineProps<{
   spot: Spot;
   highlighted?: boolean;
 }>();
+
+const message = useMessage();
+const spotFavoritesStore = useSpotFavoritesStore();
+
+const isFavorite = computed(() => {
+  return spotFavoritesStore.isFavorite(props.spot.id);
+});
 
 const hasLocation = computed(() => {
   const lat = props.spot.locationLat;
@@ -56,4 +89,32 @@ const hasLocation = computed(() => {
 
   return lat != null && lng != null && !(lat === 0 && lng === 0);
 });
+
+async function toggleFavorite() {
+  try {
+    await spotFavoritesStore.toggleFavorite(props.spot.id);
+  } catch {
+    message.error('Favorit konnte nicht gespeichert werden.');
+  }
+}
 </script>
+
+<style scoped>
+@keyframes heart-pop {
+  0% {
+    transform: scale(0.85);
+  }
+
+  55% {
+    transform: scale(1.22);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
+.animate-heart-pop {
+  animation: heart-pop 180ms ease-out;
+}
+</style>

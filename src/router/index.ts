@@ -100,6 +100,15 @@ const router = createRouter({
       },
     },
     {
+      path: '/favorites',
+      name: 'favorites',
+      component: () => import('@/pages/FavoritesPage.vue'),
+      meta: {
+        title: 'Favoriten',
+        requiresAuth: true,
+      },
+    },
+    {
       path: '/login',
       name: 'login',
       component: () => import('@/pages/LoginPage.vue'),

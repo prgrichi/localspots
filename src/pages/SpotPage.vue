@@ -82,6 +82,7 @@ import { useSpotFilters } from '@/composables/useSpotFilters';
 import { useEnsureCollections } from '@/composables/useEnsureCollections';
 
 import { useSpotStore } from '@/stores/spotStore';
+import { useSpotFavoritesStore } from '@/stores/spotFavorites';
 import { useCollectionStore } from '@/stores/collectionStore';
 import { useRoute } from 'vue-router';
 
@@ -91,6 +92,7 @@ import CollectionCreateDrawer from '@/components/collection/CollectionCreateDraw
 import NoCollectionsState from '@/components/collection/NoCollectionsState.vue';
 
 const spotStore = useSpotStore();
+const spotFavoritesStore = useSpotFavoritesStore();
 const collectionStore = useCollectionStore();
 const message = useMessage();
 const route = useRoute();
@@ -134,7 +136,7 @@ watch(
     }
 
     try {
-      await spotStore.fetchSpots(collectionId);
+      await Promise.all([spotStore.fetchSpots(collectionId), spotFavoritesStore.fetchFavorites()]);
     } catch {
       message.error('Spots konnten nicht geladen werden');
     }

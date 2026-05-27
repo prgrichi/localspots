@@ -49,20 +49,35 @@
             </div>
           </div>
 
-          <n-button
-            v-if="canEditSpot"
-            quaternary
-            size="medium"
-            class="!h-auto !w-auto !p-0 !text-slate-400 hover:!bg-transparent hover:!text-slate-700 focus:!bg-transparent active:scale-95"
-            aria-label="Spot bearbeiten"
-            @click="$emit('edit')"
-          >
-            <template #icon>
-              <n-icon size="18">
+          <div class="flex shrink-0 items-center gap-1">
+            <button
+              type="button"
+              class="flex size-11 items-center justify-center rounded-full text-accent-600 transition hover:bg-accent-100 active:scale-95"
+              :aria-label="isFavorite ? 'Aus Favoriten entfernen' : 'Zu Favoriten hinzufügen'"
+              @click="emit('toggleFavorite')"
+            >
+              <n-icon
+                :key="isFavorite ? 'favorite' : 'not-favorite'"
+                size="20"
+                :class="isFavorite ? 'animate-heart-pop' : ''"
+              >
+                <Heart v-if="isFavorite" />
+                <HeartOutline v-else />
+              </n-icon>
+            </button>
+
+            <button
+              v-if="canEditSpot"
+              type="button"
+              class="flex size-11 items-center justify-center rounded-full text-slate-400 transition hover:bg-slate-100 hover:text-slate-700 active:scale-95"
+              aria-label="Spot bearbeiten"
+              @click="emit('edit')"
+            >
+              <n-icon size="20">
                 <CreateOutline />
               </n-icon>
-            </template>
-          </n-button>
+            </button>
+          </div>
         </div>
       </header>
 
@@ -101,35 +116,35 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { computed } from 'vue';
-import { NButton, NIcon } from 'naive-ui';
-import { CreateOutline } from '@vicons/ionicons5';
+import { NIcon } from 'naive-ui';
+import { CreateOutline, Heart, HeartOutline } from '@vicons/ionicons5';
+import type { Spot } from '@/types/spot';
 
-const props = defineProps({
-  spot: {
-    type: Object,
-    required: true,
-  },
-  hasLocation: {
-    type: Boolean,
-    default: false,
-  },
-  collectionName: {
-    type: String,
-    default: 'Nicht angegeben2',
-  },
-  canEditSpot: {
-    type: Boolean,
-    default: false,
-  },
-  creatorName: {
-    type: String,
-    default: 'Unbekannt',
-  },
-});
+const props = withDefaults(
+  defineProps<{
+    spot: Spot;
+    hasLocation?: boolean;
+    collectionName?: string;
+    canEditSpot?: boolean;
+    creatorName?: string;
+    isFavorite?: boolean;
+  }>(),
+  {
+    hasLocation: false,
+    collectionName: 'Nicht angegeben',
+    canEditSpot: false,
+    creatorName: 'Unbekannt',
+    isFavorite: false,
+  }
+);
 
-defineEmits(['edit', 'delete']);
+const emit = defineEmits<{
+  edit: [];
+  delete: [];
+  toggleFavorite: [];
+}>();
 
 const creatorInitials = computed(() => {
   return props.creatorName
@@ -141,7 +156,7 @@ const creatorInitials = computed(() => {
     .toUpperCase();
 });
 
-const formatDate = value => {
+const formatDate = (value?: string) => {
   if (!value) return 'Nicht angegeben';
 
   return new Intl.DateTimeFormat('de-DE', {
@@ -150,3 +165,23 @@ const formatDate = value => {
   }).format(new Date(value));
 };
 </script>
+
+<style scoped>
+@keyframes heart-pop {
+  0% {
+    transform: scale(0.85);
+  }
+
+  55% {
+    transform: scale(1.22);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
+.animate-heart-pop {
+  animation: heart-pop 180ms ease-out;
+}
+</style>

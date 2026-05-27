@@ -77,6 +77,29 @@
                 <ChevronForwardOutline />
               </n-icon>
             </RouterLink>
+
+            <RouterLink
+              to="/favorites"
+              class="group flex items-center gap-3 rounded-2xl bg-white px-4 py-3 no-underline ring-1 ring-slate-200 transition hover:bg-slate-50 active:scale-[0.99]"
+              @click="closeMenu"
+            >
+              <span
+                class="flex size-9 shrink-0 items-center justify-center rounded-full bg-primary-50 text-primary-700"
+              >
+                <n-icon size="20">
+                  <HeartOutline />
+                </n-icon>
+              </span>
+
+              <span class="min-w-0 flex-1 text-sm font-semibold text-slate-900"> Favoriten </span>
+
+              <n-icon
+                size="18"
+                class="shrink-0 text-slate-300 transition group-hover:translate-x-0.5 group-hover:text-slate-400"
+              >
+                <ChevronForwardOutline />
+              </n-icon>
+            </RouterLink>
           </nav>
         </div>
 
@@ -116,6 +139,7 @@ import {
   AlbumsOutline,
   ChevronForwardOutline,
   LogOutOutline,
+  HeartOutline,
   PeopleOutline,
   PinOutline,
 } from '@vicons/ionicons5';

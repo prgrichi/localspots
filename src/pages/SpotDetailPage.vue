@@ -7,7 +7,9 @@
         :collection-name="collectionName"
         :can-edit-spot="canEditSpot"
         :creator-name="creatorName"
+        :is-favorite="isFavorite"
         @edit="editSpot(spot)"
+        @toggle-favorite="toggleFavorite"
       />
 
       <SpotLocationMap
@@ -49,6 +51,7 @@ import SpotLocationPanel from '@/components/spot-detail/SpotLocationPanel.vue';
 import SpotLocationDrawer from '@/components/spot-detail/SpotLocationDrawer.vue';
 
 import { useSpotStore } from '@/stores/spotStore';
+import { useSpotFavoritesStore } from '@/stores/spotFavorites';
 import { useSingleSpotMap } from '@/composables/useSpotMap';
 import { confirmDialogOptions } from '@/utils/confirmDialogOptions';
 
@@ -58,6 +61,7 @@ const message = useMessage();
 const dialog = useDialog();
 
 const spotStore = useSpotStore();
+const spotFavoritesStore = useSpotFavoritesStore();
 
 const showEditModal = ref(false);
 const showLocationModal = ref(false);
@@ -68,6 +72,14 @@ const spot = ref<Spot | null>(null);
 const spotId = computed(() => String(route.params.id));
 
 const { spotLatLng, mapCenter, spotIcon } = useSingleSpotMap(spot);
+
+const authUserId = computed(() => pb.authStore.record?.id ?? null);
+
+const isFavorite = computed(() => {
+  if (!spot.value) return false;
+
+  return spotFavoritesStore.isFavorite(spot.value.id);
+});
 
 const isOwnSpot = computed(() => {
   return Boolean(spot.value && spot.value.user === authUserId.value);
@@ -87,8 +99,6 @@ const collectionName = computed(() => {
   return spot.value?.expand?.collection?.name ?? 'Nicht angegeben';
 });
 
-const authUserId = computed(() => pb.authStore.record?.id ?? null);
-
 watch(
   spotId,
   async id => {
@@ -97,7 +107,10 @@ watch(
     if (!id) return;
 
     try {
-      const loadedSpot = await spotStore.fetchSpotById(id);
+      const [loadedSpot] = await Promise.all([
+        spotStore.fetchSpotById(id),
+        spotFavoritesStore.fetchFavorites(),
+      ]);
 
       spot.value = loadedSpot;
     } catch {
@@ -106,6 +119,16 @@ watch(
   },
   { immediate: true }
 );
+
+const toggleFavorite = async () => {
+  if (!spot.value) return;
+
+  try {
+    await spotFavoritesStore.toggleFavorite(spot.value.id);
+  } catch {
+    message.error('Favorit konnte nicht gespeichert werden');
+  }
+};
 
 const handleSpotSaved = (updatedSpot: Spot) => {
   spot.value = updatedSpot;
