@@ -40,5 +40,6 @@ __screenshots__/
 # Environment files
 .env
 .env.local
+.env.server
 .env.production
 .env.*. local

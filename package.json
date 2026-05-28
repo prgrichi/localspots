@@ -12,7 +12,9 @@
     "preview": "vite preview",
     "lint": "eslint . --fix",
     "format": "prettier --write \"src/**/*.{js,vue,css,json}\"",
-    "type-check": "vue-tsc --noEmit"
+    "type-check": "vue-tsc --noEmit",
+    "seed:local": "tsx -r dotenv/config scripts/pocketbase/seed.ts",
+    "seed:server": "DOTENV_CONFIG_PATH=.env.server tsx -r dotenv/config scripts/pocketbase/seed.ts"
   },
   "dependencies": {
     "@headlessui/vue": "^1.7.23",
