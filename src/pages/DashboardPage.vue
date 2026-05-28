@@ -1,11 +1,26 @@
 <template>
   <div class="mx-auto max-w-3xl px-4 pb-6 md:px-8">
-    <div class="mb-4">
+    <div class="mb-4 lg:hidden">
       <div class="text-xs font-semibold uppercase tracking-wide text-slate-400">Dashboard</div>
-
       <div class="flex items-baseline justify-between gap-3">
         <h1 class="truncate text-2xl font-semibold text-slate-900">Übersicht</h1>
       </div>
+    </div>
+
+    <div
+      class="mb-6 hidden overflow-hidden rounded-3xl bg-gradient-to-r from-white via-primary-50/50 to-accent-100/70 p-5 ring-1 ring-slate-200 lg:block lg:p-6"
+    >
+      <div class="text-xs font-semibold uppercase tracking-wide text-slate-500">Dashboard</div>
+      <div class="mt-2 flex flex-wrap items-center justify-between gap-3">
+        <h1 class="truncate text-2xl font-semibold text-slate-900 lg:text-3xl">Übersicht</h1>
+        <router-link to="/add" class="no-underline">
+          <n-button type="primary" secondary round> Spot eintragen </n-button>
+        </router-link>
+      </div>
+      <p class="mt-2 max-w-2xl text-sm text-slate-600 lg:text-base">
+        Behalte deine Collections, letzten Aktivitäten und Spot-Fortschritt in einer klaren Ansicht
+        im Blick.
+      </p>
     </div>
 
     <CollectionCreateDrawer v-model:show="showCollectionDrawer" @created="onCollectionCreated" />
@@ -28,7 +43,7 @@
             {{ totalSpotsLabel }} eingetragen.
           </p>
 
-          <router-link to="/add" class="mt-5 block no-underline">
+          <router-link to="/add" class="mt-5 block no-underline lg:hidden">
             <n-button type="primary" secondary size="large" block round> Spot eintragen </n-button>
           </router-link>
         </section>

@@ -3,7 +3,12 @@
   <n-drawer
     :show="show"
     placement="bottom"
-    height="95vh"
+    height="82vh"
+    :style="{
+      borderTopLeftRadius: '24px',
+      borderTopRightRadius: '24px',
+      overflow: 'hidden',
+    }"
     @update:show="emit('update:show', $event)"
   >
     <n-drawer-content

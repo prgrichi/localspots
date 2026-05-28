@@ -3,7 +3,12 @@
   <n-drawer
     :show="show"
     placement="bottom"
-    height="90vh"
+    height="78vh"
+    :style="{
+      borderTopLeftRadius: '24px',
+      borderTopRightRadius: '24px',
+      overflow: 'hidden',
+    }"
     @update:show="emit('update:show', $event)"
   >
     <n-drawer-content
@@ -11,7 +16,7 @@
       closable
       :native-scrollbar="false"
       :body-content-style="{
-        padding: '12px 24px 24px 24px',
+        padding: '10px 20px 20px 20px',
       }"
     >
       <n-form :model="form" class="compact-form">

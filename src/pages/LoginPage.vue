@@ -1,6 +1,6 @@
 <template>
   <main
-    class="relative mx-auto flex min-h-dvh w-full max-w-3xl items-center overflow-x-hidden overflow-y-auto px-4 py-6 md:px-8"
+    class="relative mx-auto flex min-h-dvh w-full max-w-3xl items-center overflow-x-hidden overflow-y-auto px-4 py-4 md:px-8 md:py-6"
   >
     <div
       aria-hidden="true"
@@ -26,31 +26,49 @@
       <LocationOutline class="size-5" />
     </div>
 
-    <section class="relative z-10 mx-auto flex w-full max-w-sm flex-col py-2">
+    <section class="relative z-10 mx-auto flex w-full max-w-sm flex-col py-1">
       <div class="text-center">
-        <div class="mx-auto flex size-14 items-center justify-center rounded-full bg-primary-50">
-          <span class="block size-6 rounded-full bg-accent-600"></span>
+        <div class="mx-auto flex size-12 items-center justify-center rounded-full bg-primary-50">
+          <span class="block size-5 rounded-full bg-accent-600"></span>
         </div>
 
-        <p class="mt-4 text-sm font-semibold uppercase tracking-wide text-slate-400">LocalSpots</p>
+        <p class="mt-3 text-xs font-semibold uppercase tracking-wide text-slate-400">LocalSpots</p>
 
-        <h1 class="mt-1 text-2xl font-semibold tracking-tight text-slate-950">
+        <h1 class="mt-1 text-xl font-semibold tracking-tight text-slate-950 md:text-2xl">
           Orte sammeln und teilen.
         </h1>
 
-        <p class="mx-auto mt-2 max-w-xs text-sm leading-6 text-slate-500">
+        <p class="mx-auto mt-1.5 max-w-xs text-sm leading-5 text-slate-500">
           Speichere Spots, sortiere sie in Collections und teile sie mit Freunden.
         </p>
       </div>
 
-      <div class="mt-10 sm:mt-14">
-        <div class="mb-4">
+      <div class="mt-6 sm:mt-8">
+        <div class="mb-3">
           <h2 class="text-base font-semibold text-slate-950">Einloggen</h2>
           <p class="mt-1 text-sm text-slate-500">Melde dich mit deinem Account an.</p>
         </div>
 
+        <div class="mb-4 rounded-2xl bg-primary-50/70 p-3 ring-1 ring-primary-700/15">
+          <div class="text-xs font-semibold uppercase tracking-wide text-primary-800">
+            Demo-Login
+          </div>
+          <div class="mt-1.5 space-y-0.5 text-sm text-slate-700">
+            <p><span class="font-medium text-slate-900">E-Mail:</span> clara.berger@example.com</p>
+            <p><span class="font-medium text-slate-900">Passwort:</span> 12345678</p>
+          </div>
+          <button
+            type="button"
+            class="mt-2 inline-flex cursor-pointer items-center gap-1 rounded-full px-2.5 py-1 text-xs font-semibold text-primary-700 transition hover:bg-primary-50"
+            @click="useDemoLogin"
+          >
+            Login-Daten einfügen
+            <span aria-hidden="true">→</span>
+          </button>
+        </div>
+
         <form @submit.prevent="submit">
-          <n-space vertical size="medium">
+          <n-space vertical size="small">
             <n-form-item label="E-Mail">
               <n-input
                 v-model:value="form.email"
@@ -119,6 +137,11 @@ const form = reactive({
   email: '',
   password: '',
 });
+
+function useDemoLogin() {
+  form.email = 'clara.berger@example.com';
+  form.password = '12345678';
+}
 
 async function submit() {
   if (isSubmitting.value) return;

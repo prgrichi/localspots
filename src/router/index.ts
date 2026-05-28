@@ -138,29 +138,8 @@ router.beforeEach(to => {
 });
 
 router.afterEach((to, from) => {
-  const mainNavOrder = ['activities', 'spots', 'add-entry', 'map', 'collections'];
-
-  const toIndex = mainNavOrder.indexOf(String(to.name));
-  const fromIndex = mainNavOrder.indexOf(String(from.name));
-
-  const bothAreMainNavRoutes = toIndex !== -1 && fromIndex !== -1;
-
-  if (!bothAreMainNavRoutes) {
-    to.meta.transition = 'fade';
-    return;
-  }
-
-  if (toIndex > fromIndex) {
-    to.meta.transition = 'slide-left';
-    return;
-  }
-
-  if (toIndex < fromIndex) {
-    to.meta.transition = 'slide-right';
-    return;
-  }
-
-  to.meta.transition = '';
+  void from;
+  to.meta.transition = 'fade';
 });
 
 export default router;
