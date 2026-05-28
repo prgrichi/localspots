@@ -940,5 +940,134 @@
         ]
       }
     ]
+  },
+  {
+    "email": "clara.berger@example.com",
+    "password": "12345678",
+    "name": "Clara Berger",
+    "collections": [
+      {
+        "name": "München Natur und Kultur",
+        "spots": [
+          {
+            "name": "Isarauen bei Thalkirchen",
+            "category": "Natur",
+            "description": "Weitläufiger Abschnitt an der Isar mit Kiesbänken, Bäumen und ruhigen Wegen. Gut für Spaziergänge, kleine Pausen am Wasser und ein bisschen Naturgefühl mitten in München.",
+            "locationLat": 48.0968,
+            "locationLng": 11.5484
+          },
+          {
+            "name": "Rosengarten im Westpark",
+            "category": "Fotospot",
+            "description": "Ruhiger Gartenbereich mit Rosen, kleinen Wegen und schönen Details. Besonders angenehm im Frühsommer oder für einen kurzen Fotostopp beim Spaziergang durch den Westpark.",
+            "locationLat": 48.1229,
+            "locationLng": 11.5221
+          },
+          {
+            "name": "Café Bla am Elisabethmarkt",
+            "category": "Café",
+            "description": "Kleiner entspannter Kaffeestopp in Schwabing mit Nähe zum Markt. Gut für eine Pause, wenn man nicht direkt in eine große Innenstadtadresse möchte.",
+            "locationLat": 48.1587,
+            "locationLng": 11.5743
+          },
+          {
+            "name": "Lenbachhaus",
+            "category": "Kultur",
+            "description": "Museum mit starker Sammlung und angenehmer Größe, wenn man Kultur ohne kompletten Tagesplan sucht. Lässt sich gut mit einem Spaziergang Richtung Königsplatz verbinden.",
+            "locationLat": 48.1461,
+            "locationLng": 11.5638
+          },
+          {
+            "name": "Luitpoldpark",
+            "category": "Sport",
+            "description": "Grüner Park mit Wegen, Wiesen und kleinem Hügel, gut zum Laufen oder für eine lockere Runde nach der Arbeit. Nicht so touristisch wie andere Münchner Parks.",
+            "locationLat": 48.1681,
+            "locationLng": 11.5737
+          },
+          {
+            "name": "Monopteros im Englischen Garten",
+            "category": "Aussichtspunkt",
+            "description": "Kleiner Aussichtspunkt mit Blick über den Englischen Garten und Richtung Stadt. Klassisch, aber besonders früh oder am Abend immer noch sehr schön.",
+            "locationLat": 48.1496,
+            "locationLng": 11.5906
+          },
+          {
+            "name": "Maximilianeum Isarblick",
+            "category": "Sonnenuntergangsspot",
+            "description": "Schöner Blick über die Isar, die Brücken und Teile der Stadt. Zum Abendlicht wirkt die Ecke ruhig und urban zugleich.",
+            "locationLat": 48.1366,
+            "locationLng": 11.5942
+          },
+          {
+            "name": "Gärtnerplatz",
+            "category": "Picknickplatz",
+            "description": "Lebendiger Platz mit viel Stadtgefühl, kleinen Grünflächen und Cafés in der Umgebung. Gut für ein unkompliziertes Treffen oder eine kurze Pause.",
+            "locationLat": 48.1317,
+            "locationLng": 11.5766
+          }
+        ]
+      },
+      {
+        "name": "Kleine Berg- und Seeauszeiten",
+        "spots": [
+          {
+            "name": "Herzogstand",
+            "category": "Wandern",
+            "description": "Aussichtsreiche Bergtour über dem Walchensee mit starkem Blick auf See und Alpen. Für einen freien Tag sehr lohnend, wenn man früh startet.",
+            "locationLat": 47.6138,
+            "locationLng": 11.3121
+          },
+          {
+            "name": "Walchensee Ufer bei Sachenbach",
+            "category": "Natur",
+            "description": "Klarer See, ruhiger Uferbereich und Bergkulisse ohne viel Infrastruktur. Gut zum Sitzen, Lesen oder für einen stilleren Moment am Wasser.",
+            "locationLat": 47.5919,
+            "locationLng": 11.3424
+          },
+          {
+            "name": "Jochberg",
+            "category": "Aussichtspunkt",
+            "description": "Beliebte, aber sehr lohnende Tour mit Blick auf Kochelsee, Walchensee und Alpenrand. Oben ist der Rundumblick der eigentliche Grund für den Aufstieg.",
+            "locationLat": 47.6338,
+            "locationLng": 11.3717
+          },
+          {
+            "name": "Franz Marc Museum",
+            "category": "Kultur",
+            "description": "Museum oberhalb des Kochelsees mit Kunst, Architektur und Blick in die Landschaft. Gute Wahl, wenn Ausflug und Kultur zusammenpassen sollen.",
+            "locationLat": 47.6548,
+            "locationLng": 11.3667
+          },
+          {
+            "name": "Café Krönner Murnau",
+            "category": "Café",
+            "description": "Klassische Konditorei im Zentrum von Murnau, gut für Kaffee und Kuchen nach einem Spaziergang. Passt gut zu einem ruhigen Nachmittag im Blauen Land.",
+            "locationLat": 47.6767,
+            "locationLng": 11.2012
+          },
+          {
+            "name": "Staffelsee Promenade Murnau",
+            "category": "Fotospot",
+            "description": "Schöner Abschnitt am See mit Blick auf Wasser, Boote und Berge. Besonders fotogen bei ruhigem Wetter und weichem Licht.",
+            "locationLat": 47.6825,
+            "locationLng": 11.1896
+          },
+          {
+            "name": "Kochelsee Uferweg",
+            "category": "Sport",
+            "description": "Angenehmer Weg am See, gut für eine lockere Runde zu Fuß oder mit dem Rad. Weniger anstrengend als eine Bergtour, aber trotzdem sehr landschaftlich.",
+            "locationLat": 47.6576,
+            "locationLng": 11.3632
+          },
+          {
+            "name": "Kristall Therme Kochel",
+            "category": "Badestelle",
+            "description": "Entspannter Ort zum Aufwärmen und Abschalten nach einem kalten oder aktiven Ausflugstag. Besonders praktisch, wenn das Wetter draußen nicht ganz mitspielt.",
+            "locationLat": 47.6566,
+            "locationLng": 11.3647
+          }
+        ]
+      }
+    ]
   }
 ]
