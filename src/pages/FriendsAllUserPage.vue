@@ -24,8 +24,9 @@
         <n-button
           size="small"
           round
-          class="shrink-0"
+          class="shrink-0 min-w-[110px]"
           :type="followStore.isFollowing(user.id) ? 'default' : 'primary'"
+          :secondary="followStore.isFollowing(user.id)"
           :loading="followStore.loadingUserId === user.id"
           @click="followStore.toggleFollow(user.id)"
         >
@@ -41,15 +42,27 @@
         <div
           v-for="user in followStore.followingUsers"
           :key="user.id"
-          class="rounded-2xl bg-white p-4 shadow-sm ring-1 ring-slate-200"
+          class="flex items-center justify-between gap-4 rounded-2xl bg-white p-4 shadow-sm ring-1 ring-slate-200"
         >
-          <div class="truncate font-semibold text-slate-900">
-            {{ user.name || user.email }}
+          <div class="min-w-0 flex-1">
+            <div class="truncate font-semibold text-slate-900">
+              {{ user.name || user.email }}
+            </div>
+
+            <div class="truncate text-sm text-slate-500">
+              {{ user.email }}
+            </div>
           </div>
 
-          <div class="truncate text-sm text-slate-500">
-            {{ user.email }}
-          </div>
+          <n-button
+            size="small"
+            round
+            class="shrink-0"
+            :loading="followStore.loadingUserId === user.id"
+            @click="followStore.toggleFollow(user.id)"
+          >
+            Entfolgen
+          </n-button>
         </div>
 
         <p
