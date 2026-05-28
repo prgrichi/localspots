@@ -10,7 +10,8 @@ Localspots ist eine mobile-first Vue-3-Webapp zum Erfassen, Organisieren und Tei
 - Kartenansicht mit Leaflet-Markern pro aktiver Collection
 - Collection-Verwaltung (eigene / alle, beitreten, verlassen, umbenennen)
 - Aktivitäten-Startseite als zentrale Home-Ansicht
-- Mobile Bottom-Navigation mit Route-Transitions
+- Mobile Bottom-Navigation + Desktop-Topnavigation
+- Demo-Login-Hinweis direkt auf der Login-Seite
 - PWA-Konfiguration für installierbare App
 
 ## Tech Stack
@@ -33,7 +34,7 @@ src/
   composables/       Feature-/UI-Logik (z. B. map, filters, stats)
   layouts/           AppLayout mit Route-spezifischer Höhenlogik
   pages/             Seiten (Activities, Spots, Map, Collections, Login, ...)
-  router/            Routen, Guards, Transition-Logik
+  router/            Routen, Guards
   services/          externe Services (PocketBase-Client)
   stores/            Pinia Stores (auth, collections, spots, follows)
   types/             zentrale TS-Typen
@@ -45,7 +46,7 @@ Routen sind in `src/router/index.ts` definiert.
 
 - Geschützte Routen nutzen `meta.requiresAuth: true`
 - Globaler `beforeEach` leitet unauthentifizierte Nutzer auf `/login`
-- Main-Nav-Routen bekommen Slide-Transitions (`slide-left` / `slide-right`), sonst `fade`
+- Seitenwechsel nutzen aktuell einheitlich `fade` als Transition
 
 Aktuelle Hauptseiten:
 
@@ -127,6 +128,15 @@ npm run type-check
 npm run format
 ```
 
+## Demo-Login (Bewerbung)
+
+Zum schnellen Testen kann der Demo-Account verwendet werden:
+
+- E-Mail: `clara.berger@example.com`
+- Passwort: `12345678`
+
+Die Daten sind auch direkt auf der Login-Seite als einfügbarer Hinweis hinterlegt.
+
 ## Seed-Daten (optional)
 
 Im Repo liegt ein Demo-Seed in `scripts/pocketbase/data.json`.
@@ -151,6 +161,15 @@ Konfiguration in `vite.config.js`:
 - `registerType: 'autoUpdate'`
 - `workbox.navigateFallback: '/index.html'`
 - `devOptions.enabled: false` (kein SW-Cache in lokaler Entwicklung)
+
+## Build/Performance
+
+- Globales `app.use(naive)` wurde entfernt, damit nur tatsächlich genutzte Naive-UI-Teile gebundled werden.
+- `vite.config.js` nutzt `manualChunks` für sinnvoll getrennte Vendor-Chunks:
+  - `vendor-core` (Vue, Router, Pinia, Naive UI)
+  - `vendor-map` (Leaflet, Vue-Leaflet)
+  - `vendor-backend` (PocketBase)
+- Ergebnis: kleineres Entry-Bundle und besseres Caching für wiederkehrende Besuche.
 
 ## Hinweise zum aktuellen Stand
 
