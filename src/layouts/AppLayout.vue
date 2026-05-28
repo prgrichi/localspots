@@ -102,7 +102,7 @@ const desktopNavItems = [
 
 const contentClass = computed(() => {
   if (isMapActive.value) {
-    return 'h-[calc(100dvh-var(--bottom-nav-height))] overflow-hidden pt-6 lg:h-dvh lg:pt-24';
+    return 'h-[calc(100dvh-var(--bottom-nav-height))] overflow-hidden pt-6 lg:h-dvh lg:pt-28';
   }
 
   if (isLoginRoute.value) {
