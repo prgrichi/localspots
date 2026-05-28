@@ -14,16 +14,59 @@
 
     <template v-else>
       <n-layout-content :class="contentClass">
-        <main class="mx-auto max-w-3xl" :class="mainClass">
-          <router-view v-slot="{ Component, route }">
-            <transition :name="route.meta.transition || 'fade'" mode="out-in">
-              <component :is="Component" :key="route.fullPath" />
-            </transition>
-          </router-view>
-        </main>
+        <div class="mx-auto w-full max-w-6xl px-4 md:px-8">
+          <div v-if="showDesktopShell" class="mb-6 hidden lg:block">
+            <div class="fixed inset-x-0 top-3 z-30">
+              <div class="mx-auto w-full max-w-6xl px-4 md:px-8">
+                <div class="rounded-2xl bg-white/85 px-4 py-3 shadow-sm ring-1 ring-slate-200 backdrop-blur">
+                  <div class="flex items-center gap-4">
+                    <RouterLink to="/" class="shrink-0 no-underline">
+                      <div class="text-sm font-semibold uppercase tracking-wide text-slate-700">
+                        LocalSpots
+                      </div>
+                    </RouterLink>
+
+                    <nav class="flex min-w-0 flex-1 flex-wrap items-center gap-2">
+                      <RouterLink
+                        v-for="item in desktopNavItems"
+                        :key="item.to"
+                        :to="item.to"
+                        class="rounded-xl px-3 py-2 text-sm font-medium no-underline transition"
+                        :class="
+                          route.path === item.to
+                            ? 'bg-primary-50 text-primary-800'
+                            : 'text-slate-600 hover:bg-slate-100 hover:text-slate-900'
+                        "
+                      >
+                        {{ item.label }}
+                      </RouterLink>
+                    </nav>
+
+                    <button
+                      type="button"
+                      class="shrink-0 rounded-xl border border-slate-200 px-3 py-2 text-sm font-medium text-slate-600 transition hover:bg-slate-100 hover:text-slate-900"
+                      @click="showMenu = true"
+                    >
+                      Konto
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="h-16"></div>
+          </div>
+
+          <main class="mx-auto max-w-3xl lg:max-w-4xl" :class="mainClass">
+            <router-view v-slot="{ Component, route: currentRoute }">
+              <transition :name="currentRoute.meta.transition || 'fade'" mode="out-in">
+                <component :is="Component" :key="currentRoute.fullPath" />
+              </transition>
+            </router-view>
+          </main>
+        </div>
       </n-layout-content>
 
-      <AppBottomNav v-if="authStore.isLoggedIn" @open-menu="showMenu = true" />
+      <AppBottomNav v-if="authStore.isLoggedIn" class="lg:hidden" @open-menu="showMenu = true" />
 
       <AppMenuDrawer v-model:show="showMenu" />
     </template>
@@ -33,7 +76,7 @@
 <script setup lang="ts">
 import { NLayout, NLayoutContent } from 'naive-ui';
 import { computed, ref, watch } from 'vue';
-import { RouterView, useRoute } from 'vue-router';
+import { RouterLink, RouterView, useRoute } from 'vue-router';
 import { useAuthStore } from '@/stores/authStore';
 import { useCollectionStore } from '@/stores/collectionStore';
 import AppBottomNav from '@/components/navigation/AppBottomNav.vue';
@@ -47,6 +90,15 @@ const showMenu = ref(false);
 
 const isMapActive = computed(() => route.name === 'map');
 const isLoginRoute = computed(() => route.name === 'login');
+const showDesktopShell = computed(() => authStore.isLoggedIn && !isMapActive.value && !isLoginRoute.value);
+const desktopNavItems = [
+  { to: '/', label: 'Aktivitäten' },
+  { to: '/spots', label: 'Spots' },
+  { to: '/add', label: 'Eintragen' },
+  { to: '/collections', label: 'Collections' },
+  { to: '/friends-all', label: 'Freunde entdecken' },
+  { to: '/favorites', label: 'Favoriten' },
+];
 
 const contentClass = computed(() => {
   if (isMapActive.value) {
@@ -57,7 +109,7 @@ const contentClass = computed(() => {
     return 'h-dvh overflow-hidden';
   }
 
-  return 'min-h-screen pt-6 pb-[calc(var(--bottom-nav-height)+1rem)]';
+  return 'min-h-screen pt-6 pb-[calc(var(--bottom-nav-height)+1rem)] lg:pb-8';
 });
 
 const mainClass = computed(() => (isMapActive.value || isLoginRoute.value ? 'h-full min-h-0' : ''));

@@ -21,6 +21,16 @@ body {
   overscroll-behavior: none;
 }
 
+html {
+  scrollbar-gutter: stable;
+}
+
+@supports not (scrollbar-gutter: stable) {
+  html {
+    overflow-y: scroll;
+  }
+}
+
 html,
 body,
 #app {
