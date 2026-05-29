@@ -108,7 +108,6 @@
               round
               block
               size="large"
-              class="!h-12 !min-h-12"
               :loading="isSubmitting"
             >
               Einloggen
