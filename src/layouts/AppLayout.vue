@@ -15,18 +15,27 @@
     <template v-else>
       <n-layout-content :class="contentClass">
         <div :class="outerContainerClass">
-          <div v-if="showDesktopShell" :class="isMapActive ? 'hidden lg:block' : 'mb-6 hidden lg:block'">
+          <div
+            v-if="showDesktopShell"
+            :class="isMapActive ? 'hidden lg:block' : 'mb-6 hidden lg:block'"
+          >
             <div class="fixed inset-x-0 top-3 z-30">
               <div class="mx-auto w-full max-w-6xl px-4 md:px-8">
-                <div class="rounded-2xl bg-white/94 px-4 py-3 shadow-sm ring-1 ring-slate-200 backdrop-blur">
+                <div
+                  class="rounded-2xl bg-white/94 px-4 py-3 shadow-sm ring-1 ring-slate-200 backdrop-blur"
+                >
                   <div class="flex items-center gap-4">
                     <RouterLink to="/" class="shrink-0 no-underline">
-                      <div class="text-sm font-semibold uppercase tracking-[0.18em] text-primary-800">
+                      <div
+                        class="text-sm font-semibold uppercase tracking-[0.18em] text-primary-800"
+                      >
                         LocalSpots
                       </div>
                     </RouterLink>
 
-                    <nav class="flex min-w-0 flex-1 flex-wrap items-center gap-1 rounded-xl bg-primary-50/55 p-1 ring-1 ring-primary-700/15">
+                    <nav
+                      class="flex min-w-0 flex-1 flex-wrap items-center gap-1 rounded-xl bg-primary-50/55 p-1 ring-1 ring-primary-700/15"
+                    >
                       <RouterLink
                         v-for="item in desktopNavItems"
                         :key="item.to"
@@ -76,7 +85,7 @@
 <script setup lang="ts">
 import { NLayout, NLayoutContent } from 'naive-ui';
 import { computed, ref, watch } from 'vue';
-import { RouterLink, RouterView, useRoute } from 'vue-router';
+import { RouterLink, RouterView, useRoute, useRouter } from 'vue-router';
 import { useAuthStore } from '@/stores/authStore';
 import { useCollectionStore } from '@/stores/collectionStore';
 import AppBottomNav from '@/components/navigation/AppBottomNav.vue';
@@ -85,6 +94,7 @@ import AppMenuDrawer from '@/components/menu/AppMenuDrawer.vue';
 const authStore = useAuthStore();
 const collectionStore = useCollectionStore();
 const route = useRoute();
+const router = useRouter();
 
 const showMenu = ref(false);
 
@@ -134,6 +144,11 @@ watch(
   async isLoggedIn => {
     if (!isLoggedIn) {
       collectionStore.clearCollections();
+
+      if (route.meta.requiresAuth && route.name !== 'login') {
+        await router.replace({ name: 'login' });
+      }
+
       return;
     }
   },

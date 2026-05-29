@@ -173,15 +173,18 @@ const closeMenu = () => {
   emit('update:show', false);
 };
 
-const logout = () => {
+const logout = async () => {
   authStore.logout();
   spotStore.clearSpots();
   collectionStore.clearCollections();
-  router.push('/login');
+
+  if (router.currentRoute.value.name !== 'login') {
+    await router.replace({ name: 'login' });
+  }
 };
 
-const logoutFromMenu = () => {
+const logoutFromMenu = async () => {
+  await logout();
   closeMenu();
-  logout();
 };
 </script>
