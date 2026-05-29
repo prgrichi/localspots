@@ -78,6 +78,7 @@
 
 <script setup>
 import { computed, onMounted, ref } from 'vue';
+import { NButton } from 'naive-ui';
 import { pb } from '@/services/pocketbase';
 import { useFollowStore } from '@/stores/followStore';
 
