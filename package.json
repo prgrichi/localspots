@@ -14,7 +14,11 @@
     "format": "prettier --write \"src/**/*.{js,vue,css,json}\"",
     "type-check": "vue-tsc --noEmit",
     "seed:local": "tsx -r dotenv/config scripts/pocketbase/seed.ts",
-    "seed:server": "DOTENV_CONFIG_PATH=.env.server tsx -r dotenv/config scripts/pocketbase/seed.ts"
+    "seed:server": "DOTENV_CONFIG_PATH=.env.server tsx -r dotenv/config scripts/pocketbase/seed.ts",
+    "test": "vitest",
+    "test:run": "vitest run",
+    "test:verbose": "vitest run --reporter=verbose",
+    "test:ui": "vitest --ui"
   },
   "dependencies": {
     "@headlessui/vue": "^1.7.23",
@@ -37,11 +41,13 @@
     "@typescript-eslint/eslint-plugin": "^8.56.0",
     "@typescript-eslint/parser": "^8.56.0",
     "@vitejs/plugin-vue": "^6.0.2",
+    "@vitest/ui": "^3.2.6",
     "@vue/eslint-config-prettier": "^10.2.0",
     "dotenv": "^17.4.2",
     "eslint": "^9.39.2",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-vue": "^10.6.2",
+    "jsdom": "^27.0.1",
     "lint-staged": "^16.2.7",
     "prettier": "^3.7.4",
     "tsx": "^4.22.3",
@@ -49,6 +55,7 @@
     "vite": "^7.2.4",
     "vite-plugin-pwa": "^1.2.0",
     "vite-plugin-vue-devtools": "^8.0.5",
+    "vitest": "^3.2.6",
     "vue-tsc": "^3.2.4"
   }
 }
