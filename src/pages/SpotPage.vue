@@ -66,7 +66,9 @@
               v-for="spot in filteredSpots"
               :key="spot.id"
               :spot="spot"
+              :is-favorite="spotFavoritesStore.isFavorite(spot.id)"
               :highlighted="spot.id === highlightedId"
+              @toggle-favorite="toggleFavorite"
             />
           </template>
         </n-space>
@@ -125,6 +127,14 @@ const spotCount = computed(() => spotStore.spots.length);
 
 function getSpotLabel(count: number) {
   return count === 1 ? 'Spot' : 'Spots';
+}
+
+async function toggleFavorite(spotId: string) {
+  try {
+    await spotFavoritesStore.toggleFavorite(spotId);
+  } catch {
+    message.error('Favorit konnte nicht gespeichert werden.');
+  }
 }
 
 watch(

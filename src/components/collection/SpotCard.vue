@@ -39,7 +39,7 @@
         type="button"
         class="group -mr-2 -mt-2 flex size-11 shrink-0 items-center justify-center rounded-full active:scale-95"
         :aria-label="isFavorite ? 'Aus Favoriten entfernen' : 'Zu Favoriten hinzufügen'"
-        @click.prevent.stop="toggleFavorite"
+        @click.prevent.stop="emit('toggle-favorite', spot.id)"
       >
         <span
           class="flex size-9 items-center justify-center rounded-full transition"
@@ -66,22 +66,19 @@
 <script setup lang="ts">
 import { computed } from 'vue';
 import { RouterLink } from 'vue-router';
-import { NIcon, useMessage } from 'naive-ui';
+import { NIcon } from 'naive-ui';
 import { Heart, HeartOutline } from '@vicons/ionicons5';
 import type { Spot } from '@/types/spot';
-import { useSpotFavoritesStore } from '@/stores/spotFavorites';
 
 const props = defineProps<{
   spot: Spot;
   highlighted?: boolean;
+  isFavorite: boolean;
 }>();
 
-const message = useMessage();
-const spotFavoritesStore = useSpotFavoritesStore();
-
-const isFavorite = computed(() => {
-  return spotFavoritesStore.isFavorite(props.spot.id);
-});
+const emit = defineEmits<{
+  'toggle-favorite': [id: string];
+}>();
 
 const hasLocation = computed(() => {
   const lat = props.spot.locationLat;
@@ -89,14 +86,6 @@ const hasLocation = computed(() => {
 
   return lat != null && lng != null && !(lat === 0 && lng === 0);
 });
-
-async function toggleFavorite() {
-  try {
-    await spotFavoritesStore.toggleFavorite(props.spot.id);
-  } catch {
-    message.error('Favorit konnte nicht gespeichert werden.');
-  }
-}
 </script>
 
 <style scoped>
