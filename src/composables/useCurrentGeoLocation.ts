@@ -5,7 +5,7 @@ export const useCurrentGeoLocation = () => {
   const isLocating = ref(false);
 
   const isSupported = computed(() => {
-    return typeof navigator !== 'undefined' && 'geolocation' in navigator;
+    return typeof navigator !== 'undefined' && !!navigator.geolocation;
   });
 
   const getCurrentLocation = () => {

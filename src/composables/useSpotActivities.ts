@@ -2,6 +2,7 @@
 import { computed, ref } from 'vue';
 import { pb } from '@/services/pocketbase';
 import { useCollectionStore } from '@/stores/collectionStore';
+import { mapSpotToActivity } from '@/utils/spotActivity';
 import type { Spot } from '@/types/spot';
 import type { SpotActivity } from '@/types/activity';
 
@@ -15,15 +16,7 @@ export function useSpotActivities() {
   const perPage = 15;
   const hasMore = ref(false);
 
-  const activities = computed<SpotActivity[]>(() =>
-    spots.value.map(spot => ({
-      id: spot.id,
-      name: spot.name,
-      userLabel: spot.expand?.user?.name || spot.expand?.user?.email || 'Unbekannter User',
-      collectionLabel: spot.expand?.collection?.name || 'Unbekannte Collection',
-      createdLabel: formatDateTime(spot.created),
-    }))
-  );
+  const activities = computed<SpotActivity[]>(() => spots.value.map(mapSpotToActivity));
 
   async function fetchActivities(reset = false) {
     if (reset) {
@@ -81,11 +74,4 @@ export function useSpotActivities() {
     fetchActivities,
     loadMoreActivities,
   };
-}
-
-function formatDateTime(value: string) {
-  return new Intl.DateTimeFormat('de-DE', {
-    dateStyle: 'short',
-    timeStyle: 'short',
-  }).format(new Date(value));
 }
