@@ -74,7 +74,11 @@
                 v-model:value="form.email"
                 class="text-base"
                 placeholder="dein@email.de"
-                :input-props="{ autocomplete: 'email' }"
+                :input-props="{
+                  type: 'email',
+                  autocomplete: 'email',
+                  'aria-label': 'E-Mail',
+                }"
               >
                 <template #prefix>
                   <n-icon size="18" class="text-slate-400">
@@ -90,7 +94,10 @@
                 class="text-base"
                 type="password"
                 placeholder="Passwort"
-                :input-props="{ autocomplete: 'current-password' }"
+                :input-props="{
+                  autocomplete: 'current-password',
+                  'aria-label': 'Passwort',
+                }"
                 show-password-on="click"
               >
                 <template #prefix>
