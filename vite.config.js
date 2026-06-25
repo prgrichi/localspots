@@ -1,3 +1,5 @@
+/// <reference types="vitest/config" />
+
 import { defineConfig } from 'vite';
 import vue from '@vitejs/plugin-vue';
 import tailwindcss from '@tailwindcss/vite';
@@ -50,6 +52,9 @@ export default defineConfig({
       '@': fileURLToPath(new URL('./src', import.meta.url)),
     },
   },
+  test: {
+    exclude: ['e2e/**', 'node_modules/**', 'dist/**'],
+  },
   build: {
     rollupOptions: {
       output: {
@@ -64,10 +69,7 @@ export default defineConfig({
             return 'vendor-core';
           }
 
-          if (
-            id.includes('node_modules/leaflet') ||
-            id.includes('node_modules/@vue-leaflet')
-          ) {
+          if (id.includes('node_modules/leaflet') || id.includes('node_modules/@vue-leaflet')) {
             return 'vendor-map';
           }
 

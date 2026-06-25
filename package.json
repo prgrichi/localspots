@@ -19,7 +19,8 @@
     "test:run": "vitest run",
     "test:verbose": "vitest run --reporter=verbose",
     "test:ui": "vitest --ui",
-    "test:e2e": "playwright test"
+    "test:e2e": "playwright test",
+    "test:all": "npm run test:run && npm run test:e2e"
   },
   "dependencies": {
     "@headlessui/vue": "^1.7.23",
