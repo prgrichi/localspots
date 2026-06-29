@@ -1,9 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router';
 import ActivitiesPage from '@/pages/ActivitiesPage.vue';
-import EntryPage from '@/pages/EntryPage.vue';
-import SpotPage from '@/pages/SpotPage.vue';
-import MapPage from '@/pages/MapPage.vue';
-import CollectionsPage from '@/pages/CollectionsPage.vue';
+// import MapPage from '@/pages/MapPage.vue';
 import { pb } from '@/services/pocketbase';
 
 const router = createRouter({
@@ -21,7 +18,7 @@ const router = createRouter({
     {
       path: '/add',
       name: 'add-entry',
-      component: EntryPage,
+      component: () => import('@/pages/EntryPage.vue'),
       meta: {
         title: 'Eintragen',
         requiresAuth: true,
@@ -30,7 +27,7 @@ const router = createRouter({
     {
       path: '/spots',
       name: 'spots',
-      component: SpotPage,
+      component: () => import('@/pages/SpotPage.vue'),
       meta: {
         title: 'Spots',
         requiresAuth: true,
@@ -45,10 +42,19 @@ const router = createRouter({
         requiresAuth: true,
       },
     },
+    // {
+    //   path: '/map',
+    //   name: 'map',
+    //   component: MapPage,
+    //   meta: {
+    //     title: 'Karte',
+    //     requiresAuth: true,
+    //   },
+    // },
     {
       path: '/map',
       name: 'map',
-      component: MapPage,
+      component: () => import('@/pages/MapPage.vue'),
       meta: {
         title: 'Karte',
         requiresAuth: true,
@@ -57,7 +63,7 @@ const router = createRouter({
     {
       path: '/collections',
       name: 'collections',
-      component: CollectionsPage,
+      component: () => import('@/pages/CollectionsPage.vue'),
       meta: {
         title: 'Collections',
         requiresAuth: true,

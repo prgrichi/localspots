@@ -23,6 +23,7 @@
 
 <script setup>
 import { watch, ref } from 'vue';
+import 'leaflet/dist/leaflet.css';
 import { LMap, LTileLayer, LMarker, LPopup } from '@vue-leaflet/vue-leaflet';
 import { DEFAULT_MAP_ZOOM, FOCUSED_MAP_ZOOM } from '@/composables/useSpotMap';
 

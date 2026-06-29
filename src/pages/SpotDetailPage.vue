@@ -53,6 +53,7 @@ import SpotLocationDrawer from '@/components/spot-detail/SpotLocationDrawer.vue'
 import { useSpotStore } from '@/stores/spotStore';
 import { useSpotFavoritesStore } from '@/stores/spotFavorites';
 import { useSingleSpotMap } from '@/composables/useSpotMap';
+import { createSpotIcon } from '@/composables/useLeafletSpotIcon';
 import { confirmDialogOptions } from '@/utils/confirmDialogOptions';
 
 const route = useRoute();
@@ -71,7 +72,8 @@ const spot = ref<Spot | null>(null);
 
 const spotId = computed(() => String(route.params.id));
 
-const { spotLatLng, mapCenter, spotIcon } = useSingleSpotMap(spot);
+const spotIcon = createSpotIcon();
+const { spotLatLng, mapCenter } = useSingleSpotMap(spot);
 
 const authUserId = computed(() => pb.authStore.record?.id ?? null);
 

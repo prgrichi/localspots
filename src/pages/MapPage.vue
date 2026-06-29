@@ -77,6 +77,7 @@
 <script setup lang="ts">
 import { ref, computed, watch, onBeforeUnmount } from 'vue';
 import { RouterLink } from 'vue-router';
+import 'leaflet/dist/leaflet.css';
 
 import { LMap, LTileLayer, LMarker, LPopup } from '@vue-leaflet/vue-leaflet';
 import type { Map as LeafletMap } from 'leaflet';
@@ -85,6 +86,7 @@ import { useMessage } from 'naive-ui';
 import { useSpotStore } from '@/stores/spotStore';
 import { useCollectionStore } from '@/stores/collectionStore';
 import { useSpotMap } from '@/composables/useSpotMap';
+import { createSpotIcon } from '@/composables/useLeafletSpotIcon';
 
 import { useEnsureCollections } from '@/composables/useEnsureCollections';
 
@@ -100,10 +102,11 @@ const isMapReady = ref(false);
 const mapRef = ref<LeafletMap | null>(null);
 
 const spots = computed(() => spotStore.spots);
+const spotIcon = createSpotIcon();
 
 useEnsureCollections();
 
-const { spotMarkers, mapCenter, spotIcon, mapBounds, spotLatLngs, defaultMapZoom, focusedMapZoom } =
+const { spotMarkers, mapCenter, mapBounds, spotLatLngs, defaultMapZoom, focusedMapZoom } =
   useSpotMap(spots);
 
 function handleMapReady(map: LeafletMap) {

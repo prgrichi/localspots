@@ -1,5 +1,4 @@
 import { computed, type Ref } from 'vue';
-import L from 'leaflet';
 import type { Spot } from '@/types/spot';
 
 type LatLng = [number, number];
@@ -12,13 +11,6 @@ type SpotMarker = {
 export const DEFAULT_MAP_CENTER: LatLng = [48.2683485, 12.4185968];
 export const DEFAULT_MAP_ZOOM = 13;
 export const FOCUSED_MAP_ZOOM = 16;
-
-const spotIcon = L.icon({
-  iconUrl: '/icons/spot-marker.svg',
-  iconSize: [40, 40],
-  iconAnchor: [20, 20],
-  popupAnchor: [0, -20],
-});
 
 function isValidCoordinate(lat: unknown, lng: unknown): lat is number {
   if (typeof lat !== 'number' || typeof lng !== 'number') {
@@ -84,18 +76,12 @@ function getBoundsFromCoordinates(coordinates: LatLng[]): MapBounds | null {
     return null;
   }
 
-  const bounds = L.latLngBounds(coordinates);
-
-  if (!bounds.isValid()) {
-    return null;
-  }
-
-  const southWest = bounds.getSouthWest();
-  const northEast = bounds.getNorthEast();
+  const lats = coordinates.map(([lat]) => lat);
+  const lngs = coordinates.map(([, lng]) => lng);
 
   return [
-    [southWest.lat, southWest.lng],
-    [northEast.lat, northEast.lng],
+    [Math.min(...lats), Math.min(...lngs)],
+    [Math.max(...lats), Math.max(...lngs)],
   ];
 }
 
@@ -135,7 +121,6 @@ export function useSpotMap(spots: Ref<Spot[]>) {
     defaultMapCenter: DEFAULT_MAP_CENTER,
     defaultMapZoom: DEFAULT_MAP_ZOOM,
     focusedMapZoom: FOCUSED_MAP_ZOOM,
-    spotIcon,
     spotMarkers,
     spotsWithLocation,
     spotLatLngs,
@@ -157,7 +142,6 @@ export function useSingleSpotMap(spot: Ref<Spot | null>) {
     defaultMapCenter: DEFAULT_MAP_CENTER,
     defaultMapZoom: DEFAULT_MAP_ZOOM,
     focusedMapZoom: FOCUSED_MAP_ZOOM,
-    spotIcon,
     spotLatLng,
     mapCenter,
   };

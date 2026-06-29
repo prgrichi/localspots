@@ -126,6 +126,7 @@
 
 <script setup lang="ts">
 import { computed, nextTick, ref, watch } from 'vue';
+import 'leaflet/dist/leaflet.css';
 import { NButton, NDrawer, NDrawerContent, NIcon, useMessage } from 'naive-ui';
 import { LocateOutline, CloseCircleOutline } from '@vicons/ionicons5';
 import { LMap, LTileLayer, LMarker } from '@vue-leaflet/vue-leaflet';
@@ -136,6 +137,7 @@ import type { Spot } from '@/types/spot';
 import { useSpotStore } from '@/stores/spotStore';
 import { useCollectionStore } from '@/stores/collectionStore';
 import { DEFAULT_MAP_ZOOM, FOCUSED_MAP_ZOOM, useSingleSpotMap } from '@/composables/useSpotMap';
+import { createSpotIcon } from '@/composables/useLeafletSpotIcon';
 import { useCurrentGeoLocation } from '@/composables/useCurrentGeoLocation';
 
 const props = withDefaults(
@@ -165,7 +167,8 @@ const mapRef = ref<LeafletMap | null>(null);
 const isSaving = ref(false);
 
 const spotRef = computed(() => props.spot);
-const { spotLatLng, mapCenter, defaultMapCenter, spotIcon } = useSingleSpotMap(spotRef);
+const spotIcon = createSpotIcon();
+const { spotLatLng, mapCenter, defaultMapCenter } = useSingleSpotMap(spotRef);
 const {
   isSupported: isGeolocationSupported,
   isLocating,
