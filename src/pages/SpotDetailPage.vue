@@ -33,12 +33,17 @@
       @delete="deleteSpot(spot)"
     />
 
-    <SpotLocationDrawer v-model:show="showLocationModal" :spot="spot" @saved="handleSpotSaved" />
+    <SpotLocationDrawer
+      v-if="showLocationModal"
+      v-model:show="showLocationModal"
+      :spot="spot"
+      @saved="handleSpotSaved"
+    />
   </main>
 </template>
 
 <script setup lang="ts">
-import { computed, ref, watch } from 'vue';
+import { computed, defineAsyncComponent, ref, watch } from 'vue';
 import { useMessage, useDialog } from 'naive-ui';
 import { useRoute, useRouter } from 'vue-router';
 import { pb } from '@/services/pocketbase';
@@ -48,13 +53,16 @@ import SpotEditDrawer from '@/components/spot-detail/SpotEditDrawer.vue';
 import SpotDetailHeader from '@/components/spot-detail/SpotDetailHeader.vue';
 import SpotLocationMap from '@/components/spot-detail/SpotLocationMap.vue';
 import SpotLocationPanel from '@/components/spot-detail/SpotLocationPanel.vue';
-import SpotLocationDrawer from '@/components/spot-detail/SpotLocationDrawer.vue';
 
 import { useSpotStore } from '@/stores/spotStore';
 import { useSpotFavoritesStore } from '@/stores/spotFavorites';
 import { useSingleSpotMap } from '@/composables/useSpotMap';
 import { createSpotIcon } from '@/composables/useLeafletSpotIcon';
 import { confirmDialogOptions } from '@/utils/confirmDialogOptions';
+
+const SpotLocationDrawer = defineAsyncComponent(
+  () => import('@/components/spot-detail/SpotLocationDrawer.vue')
+);
 
 const route = useRoute();
 const router = useRouter();
